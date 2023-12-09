@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { MenuIcon } from '../icons/IconsNav';
+import { MenuIcon } from './icons/IconsNav';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './accordion';
 
 const randomLogo = () => {
@@ -14,9 +14,9 @@ const randomLogo = () => {
 }
 
 const navigation = [
-    { name: 'User', href: '/user', logo: randomLogo() },
-    { name: 'Home', href: '/', logo: randomLogo() },
-    { name: 'Chat', href: '/chat', logo: randomLogo() },
+    { name: 'Daily', href: '/daily', logo: randomLogo() },
+    { name: 'Habbits', href: '/habbits', logo: randomLogo() },
+    { name: 'Goals', href: '/goals', logo: randomLogo() },
 ]
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
