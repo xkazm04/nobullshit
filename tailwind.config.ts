@@ -82,7 +82,16 @@ module.exports = {
         pulse: {
           '0%, 100%': { transform: 'scale(1)' },
           '50%': { transform: 'scale(1.2)' },
-        },
+        },'infinite-scroll': {
+          from: { transform: 'translateX(0)' },
+          to: { transform: 'translateX(-100%)' },
+        },'manual-scroll-left': {
+          from: { transform: 'translateX(0)' },
+          to: { transform: 'translateX(-300px)' },
+        },'manual-scroll-right': {
+          from: { transform: 'translateX(0)' },
+          to: { transform: 'translateX(300px)' },
+        }
       },
       animation: {
         "accordion-down": "accordion-down 0.3s ease-out",
@@ -90,6 +99,9 @@ module.exports = {
         "accordion-right": "accordion-right 0.3s ease-out",
         "accordion-left": "accordion-left 0.3s ease-out",
         'pulse-scale': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'infinite-scroll': 'infinite-scroll 25s linear infinite',
+        'manual-scroll-left': 'manual-scroll-left 0.5s linear',
+        'manual-scroll-right': 'manual-scroll-right 0.5s linear',
       },
 
     },

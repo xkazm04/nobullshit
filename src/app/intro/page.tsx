@@ -6,6 +6,7 @@ import IntroWelcome from "../components/Intro/IntroWelcome"
 import Stepper from "../components/Stepper"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
+import Header from "../components/Header"
 
 const Page = () => {
     // Will need zustand for passing data between steps
@@ -19,14 +20,15 @@ const Page = () => {
     const finish = () => {
         Router.push('/daily')
     }
-    return (
+    return <>
+      <Header />
         <div className="relative h-full">
         {steps[currentStep].nextComponent}
         <div className="absolute bottom-5 w-full">
           <Stepper steps={steps} currentStep={currentStep} setCurrentStep={setCurrentStep} finalFunction={finish} />
         </div>
       </div>
-    )
+      </>
 }
 
 export default Page
