@@ -72,28 +72,16 @@ body {
 }
 
 @layer components {
-  .btn-action {
-    @apply inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 transition-colors duration-200 ease-out cursor-pointer;
-  }
   .btn-mini{
-    @apply inline-flex items-center justify-center px-4 py-0 border border-transparent rounded-md shadow-sm text-sm text-white bg-indigo-600 hover:bg-indigo-700 transition-colors duration-200 ease-out cursor-pointer;
+    @apply inline-flex items-center justify-center px-4 py-1 border border-transparent rounded-xl shadow-sm text-sm text-main border-main 
+    hover:bg-yellow-950 transition-colors duration-200 ease-out cursor-pointer;
   }
-  .btn-link{
-    @apply text-sm font-medium text-white hover:text-indigo-500 transition-colors duration-100 ease-out;
+  .divider{
+    @apply border-t border-gray-700 my-4;
   }
-  .title-head{
-    @apply text-4xl font-bold tracking-tight text-gray-200 sm:text-6xl md:text-6xl;
-  }
-  .desc-head{
-    @apply mt-6 text-lg leading-8 text-gray-200;
-  }
-  .menu-item{
-    @apply px-3 py-2 rounded-md font-medium text-white hover:text-indigo-200 transition-colors duration-100 ease-out text-lg font-mono;
-  }
-  .dia-component{
-    @apply border border-gray-200 rounded-md p-2 text-center bg-gray-900 w-[250px] self-center;
-  }
-  .input-table{
-    @apply px-3 placeholder-gray-300 relative bg-gray-950 rounded text-sm shadow outline-none min-w-[100px] cursor-pointer;
+  .fullbox{
+    @apply w-full p-4 rounded-md bg-gray-950 text-gray-100 font-normal font-['Roboto'] capitalize tracking-wide leading-6 border-transmain
+    border-t-[0.2px] shadow-sm shadow-slate-900
+    ;
   }
 }
