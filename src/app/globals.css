@@ -80,7 +80,7 @@ body {
     @apply border-t border-gray-700 my-4;
   }
   .fullbox{
-    @apply w-full p-4 rounded-md bg-gray-950 text-gray-100 font-normal font-['Roboto'] capitalize tracking-wide leading-6 border-transmain
+    @apply w-full p-4 rounded-xl bg-gray-950 text-gray-100 font-normal font-['Roboto'] capitalize tracking-wide leading-6 border-transmain
     border-t-[0.2px] shadow-sm shadow-slate-900
     ;
   }
