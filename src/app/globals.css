@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -16,12 +17,83 @@
   }
 }
 
+/* width */
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #4F46E5;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: #030613;
+  font-size: 16px;
+}
+
+.mobile-body{
+  background: linear-gradient(180deg, #0C0F17 1.42%, #13151C 44.62%, #0E1017 99.99%);
+}
+
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+.typewriter {
+  animation: typewriter 1s steps(40) 1s 1 normal both;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.skeleton {
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200px 0; }
+  100% { background-position: calc(200px + 100%) 0; }
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@layer components {
+  .btn-action {
+    @apply inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 transition-colors duration-200 ease-out cursor-pointer;
+  }
+  .btn-mini{
+    @apply inline-flex items-center justify-center px-4 py-0 border border-transparent rounded-md shadow-sm text-sm text-white bg-indigo-600 hover:bg-indigo-700 transition-colors duration-200 ease-out cursor-pointer;
+  }
+  .btn-link{
+    @apply text-sm font-medium text-white hover:text-indigo-500 transition-colors duration-100 ease-out;
+  }
+  .title-head{
+    @apply text-4xl font-bold tracking-tight text-gray-200 sm:text-6xl md:text-6xl;
+  }
+  .desc-head{
+    @apply mt-6 text-lg leading-8 text-gray-200;
+  }
+  .menu-item{
+    @apply px-3 py-2 rounded-md font-medium text-white hover:text-indigo-200 transition-colors duration-100 ease-out text-lg font-mono;
+  }
+  .dia-component{
+    @apply border border-gray-200 rounded-md p-2 text-center bg-gray-900 w-[250px] self-center;
+  }
+  .input-table{
+    @apply px-3 placeholder-gray-300 relative bg-gray-950 rounded text-sm shadow outline-none min-w-[100px] cursor-pointer;
+  }
 }
