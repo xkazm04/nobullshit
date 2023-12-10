@@ -3,13 +3,12 @@ import { useState, useEffect } from 'react';
 import { MenuIcon } from './icons/IconsNav';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './accordion';
 import { GoalIcon, Tally5Icon, Zap } from 'lucide-react';
-
 const mainColor ='#EEFF87'
 
 const navigation = [
-    { name: 'Daily', href: '/daily', logo: <GoalIcon color={mainColor}/> },
-    { name: 'Habbits', href: '/habbits', logo: <Zap color={mainColor}/> },
-    { name: 'Goals', href: '/goals', logo: <Tally5Icon color={mainColor}/>}
+    { name: 'Daily', href: '/daily', logo: <GoalIcon color={mainColor} strokeWidth={0.75}/> },
+    { name: 'Habbits', href: '/habbits', logo: <Zap color={mainColor}  strokeWidth={0.75}/> },
+    { name: 'Goals', href: '/goals', logo: <Tally5Icon color={mainColor}  strokeWidth={0.75}/>}
 ]
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -51,16 +50,16 @@ const Header = () => {
                                         <a
                                             key={item.name}
                                             href={item.href}
-                                            className={`flex flex-col items-start justify-start h-full text-sm py-2 px-3 rounded-xl
+                                            className={`flex flex-col items-start justify-start h-full text-sm py-2 px-2 rounded-xl
                                             transition-all duration-200 ease-out  tracking-wide
-                                            lg:cursor-pointer lg:focus-within:bg-gray-950 lg:hover:font-bold
+                                            lg:cursor-pointer lg:focus-within:bg-gray-950 lg:hover:font-bold lg:hover:bg-cc
                                             ${activeRoute === item.name ? 'bg-gray-950' : ''}`}
                                             onClick={() => {
                                                 setActiveRoute(item.name);
                                                 setIsOpen(false);
                                             }}
                                         >
-                                           <div className='flex items-center justify-start gap-2'>
+                                           <div className='flex items-center justify-start gap-3'>
                                                 {item.logo}
                                                 <span>{item.name}</span>
                                              </div>
