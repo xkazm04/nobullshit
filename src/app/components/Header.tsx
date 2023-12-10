@@ -13,7 +13,7 @@ const navigation = [
 ]
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const [activeRoute, setActiveRoute] = useState('' as string);
+    const [activeRoute, setActiveRoute] = useState('' as string);;
 
     const getActiveRoute = () => {
         const path = window.location.pathname;

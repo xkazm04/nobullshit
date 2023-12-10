@@ -1,11 +1,18 @@
 'use client'
 import { useState } from "react"
-
 const IntroLogin = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [signType, setSignType] = useState('email') 
 
+    const handleSubmit = async(e) => {
+        e.preventDefault()
+        const user = {
+            username: username,
+            password: password
+        }
+
+    }
       
     return (
         <div className="flex flex-col justify-center items-center  h-full">
@@ -18,6 +25,7 @@ const IntroLogin = () => {
                 {signType === 'email' && <div>
                     <input className="fullbox" type="text" placeholder="Username" onChange={e => setUsername(e.target.value)}/> 
                     <input className="fullbox" type="password" placeholder="Password" onChange={e => setPassword(e.target.value)}/>
+                    <button className="btn-main" onClick={handleSubmit}>Sign in</button>
                 </div>}
                 {signType === 'google' && <div>
                     <button className="fullbox">Sign in with Google</button>
