@@ -32,7 +32,6 @@ const Goals = ({ selected, type }) => {
             ))
             : <NoFound title={'No activities found'} description={'Add a new target to be better'} picture={<IlustratedFire/>}/>
             }
-            <NoFound title={'No activities found'} description={'Add a new target to be better'} picture={<IlustratedFire/>}/>
         </div>
     );
 }

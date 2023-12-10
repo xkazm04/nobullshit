@@ -1,8 +1,9 @@
 'use client';
-import React, { useState, useEffect, useRef } from 'react';
 import YouTube from 'react-youtube';
 import Header from '../components/Header';
 import BottomNav from '../components/BottomNav';
+import Timer from '../components/Timing/Timer';
+import { useState } from 'react';
 
 const YtOptions = {
   height: '200',
@@ -14,53 +15,39 @@ const YtOptions = {
   },
 };
 
+const menuItems = [
+  { name: 'Countdown', value: 'countdown' },
+  { name: 'Timer', value: 'timer' }
+];
 
 const Page = () => {
-  const totalSeconds = 120;
-  const size= 80;
-  const totalMilliseconds = totalSeconds * 1000;
-  const circumference = size * Math.PI * 2;
-  const [countdown, setCountdown] = useState(totalMilliseconds);
+  const [type, setType] = useState('' as string);
 
-
-  useEffect(() => {
-    if (countdown > 0) {
-      const interval = setInterval(() => {
-        setCountdown((prevCountdown) => prevCountdown - 10);
-      }, 10);
-      return () => clearInterval(interval);
+  const renderComponent = () => {
+    switch (type) {
+      case 'countdown':
+        return <Timer />;
+      case 'timer':
+        return <Timer />;
+      default:
+        return <Timer />;
     }
-  }, [countdown]);
+  };
 
-  const minutes = Math.floor(countdown / 1000 / 60);
-  const seconds = Math.floor((countdown / 1000) % 60);
-  const strokeDashoffset = (countdown / totalMilliseconds) * circumference;
 
   return (
     <div className="flex flex-col items-center justify-between w-full h-full">
-      <div className='absolute z-10 w-full'><Header /></div>
-      <div className="relative w-64 h-64">
-        <svg className="absolute top-0 left-0 w-full h-full">
-          <circle cx="50%" cy="50%" r="30%" stroke="gray" strokeWidth="2%" fill="transparent" />
-          <circle
-            cx="50%"
-            cy="50%"
-            r="30%"
-            stroke="yellow"
-            strokeWidth="1%"
-            fill="none"
-            strokeLinecap="round"
-            strokeDasharray={circumference}
-            strokeDashoffset={strokeDashoffset}
-          />
-        </svg>
-        <div className="absolute top-0 left-0 flex items-center justify-center w-full h-full text-2xl">
-          {countdown <= 0 ? <div>You did it!</div> : <>{`${minutes}:${seconds < 10 ? '0' : ''}${seconds}`}</>}
+      <div className='absolute z-10 w-full'><Header /></div>      
+        <div className='mt-[10%]'>
+          {renderComponent()}
         </div>
-      </div>
-      <div className="flex space-x-4">
-        <button>Start</button>
-      </div>
+        <div className='flex flex-row justify-center gap-10'>
+          {menuItems.map((item) => (
+            <div key={item.name}>
+              <button className='btn-mini'>{item.name}</button>
+            </div>
+          ))}
+        </div>   
       <div className='z-10 w-full'><BottomNav /></div>
     </div>
   );

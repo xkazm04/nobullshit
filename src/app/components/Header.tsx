@@ -2,21 +2,14 @@
 import { useState, useEffect } from 'react';
 import { MenuIcon } from './icons/IconsNav';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './accordion';
+import { GoalIcon, Tally5Icon, Zap } from 'lucide-react';
 
-const randomLogo = () => {
-    return (
-        <svg width="14" height="10" viewBox="0 0 14 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="14" height="2" rx="1" transform="matrix(1 0 0 -1 0 2)" fill="#EEFF87"/>
-            <rect width="14" height="2" rx="1" transform="matrix(1 0 0 -1 0 6)" fill="#EEFF87"/>
-            <rect width="14" height="2" rx="1" transform="matrix(1 0 0 -1 0 10)" fill="#EEFF87"/>
-        </svg>
-    )
-}
+const mainColor ='#EEFF87'
 
 const navigation = [
-    { name: 'Daily', href: '/daily', logo: randomLogo() },
-    { name: 'Habbits', href: '/habbits', logo: randomLogo() },
-    { name: 'Goals', href: '/goals', logo: randomLogo() },
+    { name: 'Daily', href: '/daily', logo: <GoalIcon color={mainColor}/> },
+    { name: 'Habbits', href: '/habbits', logo: <Zap color={mainColor}/> },
+    { name: 'Goals', href: '/goals', logo: <Tally5Icon color={mainColor}/>}
 ]
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -51,7 +44,7 @@ const Header = () => {
                             </AccordionTrigger>
                             <AccordionContent>
                                 <div>Logo</div>
-                                <div>Motto</div>
+                                <div className='font-[inter] font-thin tracking-wide'>Your Turn</div>
                                 <div className='divider'/>
                                 <div className='flex flex-col gap-1 z-10'>
                                     {navigation.map((item) => (
@@ -59,7 +52,7 @@ const Header = () => {
                                             key={item.name}
                                             href={item.href}
                                             className={`flex flex-col items-start justify-start h-full text-sm py-2 px-3 rounded-xl
-                                            transition-all duration-200 ease-out 
+                                            transition-all duration-200 ease-out  tracking-wide
                                             lg:cursor-pointer lg:focus-within:bg-gray-950 lg:hover:font-bold
                                             ${activeRoute === item.name ? 'bg-gray-950' : ''}`}
                                             onClick={() => {

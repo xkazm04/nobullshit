@@ -9,6 +9,11 @@ export type GoalType = {
     completed: boolean, 
 }
 
+const tasks = [
+    { id: 1, name: 'Task 1', completed: true },
+    { id: 2, name: 'Task 2',  completed: false },
+]
+
 
 const Goal = ({id, name, category, completed}:GoalType) => {
     const [comp, setComp] = useState(completed)
@@ -55,8 +60,36 @@ const Goal = ({id, name, category, completed}:GoalType) => {
                 )}
             </div>
         </div>
-        {expanded && <div className="p-5 py-3 bg-gray-950 font-light text-sm"
-            onClick={() => { setExpanded(!expanded) }}>Expanded</div>}
+        {expanded && <div className="p-5 py-3 bg-gray-950 font-light text-sm">
+                    {tasks.map((task) => (
+                        <div className="flex flex-row justify-start gap-5 border-t border-gray-800 bg-gray-950 py-1">
+                            <div className='flex flex-col gap-1 py-1'>
+                                <div>{task.name}</div>
+                            </div>
+                            <div className='absolute right-5'>
+                                {task.completed ? (
+                                    <div className="text-green-500 bg-green-950 rounded-xl mt-2 lg:hover:text-green-700 lg:cursor-pointer"
+                                        onClick={() => { check(false) }}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                                d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    </div>
+                                ) : (
+                                    <div className="text-red-500 bg-red-950 rounded-xl mt-2 lg:hover:text-red-700 lg:cursor-pointer"
+                                        onClick={() => { check(true) }}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                                d="M6 18L18 6M6 6l12 12" />
+                                        </svg>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    ))}
+            </div>}
       </div>
     )
 }
