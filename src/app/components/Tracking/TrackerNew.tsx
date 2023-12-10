@@ -5,6 +5,15 @@ const TrackerNew = () => {
     const [activeCategory, setActiveCategory] = useState(categories[0])
     const [habitName, setHabitName] = useState('')
     const [habitDays, setHabitDays] = useState([false, false, false, false, false, false, false])
+
+    const createHabbit = () => {
+        const habit = {
+            name: habitName,
+            days: habitDays,
+            category: activeCategory
+        }
+        console.log(habit)
+    }
     return (
         <div className="flex flex-col items-center justify-start w-full h-full py-10">
         <div className="w-full p-5">
@@ -44,7 +53,8 @@ const TrackerNew = () => {
                     </div>
                 </div>)}
             </div>
-        </div>
+        </div>    
+        {habitName !== '' && <button className="btn-mini" onClick={createHabbit}>Create habbit</button>}    
     </div>
     )
 }

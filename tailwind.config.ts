@@ -79,7 +79,7 @@ module.exports = {
           from: { opacity: 0 },
           to: { opacity: 1 },
         },
-        pulse: {
+        'pulse': {
           '0%, 100%': { transform: 'scale(1)' },
           '50%': { transform: 'scale(1.2)' },
         },'infinite-scroll': {
@@ -91,7 +91,12 @@ module.exports = {
         },'manual-scroll-right': {
           from: { transform: 'translateX(0)' },
           to: { transform: 'translateX(300px)' },
-        }
+        },
+        'touch': {
+          '0%': { transform: 'scale(1)', opacity: '1' },
+          '50%': { transform: 'scale(1.5)', opacity: '.5' },
+          '100%': { transform: 'scale(2)', opacity: '0' },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.3s ease-out",
@@ -102,6 +107,7 @@ module.exports = {
         'infinite-scroll': 'infinite-scroll 25s linear infinite',
         'manual-scroll-left': 'manual-scroll-left 0.5s linear',
         'manual-scroll-right': 'manual-scroll-right 0.5s linear',
+        'touch': 'ping 1s cubic-bezier(0, 0, 0.2, 1) 1',
       },
 
     },

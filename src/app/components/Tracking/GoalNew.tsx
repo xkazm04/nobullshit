@@ -1,11 +1,13 @@
 'use client';
 import { useState } from "react"
 import TimeSetting from "./TimeSetting";
+import DaySetting from "./DaySetting";
 const GoalNew = (goalId) => {
-    const [habitDays, setHabitDays] = useState([false, false, false, false, false, false, false])
+
     const [targetName, setTargetName] = useState('') 
     const [time, setTime] = useState(0)
     const [enableTime, setEnableTime] = useState(false)
+    const [habitDays, setHabitDays] = useState([false, false, false, false, false, false, false])
 
     const createGoal = () => {
         const goal = {
@@ -33,15 +35,9 @@ const GoalNew = (goalId) => {
                 <div className="text-main font-semibold flex flex-row justify-center my-8">Days to follow</div>
                 <div className="divider" />
                 <div className="flex flex-row justify-center gap-5">
-                    {habitDays.map((d, i) => <div className="flex flex-col items-center gap-2 lg:cursor-pointer">
-                        <div className="text-gray-300">{['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][i]}</div>
-                        <div className={`w-8 h-8 rounded-full flex flex-col justify-center items-center lg:hover:bg-transmain
-                    ${d ? 'bg-main text-gray-900' : 'bg-gray-900 text-gray-300'}`}
-                            onClick={() => setHabitDays(habitDays.map((d, j) => i === j ? !d : d))}
-                        >
-                            {i + 1}
-                        </div>
-                    </div>)}
+                    {habitDays.map((d, i) => 
+                        <DaySetting habitDays={habitDays} setHabitDays={setHabitDays} d={d} i={i} />
+                    )}
                 </div>
                 {enableTime && <>
                     <div className="text-main font-semibold flex flex-row justify-center my-8">Session time</div>
