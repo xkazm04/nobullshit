@@ -16,46 +16,28 @@ const YtOptions = {
 
 
 const Page = () => {
-  const timerLength = 60 * 60;
-  const [timeLeft, setTimeLeft] = useState(timerLength);
-  const [isActive, setIsActive] = useState(false);
-  const intervalRef = useRef(null);
+  const totalSeconds = 120;
+  const size= 80;
+  const totalMilliseconds = totalSeconds * 1000;
+  const circumference = size * Math.PI * 2;
+  const [countdown, setCountdown] = useState(totalMilliseconds);
 
-  const startTimer = () => {
-    setIsActive(true);
-    intervalRef.current = setInterval(() => {
-      setTimeLeft(timeLeft => timeLeft - 1000);
-    }, 1000);
-  };
-
-  const pauseTimer = () => {
-    setIsActive(false);
-    clearInterval(intervalRef.current);
-  };
-
-  const stopTimer = () => {
-    setIsActive(false);
-    setTimeLeft(timerLength);
-    clearInterval(intervalRef.current);
-  };
-
-  const resetTimer = () => {
-    setIsActive(false);
-    setTimeLeft(timerLength);
-  };
 
   useEffect(() => {
-    if (timeLeft === 0) {
-      stopTimer();
+    if (countdown > 0) {
+      const interval = setInterval(() => {
+        setCountdown((prevCountdown) => prevCountdown - 10);
+      }, 10);
+      return () => clearInterval(interval);
     }
-  }, [timeLeft]);
+  }, [countdown]);
 
-
-  const minutes = Math.floor(timeLeft / 60000);
-  const seconds = ((timeLeft % 60000) / 1000).toFixed(0);
+  const minutes = Math.floor(countdown / 1000 / 60);
+  const seconds = Math.floor((countdown / 1000) % 60);
+  const strokeDashoffset = (countdown / totalMilliseconds) * circumference;
 
   return (
-    <div className="flex flex-col items-center justify-center w-full h-full">
+    <div className="flex flex-col items-center justify-between w-full h-full">
       <div className='absolute z-10 w-full'><Header /></div>
       <div className="relative w-64 h-64">
         <svg className="absolute top-0 left-0 w-full h-full">
@@ -66,20 +48,18 @@ const Page = () => {
             r="30%"
             stroke="yellow"
             strokeWidth="1%"
-            fill="transparent"
-            strokeDasharray={`${2 * Math.PI * 30}`}
-            strokeDashoffset={`${(2 * Math.PI * 30 * (timerLength - timeLeft)) / timerLength}`}
+            fill="none"
+            strokeLinecap="round"
+            strokeDasharray={circumference}
+            strokeDashoffset={strokeDashoffset}
           />
         </svg>
         <div className="absolute top-0 left-0 flex items-center justify-center w-full h-full text-2xl">
-          {timeLeft <= 0 ? <div>You did it!</div> : <>{`${minutes}:${seconds < 10 ? '0' : ''}${seconds}`}</>}
+          {countdown <= 0 ? <div>You did it!</div> : <>{`${minutes}:${seconds < 10 ? '0' : ''}${seconds}`}</>}
         </div>
       </div>
       <div className="flex space-x-4">
-        <button onClick={startTimer}>Start</button>
-        <button onClick={pauseTimer}>Pause</button>
-        <button onClick={stopTimer}>Stop</button>
-        <button onClick={resetTimer}>Reset</button>
+        <button>Start</button>
       </div>
       <div className='z-10 w-full'><BottomNav /></div>
     </div>
