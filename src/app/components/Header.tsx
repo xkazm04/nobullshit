@@ -53,7 +53,7 @@ const Header = () => {
                                 <div>Logo</div>
                                 <div>Motto</div>
                                 <div className='divider'/>
-                                <div className='flex flex-col gap-1'>
+                                <div className='flex flex-col gap-1 z-10'>
                                     {navigation.map((item) => (
                                         <a
                                             key={item.name}

@@ -49,7 +49,7 @@ const Today = () => {
                     <button className="text-main lg:hover:cursor-pointer px-2 py-1" onClick={() => { prevDay() }}>{"<"}</button>
                 </div>
                 <div >
-                    <button onClick={() => setShowCalendar(!showCalendar)} className="btn-mini mx-8 bg-transmain">
+                    <button onClick={() => setShowCalendar(!showCalendar)} className="btn-mini mx-8 bg-transmain w-[150px]">
                         {fullDate}
                     </button>
                 </div>

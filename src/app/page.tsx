@@ -1,8 +1,8 @@
 'use client';
-import Header from "./components/Header";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import LoadingAnim from "./components/LoadingAnim";
+
 
 export default function Home() {
   const router = useRouter()
@@ -22,14 +22,13 @@ export default function Home() {
 
   return (
     <div>
-      <Header />
-      {loading && <LoadingAnim />}
-      <button type="button" onClick={() => router.push('/intro')}>
-        Intro
-      </button>
-      <button type="button" onClick={() => router.push('/daily')}>
-        Daily
-      </button>
+        {loading && <LoadingAnim />}
+        <button type="button" onClick={() => router.push('/intro')}>
+          Intro
+        </button>
+        <button type="button" onClick={() => router.push('/daily')}>
+          Daily
+        </button>
     </div>
   )
 }

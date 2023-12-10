@@ -21,7 +21,6 @@ const Page = () => {
         Router.push('/daily')
     }
     return <>
-      <Header />
         <div className="relative h-full">
         {steps[currentStep].nextComponent}
         <div className="absolute bottom-5 w-full">
