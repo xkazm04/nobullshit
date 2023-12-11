@@ -3,7 +3,7 @@ const Page = () => {
     const router = useRouter();
     const { id } = router.query;
     return (
-        <div>
+        <div className='page'>
           <h1>Page ID: {id}</h1>
         </div>
       );

@@ -15,9 +15,9 @@ const TrackerNew = () => {
         console.log(habit)
     }
     return (
-        <div className="flex flex-col items-center justify-start w-full h-full py-10">
+        <div className="page">
         <div className="w-full p-5">
-            <div className="text-main font-semibold flex flex-row justify-center my-8">Select category</div>
+            <div className="text-main font-semibold flex flex-row justify-center">Select category</div>
             <div className="divider"/>
             <div className="flex flex-row flex-wrap">
                 {categories.map(c => <div id={c.id}>

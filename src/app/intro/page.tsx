@@ -2,11 +2,9 @@
 import IntroFirst from "../components/Intro/IntroFirst"
 import IntroLogin from "../components/Intro/IntroLogin"
 import IntroPromo from "../components/Intro/IntroPromo"
-import IntroWelcome from "../components/Intro/IntroWelcome"
 import Stepper from "../components/Stepper"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import Header from "../components/Header"
 
 const Page = () => {
     // Will need zustand for passing data between steps

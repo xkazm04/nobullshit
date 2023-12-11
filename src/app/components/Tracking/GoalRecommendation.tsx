@@ -10,6 +10,8 @@ const GoalRecommendation = (id: number) => {
     const [amount, setAmount] = useState(0);
     const [showAmount, setShowAmount] = useState(false);
 
+    // Restyle, reuse exsiting components 
+
     const sendSubgoal = async() => {
         console.log('sendSubgoal')
     }

@@ -91,8 +91,10 @@ body {
   }
   .fullbox{
     @apply w-full p-4 rounded-xl bg-gray-950 text-gray-100 font-normal font-['Roboto'] capitalize tracking-wide leading-6 border-transmain
-    border-t-[0.2px] shadow-sm shadow-slate-900
-    ;
+    border-t-[0.2px] shadow-sm shadow-slate-900;
+  }
+  .page{
+    @apply flex flex-col items-center justify-start w-full h-full
   }
 }
 

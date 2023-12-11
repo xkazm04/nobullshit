@@ -21,14 +21,8 @@ export default function Home() {
   }, []);
 
   return (
-    <div>
+    <div className="flex flex-col h-full w-full">
         {loading && <LoadingAnim />}
-        <button type="button" onClick={() => router.push('/intro')}>
-          Intro
-        </button>
-        <button type="button" onClick={() => router.push('/daily')}>
-          Daily
-        </button>
     </div>
   )
 }
