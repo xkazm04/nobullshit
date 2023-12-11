@@ -1,5 +1,4 @@
 'use client';
-import { set } from "mongoose";
 import { MenuIcon } from "../icons/IconsNav"
 import { useState } from "react"
 import { ArrowRightCircleIcon, ScrollTextIcon } from "lucide-react";
