@@ -36,7 +36,7 @@ const Page = () => {
 
 
   return (
-    <div className="flex flex-col items-center justify-between w-full h-full">
+    <div className="page">
       <div className='absolute z-10 w-full'><Header /></div>      
         <div className='mt-[10%]'>
           {renderComponent()}

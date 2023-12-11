@@ -18,3 +18,9 @@ export enum Category {
     SideHustle = "6",
     Mental = "7"
 }
+
+export enum DailyTypes {
+    Morning = "1",
+    Day = "2",
+    Evening = "3"
+}

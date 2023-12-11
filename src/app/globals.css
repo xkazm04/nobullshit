@@ -83,7 +83,7 @@ body {
 
 @layer components {
   .btn-mini{
-    @apply inline-flex items-center justify-center px-4 py-1 border border-transparent rounded-xl shadow-sm text-sm text-main border-main 
+    @apply inline-flex items-center justify-center px-4 py-2 border rounded-xl shadow-sm text-sm text-main border-main bg-transmain 
     hover:bg-yellow-950 transition-colors duration-200 ease-out cursor-pointer;
   }
   .divider{
@@ -94,7 +94,17 @@ body {
     border-t-[0.2px] shadow-sm shadow-slate-900;
   }
   .page{
-    @apply flex flex-col items-center justify-start w-full h-full
+    @apply relative flex flex-col justify-between h-full w-full;
+  }
+  .input{
+    @apply w-[200px] px-2 py-1 rounded-xl bg-gray-950 text-gray-100 font-normal font-['Inter'] capitalize tracking-wide leading-6 border-transmain
+    border-t-[0.2px] shadow-sm shadow-slate-900 text-sm focus:outline-none placeholder:italic placeholder:text-gray-400;
+  }
+  .cat-row{
+    @apply text-main font-semibold flex flex-row justify-between;
+  }
+  .title-menu{
+    @apply capitalize font-mono text-blue-200;
   }
 }
 

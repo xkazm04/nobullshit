@@ -2,8 +2,8 @@
 import { useState } from 'react'
 
 import Today from '../components/Tracking/Today';
-import Header from '../components/Header';
 import BottomNav from '../components/BottomNav';
+import HeaderComponent from '../components/ui/header';
 
 const Page = () => {
     const [goals, setGoals] = useState([
@@ -14,7 +14,7 @@ const Page = () => {
     // Optimalization for lesser resolutions
 
     return <div className='relative flex flex-col justify-between h-full'>
-        <div className='absolute z-10 w-full'><Header /></div>
+        <HeaderComponent page={'Daily'}/>
         <div className="flex flex-col gap-5 justify-start mt-20 max-h-[700px] overflox-y-hiddenw">
             <Today />
         </div>
