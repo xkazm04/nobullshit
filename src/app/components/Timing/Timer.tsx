@@ -1,13 +1,30 @@
 'use client';
 import { useState, useEffect } from 'react';
+import { TimePicker } from 'react-ios-time-picker';
 
-const Timer = ({time, type}) => {
+const Timer = ({t, type}) => {
     const totalSeconds = 120;
     const size= 80;
     const totalMilliseconds = totalSeconds * 1000;
     const circumference = size * Math.PI * 2;
     const [countdown, setCountdown] = useState(totalMilliseconds);
     // Add hours
+    const [time, setTime] = useState({hours: 19, minutes: 0, seconds: 0})
+    const [value, setValue] = useState('10:00');
+
+    const onChange = (timeValue) => {
+      setValue(timeValue);
+   }
+
+    const adjustTime = (field, amount) => {
+      setTime(prevTime => {
+          const newTime = { ...prevTime };
+          newTime[field] += amount;
+          if (newTime[field] < 0) newTime[field] += 60;
+          if (newTime[field] >= 60) newTime[field] -= 60;
+          return newTime;
+      });
+  };
   
     useEffect(() => {
       if (countdown > 0) {
@@ -42,6 +59,9 @@ const Timer = ({time, type}) => {
           {countdown <= 0 ? <div>You did it!</div> : <>{`${minutes}:${seconds < 10 ? '0' : ''}${seconds}`}</>}
         </div>
       </div>
+      <div className="text-center mb-8">
+      <TimePicker onChange={onChange} value={value} />
+    </div>
       <div className="flex space-x-4">
         <button>Start</button>
       </div>
