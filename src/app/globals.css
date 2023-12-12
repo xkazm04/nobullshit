@@ -85,7 +85,11 @@ body {
 @layer components {
   .btn-mini{
     @apply inline-flex items-center justify-center px-4 py-2 border rounded-xl shadow-sm text-sm text-main border-main bg-transmain 
-    hover:bg-yellow-950 transition-colors duration-200 ease-out cursor-pointer;
+    hover:bg-yellow-950 transition-colors duration-200 ease-out lg:cursor-pointer;
+  }
+  .btn-action{
+    @apply inline-flex items-center justify-center px-4 py-2 border rounded-xl shadow-sm text-sm text-main border-gray-600 font-mono
+   transition-colors duration-200 ease-out lg:cursor-pointer capitalize; 
   }
   .divider{
     @apply border-t border-gray-700 my-4;
