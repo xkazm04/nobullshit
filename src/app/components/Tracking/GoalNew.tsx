@@ -1,6 +1,6 @@
 'use client';
 import { useState } from "react"
-import TimeSetting from "./TimeSetting";
+import TimeSetting from "../form/TimeSetting";
 import DaySetting from "./DaySetting";
 import { DailyTypes, categories } from "@/data/enums";
 import FormName from "../form/FormName";

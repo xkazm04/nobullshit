@@ -1,12 +1,12 @@
 
 export const categories = [
-    { id: "1", name: 'Skill', logo: 'HammerIcon'},
-    { id: "2", name: 'Physical', logo: 'SkullIcon' },
-    { id: "3", name: 'Health', logo: 'HeartPulseIcon'  },
-    { id: "4", name: 'Study', logo: 'GraduationCapIcon' },
-    { id: "5", name: 'Social', logo: 'PersonStandingIcon' },
-    { id: "6", name: 'Side hustle', logo: 'BriefcaseIcon' },
-    { id: "7", name: 'Mental', logo: 'BrainIcon' }
+    { id: "1", name: 'Skill', logo: 'HammerIcon', color: '#7dd3fc'},
+    { id: "2", name: 'Physical', logo: 'SkullIcon', color: '#c4b5fd' },
+    { id: "3", name: 'Health', logo: 'HeartPulseIcon', color: '#6ee7b7'  },
+    { id: "4", name: 'Study', logo: 'GraduationCapIcon', color: '#d9f99d' },
+    { id: "5", name: 'Social', logo: 'PersonStandingIcon', color: '#fca5a5' },
+    { id: "6", name: 'Side hustle', logo: 'BriefcaseIcon', color: '#a5b4fc' },
+    { id: "7", name: 'Mental', logo: 'BrainIcon', color:'#f0abfc' }
     ];
 
 export enum Category {

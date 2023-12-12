@@ -3,8 +3,6 @@ import {
     DialogDescription,
     DialogHeader,
     DialogTitle,
-    DialogFooter,
-    DialogClose
 } from "./ui/dialog";
 
 type ModalProps = {
@@ -24,11 +22,6 @@ const Modal = ({title, description, content}: ModalProps) => {
                 </DialogDescription>
             </DialogHeader>
             {content}
-            <DialogFooter className="sm:justify-start">
-                <DialogClose asChild>
-                    <button>Close</button>
-                </DialogClose>
-            </DialogFooter>
         </DialogContent>
     )
 }
