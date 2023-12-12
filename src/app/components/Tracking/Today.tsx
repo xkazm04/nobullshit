@@ -8,7 +8,6 @@ const Today = () => {
     const daysInMonth = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate();
     const days = Array.from({ length: daysInMonth }, (_, i) => i + 1);
     const today = new Date().getDate();
-    const [showCalendar, setShowCalendar] = useState(false);
     const [selectedDay, setSelectedDay] = useState(today);
     const [showGoals, setShowGoals] = useState(true);
     const [showHabbits, setShowHabbits] = useState(true);
@@ -57,7 +56,7 @@ const Today = () => {
                         <button className="text-main lg:hover:cursor-pointer px-2 py-1" onClick={() => { prevDay() }}>{"<"}</button>
                     </div>
                     <div >
-                        <button onClick={() => setShowCalendar(!showCalendar)} className="btn-mini mx-8 bg-transmain w-[150px]">
+                        <button className="btn-mini mx-8 bg-transmain w-[150px]">
                             {fullDate}
                         </button>
                     </div>

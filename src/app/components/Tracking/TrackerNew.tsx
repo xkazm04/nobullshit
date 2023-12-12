@@ -1,12 +1,17 @@
 'use client';
 import { categories, DailyTypes } from "@/data/enums"
 import { useState } from "react"
+import FormCategory from "../form/FormCategory";
+import FormName from "../form/FormName";
+import FormDays from "../form/FormDays";
+import FormDayType from "../form/FormDayType";
 
 
 const TrackerNew = () => {
     const [activeCategory, setActiveCategory] = useState(categories[0])
     const [habitName, setHabitName] = useState('')
     const [habitDays, setHabitDays] = useState([false, false, false, false, false, false, false])
+    const [dayType, setDayType] = useState(DailyTypes[0])
     // Daily types to checkboxes
     const createHabbit = () => {
         const habit = {
@@ -19,57 +24,13 @@ const TrackerNew = () => {
     return (
         <div className="page">
             <div className="w-full p-5 font-['Inter'] capitalize tracking-wide text-sm">
-                <div className="cat-row">Select category</div>
-                <div className="flex flex-row flex-wrap">
-                    {categories.map(c => <div id={c.id}>
-                        <div className="bg-gray-950 text-gray-300 py-1 px-3 rounded-2xl border border-transmain my-1
-                    lg:hover:bg-gray-900 lg:cursor-pointer"
-                            onClick={() => setActiveCategory(c)}
-                        >
-                            <div className={`w-3 h-3 rounded-full inline-block mr-2 ${activeCategory.id === c.id ? 'bg-main' : 'bg-gray-900'}`} />
-                            {c.name}
-                        </div>
-                    </div>)}
-                </div>
+                <FormName setName={setHabitName} />
                 <div className="divider" />
-                <div className="cat-row">
-                    <div>Habit name</div>
-                    <div><label htmlFor="habitName" className="sr-only">Habit Name</label>
-                        <input
-                            className="input"
-                            type="text"
-                            placeholder="Daily pushups"
-                            onChange={e => setHabitName(e.target.value)}
-                            autoComplete="off"
-                        /></div>
-                </div>
+                <FormCategory activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
                 <div className="divider" />
-                <div className="cat-row">Days to follow</div>
-                <div className="flex flex-row justify-center gap-5 my-2">
-                    {habitDays.map((d, i) => <div className="flex flex-col items-center gap-2 lg:cursor-pointer">
-                        <div className="text-gray-300">{['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][i]}</div>
-                        <div className={`w-8 h-8 rounded-full flex flex-col justify-center items-center lg:hover:bg-transmain
-                    ${d ? 'bg-main text-gray-900' : 'bg-gray-900 text-gray-300'}`}
-                            onClick={() => setHabitDays(habitDays.map((d, j) => i === j ? !d : d))}
-                        >
-                            {i + 1}
-                        </div>
-                    </div>)}
-                </div>
+                <FormDays habitDays={habitDays} setHabitDays={setHabitDays} />
                 <div className="divider" />
-                <div className="cat-row">
-                    <div>Show (optional)</div>
-                    <div><label htmlFor="dailyType" className="sr-only">daily type</label>
-                        <select
-                            id="dailyType"
-                            className="input"
-                            onChange={e => console.log(e.target.value)}
-                            autoComplete="off"
-                        >
-                            {Object.keys(DailyTypes).map((d, i) => <option className="input" value={d}>{d}</option>)}
-                        </select>
-                    </div>
-                </div>
+                <FormDayType setDayType={setDayType} />
             </div>
             {habitName !== '' && <button className="btn-mini" onClick={createHabbit}>Create</button>}
         </div>

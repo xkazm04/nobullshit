@@ -38,6 +38,7 @@ body {
   font-size: 16px;
 }
 
+
 .mobile-body{
   background: linear-gradient(180deg, #0C0F17 1.42%, #13151C 44.62%, #0E1017 99.99%);
 }
@@ -105,6 +106,15 @@ body {
   }
   .title-menu{
     @apply capitalize font-mono text-blue-200;
+  }
+  .title{
+    @apply scroll-m-20 text-4xl font-extrabold tracking-tight;
+  }
+  .title-sub{
+    @apply scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0
+  }
+  .typo-base{
+    @apply leading-7 [&:not(:first-child)]:mt-6;
   }
 }
 
