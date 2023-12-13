@@ -7,14 +7,15 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 
 const Page = () => {
-    // Will need zustand for passing data between steps
     const Router = useRouter()
+    const [condition, setCondition] = useState(false)
     const steps = [
-        { nextComponent: <IntroLogin /> },
-        { nextComponent: <IntroPromo /> },
-        { nextComponent: <IntroFirst /> },
+        { nextComponent: <IntroLogin condition={condition} setCondition={setCondition} /> },
+        { nextComponent: <IntroPromo setCondition={setCondition}/> },
+        { nextComponent: <IntroFirst setCondition={setCondition}/> },
       ];
     const [currentStep, setCurrentStep] = useState(0);
+    
     const finish = () => {
         Router.push('/daily')
     }
@@ -22,7 +23,13 @@ const Page = () => {
         <div className="relative h-full">
         {steps[currentStep].nextComponent}
         <div className="absolute bottom-5 w-full">
-          <Stepper steps={steps} currentStep={currentStep} setCurrentStep={setCurrentStep} finalFunction={finish} />
+          <Stepper 
+            steps={steps} 
+            currentStep={currentStep} 
+            setCurrentStep={setCurrentStep} 
+            finalFunction={finish} 
+            condition={condition} 
+            setCondition={setCondition} />
         </div>
       </div>
       </>

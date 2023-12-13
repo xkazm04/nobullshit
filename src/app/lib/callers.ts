@@ -1,6 +1,6 @@
 import { openDB } from 'idb';
 export const apiRequest = async (method, endpoint, body = null, params = null, responseType = 'json', requestBodyType = 'json') => {
-  const url = new URL(`${process.env.SERVER_URL}${endpoint}`);
+  const url = endpoint;
   if (params) {
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
   }
@@ -42,8 +42,6 @@ export const apiRequest = async (method, endpoint, body = null, params = null, r
       }, requestKey);
       await tx.done;
   }
-
-  throw error;
 }
 };
 
@@ -71,4 +69,6 @@ export const retryRequests = async () => {
 };
 
 // Listen for the online event to retry the requests
-window.addEventListener('online', retryRequests);
+if (typeof window !== 'undefined') {
+    window.addEventListener('online', retryRequests);
+}

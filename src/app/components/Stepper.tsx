@@ -11,9 +11,11 @@ interface StepperProps {
   currentStep: number;
   setCurrentStep: (step: number) => void;
   finalFunction: () => void;
+  condition: boolean;
+  setCondition: (condition: boolean) => void;
 }
 
-const Stepper: React.FC<StepperProps> = ({ steps, currentStep, setCurrentStep, finalFunction }) => {
+const Stepper: React.FC<StepperProps> = ({ steps, currentStep, setCurrentStep, finalFunction, condition, setCondition }) => {
   const router = useRouter();
 
   const goBack = () => {
@@ -25,6 +27,7 @@ const Stepper: React.FC<StepperProps> = ({ steps, currentStep, setCurrentStep, f
   };
 
   const goNext = () => {
+    setCondition(false)
     if (currentStep < steps.length - 1) {
       setCurrentStep(currentStep + 1);
     }
@@ -45,6 +48,7 @@ const Stepper: React.FC<StepperProps> = ({ steps, currentStep, setCurrentStep, f
           <div key={i} className={`w-3 h-3 rounded-full ${i === currentStep ? 'bg-main' : 'bg-gray-300'}`}></div>
         ))}
       </div>
+      {condition ? <>
       {currentStep < steps.length - 1 ? (
         <button onClick={goNext} className="btn-mini">
           Next
@@ -53,7 +57,7 @@ const Stepper: React.FC<StepperProps> = ({ steps, currentStep, setCurrentStep, f
         <button onClick={finalFunction} className="btn-mini">
         Finish
       </button>
-      }
+      }</> : <button disabled className="btn-disabled">Next</button>}
     </div>
   );
 };
