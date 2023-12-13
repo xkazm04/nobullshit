@@ -8,12 +8,7 @@ import GoalNew from './GoalNew';
 
 
 
-const Goals = ({ selected, type }) => {
-    const [goals, setGoals] = useState([
-        { id: 1, name: 'Goal 1', category: 'Category 1', completed: true},
-        { id: 2, name: 'Goal 2', category: 'Category 2', completed: false},
-    ]);
-
+const Goals = ({ selected, type, goals }) => {
     const renderDialog = () => {
         return <Modal title={'Create a goal'} description={''} content={<GoalNew />} />
     }
@@ -31,7 +26,7 @@ const Goals = ({ selected, type }) => {
                 </div>
 
                 {goals && goals.length > 0 ? goals.map((goal) => (
-                    <Goal id={goal.id} key={goal.id} name={goal.name} category={goal.category} completed={goal.completed}/>
+                    <Goal id={goal.id} key={goal.id} name={goal.name} category={goal.category} completed={goal.completed} type={type}/>
                 ))
                 : <NoFound title={'No activities found'} description={'Add a new target to be better'} picture={<IlustratedFire/>}/>
                 }

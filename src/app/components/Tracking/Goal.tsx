@@ -5,6 +5,7 @@ import { Dialog, DialogTrigger } from "../ui/dialog";
 import Modal from "../Modal";
 import ConfirmationDialog from "../form/ConfirmationDialog";
 import Checkmark from "../form/Checkmark";
+import Task from "./Task";
 
 export type GoalType = {
     id: number,
@@ -13,27 +14,38 @@ export type GoalType = {
     completed: boolean,
 }
 
-const tasks = [
+const taskExamples = [
     { id: 1, name: 'Task 1', completed: true },
     { id: 2, name: 'Task 2', completed: false },
 ]
 
 
-const Goal = ({ id, name, category, completed }: GoalType) => {
+const Goal = ({ id, name, category, completed, type }: GoalType) => {
     const [comp, setComp] = useState(completed)
+    const [tasks, setTasks] = useState(taskExamples)
     const [expanded, setExpanded] = useState(false)
     const [showNote, setShowNote] = useState(false)
     const [newNote, setNewNote] = useState('' as string)
     const [noteColor, setNoteColor] = useState('#EEFF87' as string)
     const loadingCoeficient = 2
     const hasTasks = tasks.length > 0
-    const [percentage, setPercentage] = useState(50)
+    const [percentage, setPercentage] = useState(0)
+    
     const check = (action: boolean) => {
         if (action === true) {
             setComp(true)
         } else {
             setComp(false)
         }
+    }
+
+    const completeTask = ({id}) => {
+        setTasks(tasks.map((task) => {
+            if (task.id === id) {
+                task.completed = !task.completed
+            }
+            return task
+        }))
     }
 
     const removeGoal = () => {
@@ -60,32 +72,23 @@ const Goal = ({ id, name, category, completed }: GoalType) => {
                 className={`${category} p-3 flex flex-row justify-start gap-5 border-t border-gray-800 bg-gray-950 relative`}
             >
                 <div className="flex text-sm min-w-[150px] font-white">{name}</div>
+                {type === 'Goals' && 
                 <div className="absolute bottom-2 left-[20%]">
                     <div className="w-[200px] h-[0.7px] bg-gray-600"/>
-                    <div className={`h-[0.5px] bg-gray-400 w-[${percentage * loadingCoeficient}px] ${comp} ? 'bg-green-500' : 'bg-main'}`}/>
-                </div>
+                    <div className={`h-[0.5px] bg-gray-600 w-[${percentage * loadingCoeficient}px] ${comp} ? 'bg-green-500' : 'bg-main'}`}/>
+                </div>}
                 <div className='absolute right-5 flex flex-row mt-1 gap-5'>
                     <div onClick={() => { setShowNote(!showNote) }}>
                         <ScrollTextIcon strokeWidth={0.75} color={noteColor} />
                     </div>
-                    {hasTasks ? <div className='p-1 bg-gray-900 rounded-2xl' onClick={() => { setExpanded(!expanded) }}>
+                    {type === 'Goals' ? <div className='p-1 bg-gray-900 rounded-2xl' onClick={() => { setExpanded(!expanded) }}>
                         <Maximize2Icon strokeWidth={1.5} size={16} color={noteColor} />
                     </div> : <Checkmark condition={comp} check={check} />}
                 </div>
             </div>
             {expanded && <div className="p-5 py-3 bg-gray-950 font-light text-sm">
-                {tasks.map((task) => (
-                    <div className="flex flex-row justify-start gap-5 border-t border-gray-800 bg-gray-950 py-1">
-                        <div className='flex flex-col gap-1 py-1'>
-                            <div>{task.name}</div>
-                        </div>
-                        <div className='absolute right-5 flex flex-row mt-2 gap-6'>
-                            <DialogTrigger asChild>
-                                <div>{<MinusIcon color={'orange'} />}</div>
-                            </DialogTrigger>
-                            <Checkmark condition={task.completed} check={check} />
-                        </div>
-                    </div>
+                {type === 'Goals' && tasks.map((task) => (
+                    <Task task={task} length={tasks.length} setPercentage={setPercentage} percentage={percentage} complete={completeTask} /> 
                 ))}
             </div>}
             {showNote &&

@@ -2,6 +2,7 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import LoadingAnim from "./components/LoadingAnim";
+import Offline from "./components/Offline";
 
 
 export default function Home() {
@@ -22,7 +23,9 @@ export default function Home() {
 
   return (
     <div className="flex flex-col h-full w-full">
-        {loading && <LoadingAnim />}
+      <Offline children={loading && <LoadingAnim />}>
+
+      </Offline>
     </div>
   )
 }
