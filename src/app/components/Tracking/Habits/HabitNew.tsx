@@ -1,17 +1,22 @@
 'use client';
 import { useState } from "react"
-import TimeSetting from "../form/TimeSetting";
+import TimeSetting from "../../form/TimeSetting";
 import { categories } from "@/data/enums";
-import FormName from "../form/FormName";
-import FormCategory from "../form/FormCategory";
-import FormDays from "../form/FormDays";
-import FormDayType from "../form/FormDayType";
-import FormCondition from "../form/FormCondition";
+import FormName from "../../form/FormName";
+import FormCategory from "../../form/FormCategory";
+import FormDays from "../../form/FormDays";
+import FormDayType from "../../form/FormDayType";
+import FormCondition from "../../form/FormCondition";
 import { apiRequest } from "@/app/lib/callers";
-import { TrackerType, RecurrenceObject, RecurrenceRepetition } from "@/app/types/TrackerTypes";
-import FormDateSetting from "../form/FormDateSetting";
+import { HabitType, RecurrenceObject } from "@/app/types/TrackerTypes";
+import FormDateSetting from "../../form/FormDateSetting";
+import { trackerExampleReq } from "@/data/examples";
 
-const GoalNew = () => {
+type Props = {
+    setFn: (condition?: boolean) => void
+}
+
+const HabitNew = ({setFn}: Props) => {
 
     const [targetName, setTargetName] = useState('') 
     const [time, setTime] = useState(0)
@@ -23,40 +28,32 @@ const GoalNew = () => {
     const [enabledDates, setEnabledDates] = useState(false)
     const [activeCategory, setActiveCategory] = useState(categories[0].id)
     const [recurrence, setRecurrence] = useState<RecurrenceObject>();
+    const [error, setError] = useState(false)
+    const [success, setSuccess] = useState(false)
 
     // Day type 4x boolean rewrite
 
     const createGoal = async() => {
-        const newTracker: TrackerType = {
-            category: activeCategory.id,
-            name: targetName,
-            days: habitDays,
-            dayType: dayType,
+        const url = 'http://localhost:8000/tracker/habit';
+        try {
+            await apiRequest('POST', url, trackerExampleReq)
+            setFn(true)
+            setSuccess(true)
+        } catch (err) { 
+            setError(true)
+            setFn(true)
         }
-        const newRecurrence = {
-            dateFrom: dateFrom,
-            dateTo: dateTo,
-            isRecurring: enabledDates,
-            recurrenceType: 'None' as RecurrenceRepetition,
-            recurrenceInterval: 0,
-            specificDays: habitDays,
-            endCondition: {
-                type: 'OnDate',
-                endDate: dateTo,
-                occurences: 0
-            }
-        } 
-        await apiRequest('POST', '/api/tracker', newTracker)
     }
    
     return (
         <div className="page">
-                <div className="w-full p-5 font-['Inter'] capitalize tracking-wide text-sm">
+            {!success ?       
+            <div className="w-full p-5 font-['Inter'] capitalize tracking-wide text-sm">
                     <FormCategory activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
                     <div className="divider" />
                     <FormName setName={setTargetName} />
                     <div className="divider" />
-                    <FormDays habitDays={habitDays} setHabitDays={setHabitDays} />
+                    <FormDays habitDays={habitDays} setHabitDays={setHabitDays} label={'Days to complete'} />
                     <div className="divider" />
                     <FormDayType setDayType={setDayType} />
                     <div className="divider" />
@@ -73,22 +70,16 @@ const GoalNew = () => {
                         </>}
                     </div>
                     {recurrence && <>
-                        {recurrence.dateFrom}
-                        {recurrence.dateTo}
-                        {recurrence.isRecurring}
-                        {recurrence.recurrenceType}
-                        {recurrence.recurrenceInterval}
-                        {recurrence.specificDays}
-                        {recurrence.endCondition.type}
-                        {recurrence.endCondition.endDate}
-                        {recurrence.endCondition.occurences}
+
                     </>}
+                    {error && <>Error. You can finish the process</>}
+                   
                     <div className="full-w flex flex-row justify-center my-10">
                         <button className="btn-action" onClick={createGoal}>Create goal</button>
                     </div>
-                </div>
+                </div>  : <div className="typo-long">Great. Continue</div>}
         </div>
     )
 }
 
-export default GoalNew
+export default HabitNew

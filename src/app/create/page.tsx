@@ -5,8 +5,8 @@ import { ArrowLeft } from "lucide-react"
 import { useRouter } from "next/navigation"
 import BottomNav from "../components/BottomNav"
 import { useState } from "react"
-import GoalNew from "../components/Tracking/GoalNew"
-import GoalGuide from "../components/Tracking/GoalGuide"
+import GoalNew from "../components/Tracking/Habits/HabitNew"
+import GoalGuide from "../components/Tracking/Guide/GoalGuide"
 
 const menuOptions = [
     { id: 'tracker', name: 'Tracker' },

@@ -5,7 +5,7 @@ import { BookCheckIcon, CrownIcon, GoalIcon, TimerResetIcon } from 'lucide-react
 
 const navItems = [
   { href: '/daily', label: 'Daily', logo: <BookCheckIcon strokeWidth={0.75}/> },
-  { href: '/goals', label: 'Goals', logo: <GoalIcon strokeWidth={0.75}/>  },
+  { href: '/weekly', label: 'Overview', logo: <GoalIcon strokeWidth={0.75}/>  },
   { href: '/timer', label: 'Timer', logo: <TimerResetIcon strokeWidth={0.75}/> },
   { href: '/challenge', label: 'Challenge', logo: <CrownIcon strokeWidth={0.75}/> },
 ]

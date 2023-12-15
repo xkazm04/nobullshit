@@ -1,13 +1,14 @@
-
-
-export type TrackerType = {
-    id?: number,
-    days: boolean[],
-    dayType: boolean[],
-    active?: boolean,
-    name: string,
-    category: number
-    recurrnece?: RecurrenceObject
+export type HabitType = {
+    userId: string;
+    dayType: boolean[];
+    name: string;
+    category: string;
+    dateFrom?: string;
+    dateTo?: string;
+    isRecurring?: boolean;
+    recurrenceType?: string;
+    recurrenceInterval?: number;
+    specificDays?: boolean[];
 }
 
 export type RecurrenceObject = {

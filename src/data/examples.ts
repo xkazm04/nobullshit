@@ -1,6 +1,21 @@
 import { GoalType, NoteType } from "@/app/types/TrackerTypes";
 import { Category } from "@/data/enums";
 
+export const trackerExampleReq = 
+    {
+        "userId": "123e4567-e89b-12d3-a456-426614174000",
+        "dayType": [true, false, true, false],
+        "name": "My Tracker",
+        "category": 1,
+        "dateFrom": "2022-01-01",
+        "dateTo": "2022-12-31",
+        "isRecurring": true,
+        "recurrenceType": "Week",
+        "recurrenceInterval": 1,
+        "specificDays": [false, false, true, false, false, false, false]
+    }
+
+
 export const goalExamples: GoalType[] = [
     {
         id: 1,

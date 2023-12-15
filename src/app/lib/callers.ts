@@ -1,4 +1,21 @@
 import { openDB } from 'idb';
+
+export async function apiGetAllRequest<T>(url: string): Promise<T[]> {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+        throw new Error(`GET request failed with status ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    if (!Array.isArray(data)) {
+        throw new Error('Response is not an array');
+    }
+
+    return data;
+}
+
 export const apiRequest = async (method, endpoint, body = null, params = null, responseType = 'json', requestBodyType = 'json') => {
   const url = endpoint;
   if (params) {
@@ -13,7 +30,7 @@ export const apiRequest = async (method, endpoint, body = null, params = null, r
         },
         body: body ? (requestBodyType === 'json' ? JSON.stringify(body) : new URLSearchParams(body)) : null,
     });
-
+    console.log('response', response);
     if (!response.ok) {
         throw new Error(`Network response was not ok: ${response.status} ${await response.text()}`);
     }

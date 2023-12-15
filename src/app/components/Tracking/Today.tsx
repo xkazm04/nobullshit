@@ -1,21 +1,18 @@
 import { useEffect, useState, useRef } from "react";
-import Goals from "./Goals";
+import HabitsDaily from "./Habits/HabitsDaily";
 import {Dialog,DialogTrigger} from "../ui/dialog";
 import Modal from "../Modal";
 import CalendarPicker from "../form/CalendarPicker";
 
-const Today = ({goals}) => {
+
+const Today = ({habits}:any) => {
     const daysInMonth = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate();
     const days = Array.from({ length: daysInMonth }, (_, i) => i + 1);
     const today = new Date().getDate();
     const [selectedDay, setSelectedDay] = useState(today);
-    const [showGoals, setShowGoals] = useState(true);
-    const [showHabbits, setShowHabbits] = useState(true);
     const [fullDate, setFullDate] = useState(new Date().toLocaleDateString());
 
-
     const scrollContainerRef = useRef(null);
-
 
     useEffect(() => {
         console.log(selectedDay);
@@ -82,8 +79,7 @@ const Today = ({goals}) => {
                     </ul>
                 </div>
             </div>
-            {showGoals && <Goals selected={selectedDay.toString()} type={'Goals'} goals={goals} />}
-            {showHabbits && <Goals selected={selectedDay.toString()} type={'Habits'} goals={goals} />}
+            <HabitsDaily selected={selectedDay.toString()} type={'Goals'} habits={habits} />
             {renderDialog()}
             </Dialog>
         </div>

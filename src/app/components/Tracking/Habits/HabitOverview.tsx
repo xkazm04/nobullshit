@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 import { CheckCheckIcon, MoonIcon, PlusCircleIcon, SunIcon, XCircleIcon } from "lucide-react";
 import { categories } from "@/data/enums";
 import { getCategoryColor } from "@/app/lib/colorGetter";
-import { Dialog, DialogTrigger } from "../ui/dialog";
-import Modal from "../Modal";
-import GoalNew from "./GoalNew";
-import { Powah } from "../icons/illustrations";
-import TrackersWeekly from "./TrackersWeekly";
+import { Dialog, DialogTrigger } from "../../ui/dialog";
+import Modal from "../../Modal";
+import HabitNew from "./HabitNew";
+import { Powah } from "../../icons/illustrations";
+import HabitsWeekly from "./HabitsWeekly";
 
 const trackerExamples = [
     {id:1, name: 'Wake up early', completed: [true, true, false, false, true], category: categories[0].id, dayType: 'morning' },
@@ -23,7 +23,7 @@ const daysExamples = [
     {id:4, name: 'MON', date: '26'},
     {id:5, name: 'SUN', date: '25'}
 ]
-const GoalOverview = () => {
+const HabitOverview = () => {
     const [days, setDays] = useState(daysExamples);
     const [showDetail, setShowDetail] = useState(false);
     const [trackers, setTrackers] = useState(trackerExamples);
@@ -53,7 +53,7 @@ const GoalOverview = () => {
     }
 
     const renderDialog = () => {
-        return <Modal title={'Create new goal'} description={''} content={<GoalNew/>} />
+        return <Modal title={'Create new goal'} description={''} content={<HabitNew/>} />
     }
 
 
@@ -61,7 +61,7 @@ const GoalOverview = () => {
         <div className="flex flex-col relative justify-between items-start w-full h-full bg-gray-950 py-1 rounded-2xl text-sm ">
             <Dialog>
                 <div className=" text-white w-full text-[9px]">
-                    <div className="container mx-auto px-4 py-6">
+                    <div className="container mx-auto px-4 py-6 relative">
                         <div className="flex items-center justify-end mb-4 relative gap-5">
                             {days.map(day => (
                                 <div key={day.id} className="flex flex-col justify-center w-[20px]">
@@ -70,10 +70,11 @@ const GoalOverview = () => {
                                 </div>
                             ))}
                         </div>
-                        <div><SunIcon/></div>
-                                <TrackersWeekly trackers={trackers} handleCheck={handleCheck}/>
-                        <div><MoonIcon/></div>
-                                <TrackersWeekly trackers={trackers} handleCheck={handleCheck}/>
+                        <div className="absolute top-[25px] flex flex-row gap-5">
+                            <div><MoonIcon/></div>
+                            <div><SunIcon/></div>
+                        </div>
+                        <HabitsWeekly trackers={trackers} handleCheck={handleCheck}/>
                     </div>
                     <DialogTrigger asChild>
                         <div className="flex flex-row justify-center"><button><PlusCircleIcon color={'#EEFF87'}/></button></div>
@@ -88,4 +89,4 @@ const GoalOverview = () => {
     </>
 }
 
-export default GoalOverview;
+export default HabitOverview;

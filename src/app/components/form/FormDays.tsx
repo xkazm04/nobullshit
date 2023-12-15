@@ -1,4 +1,10 @@
-const FormDays = ({habitDays, setHabitDays, label}) => {
+type Props = {
+    habitDays: boolean[],
+    setHabitDays: (habitDays: boolean[]) => void,
+    label: string
+}
+
+const FormDays = ({habitDays, setHabitDays, label}: Props) => {
     return (<>
         <div className="cat-row">{label}</div>
         <div className="flex flex-row justify-center gap-5 my-5">

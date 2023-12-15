@@ -8,7 +8,7 @@ const mainColor = '#EEFF87'
 
 const navigation = [
     { name: 'Daily', href: '/daily', logo: <GoalIcon color={mainColor} strokeWidth={0.75} size={20} /> },
-    { name: 'Habbits', href: '/habbits', logo: <Zap color={mainColor} strokeWidth={0.75} size={20} /> },
+    { name: 'Overview', href: '/weekly', logo: <Zap color={mainColor} strokeWidth={0.75} size={20} /> },
     { name: 'Goals', href: '/goals', logo: <Tally5Icon color={mainColor} strokeWidth={0.75} size={20} /> },
     { name: 'Challenges', href: '/challenges', logo: <GoalIcon color={mainColor} strokeWidth={0.75} size={20} /> },
 ]

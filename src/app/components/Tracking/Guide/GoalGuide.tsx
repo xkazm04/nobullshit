@@ -1,9 +1,9 @@
 'use client';
-import Stepper from "../Stepper";
+import Stepper from "../../Stepper";
 import { useState } from "react";
-import GuideArea from "./Guide/GuideArea";
-import GuideHabit from "./Guide/GuideHabit";
-import GuideMilestones from "./Guide/GuideMilestones";
+import GuideArea from "./GuideArea";
+import GuideHabit from "./GuideHabit";
+import GuideMilestones from "./GuideMilestones";
 
 const GoalGuide = () => {
    

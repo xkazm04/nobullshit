@@ -1,11 +1,12 @@
 'use client';
 import { useState } from "react"
-import { ArrowRightIcon, Maximize2Icon, MinusIcon, ScrollTextIcon } from "lucide-react";
-import { Dialog, DialogTrigger } from "../ui/dialog";
-import Modal from "../Modal";
-import ConfirmationDialog from "../form/ConfirmationDialog";
-import Checkmark from "../form/Checkmark";
-import Task from "./Task";
+import { ArrowRightIcon, Maximize2Icon, MinusIcon, PlusCircle, ScrollTextIcon } from "lucide-react";
+import { Dialog, DialogTrigger } from "../../ui/dialog";
+import Modal from "../../Modal";
+import ConfirmationDialog from "../../form/ConfirmationDialog";
+import Checkmark from "../../form/Checkmark";
+import Task from "../Task";
+import { FormTextInput } from "../../form/FormTextInput";
 
 export type GoalType = {
     id: number,
@@ -20,13 +21,14 @@ const taskExamples = [
 ]
 
 
-const Goal = ({ id, name, category, completed, type }: GoalType) => {
+const Habit = ({ id, name, category, completed, type }: GoalType) => {
     const [comp, setComp] = useState(completed)
     const [tasks, setTasks] = useState(taskExamples)
     const [expanded, setExpanded] = useState(false)
     const [showNote, setShowNote] = useState(false)
     const [newNote, setNewNote] = useState('' as string)
     const [noteColor, setNoteColor] = useState('#EEFF87' as string)
+    const [newTaskName, setNewTaskName] = useState('' as string)
     const loadingCoeficient = 2
     const hasTasks = tasks.length > 0
     const [percentage, setPercentage] = useState(0)
@@ -52,6 +54,10 @@ const Goal = ({ id, name, category, completed, type }: GoalType) => {
         console.log('Goal removed')
     }
 
+    const addTask = () => {
+        console.log('Task added')
+    }
+
     const sendNote = () => {
         console.log('Note sent')
         setShowNote(false);
@@ -73,8 +79,9 @@ const Goal = ({ id, name, category, completed, type }: GoalType) => {
             >
                 <div className="flex text-sm min-w-[150px] font-white">{name}</div>
                 {type === 'Goals' && 
-                <div className="absolute bottom-2 left-[20%]">
-                    <div className="w-[200px] h-[0.7px] bg-gray-600"/>
+                <div className="absolute bottom-2 left-[30%]">
+                    <div className="text-xs text-gray-500 ml-[70px]">{percentage} %</div>
+                    <div className="w-[150px] h-[0.7px] bg-gray-600"/>
                     <div className={`h-[0.5px] bg-gray-600 w-[${percentage * loadingCoeficient}px] ${comp} ? 'bg-green-500' : 'bg-main'}`}/>
                 </div>}
                 <div className='absolute right-5 flex flex-row mt-1 gap-5'>
@@ -86,10 +93,17 @@ const Goal = ({ id, name, category, completed, type }: GoalType) => {
                     </div> : <Checkmark condition={comp} check={check} />}
                 </div>
             </div>
-            {expanded && <div className="p-5 py-3 bg-gray-950 font-light text-sm">
+            {expanded && <div className="p-5 py-3 bg-gray-950 font-light text-sm relative transition-all duration-200 ease-out delay-300">
                 {type === 'Goals' && tasks.map((task) => (
                     <Task task={task} length={tasks.length} setPercentage={setPercentage} percentage={percentage} complete={completeTask} /> 
                 ))}
+                <div className="flex flex-row justify-between my-3 ">
+                    <div className="flex flex-row justify-center gap-3">
+                        <FormTextInput placeholder="Fill task name" label={'++'} type={'text'} setNew={setNewTaskName}/>         
+                    </div>
+                    <button className="btn-action border-none" onClick={addTask}><PlusCircle strokeWidth={0.75} size={25}/></button>
+                   
+                </div>
             </div>}
             {showNote &&
                 <div className="flex flex-row justify-between items-center bg-gray-950 p-2 mb-5">
@@ -112,4 +126,4 @@ const Goal = ({ id, name, category, completed, type }: GoalType) => {
     )
 }
 
-export default Goal
+export default Habit
