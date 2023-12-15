@@ -3,8 +3,8 @@ import { categories } from "@/data/enums";
 const FormCategory = ({ activeCategory, setActiveCategory }) => {
     return (
         <> 
-            <div className="cat-row">Select category</div>
-            <div className="flex flex-row flex-wrap">
+            <div className="cat-row">Which area you want to improve?</div>
+            <div className="flex flex-row flex-wrap pt-4">
                 {categories.map(c => (
                     <div key={c.id}>
                         <div 

@@ -106,11 +106,15 @@ body {
     @apply relative flex flex-col justify-between h-full w-full;
   }
   .input{
-    @apply w-[200px] px-2 py-1 rounded-xl bg-gray-950 text-gray-100 font-normal font-['Inter'] tracking-wide leading-6 border-transmain
-    border-t-[0.2px] shadow-sm shadow-slate-900 text-sm focus:outline-none placeholder:italic placeholder:text-gray-400;
+    @apply w-[180px] px-4 py-1 rounded-xl bg-gray-950 text-gray-100 font-normal font-['Inter'] tracking-wide leading-6 border-transmain
+    border-t-[0.2px] shadow-sm shadow-slate-900 text-sm focus:outline-none placeholder:italic placeholder:text-gray-400
+    focus:w-[240px] transition-all duration-200 ease-out delay-100;
+  }
+  .input-full{
+    @apply shadow appearance-none border w-full py-2 px-3 bg-gray-950 text-gray-200 leading-tight focus:outline-none rounded-xl;
   }
   .cat-row{
-    @apply text-main font-semibold flex flex-row justify-between;
+    @apply font-mono text-blue-200 flex flex-row justify-between;
   }
   .title-menu{
     @apply capitalize font-mono text-blue-200;
@@ -124,5 +128,21 @@ body {
   .typo-base{
     @apply leading-7 [&:not(:first-child)]:mt-6;
   }
+  .typo-long{
+    @apply flex flex-row justify-center text-center text-sm tracking-wider px-7 text-gray-100 leading-6
+  }
 }
 
+.cal {
+  background-color: #353535; 
+  color: #edf2f7; 
+}
+.cal .react-datepicker__day-name, .cal .react-datepicker__day, .cal .react-datepicker__time-name {
+  color: #555555; 
+  background: rgb(231, 231, 231);
+}
+
+.cal .react-datepicker__day--selected, .cal .react-datepicker__month-text--selected, .cal .react-datepicker__quarter-text--selected, .cal .react-datepicker__year-text--selected {
+  background-color: #4F46E5; 
+  color: white
+}

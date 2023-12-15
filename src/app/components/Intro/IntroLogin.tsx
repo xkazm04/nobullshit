@@ -41,7 +41,7 @@ const IntroLogin = ({condition,setCondition}: Props) => {
             <div className="flex flex-col w-[90%] gap-5
                 rounded-lg
             ">
-                <div className="flex flex-row justify-center text-center text-sm tracking-wider px-7 text-gray-100 leading-6">
+                <div className="typo-long">
                     By setting a habbit 5 hours / week you will gain 250h+ expertize at any skill, feel physically better.
                 </div>
                 <div className="flex flex-row justify-center bg-gray-950 gap-3">

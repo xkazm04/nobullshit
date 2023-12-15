@@ -7,7 +7,7 @@ import {
 
 type ModalProps = {
     title: string;
-    description: string;
+    description?: string;
     content: React.ReactNode;
 };
 

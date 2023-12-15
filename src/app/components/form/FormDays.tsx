@@ -1,7 +1,7 @@
-const FormDays = ({habitDays, setHabitDays}) => {
+const FormDays = ({habitDays, setHabitDays, label}) => {
     return (<>
-        <div className="cat-row">Days to follow</div>
-        <div className="flex flex-row justify-center gap-5 my-2">
+        <div className="cat-row">{label}</div>
+        <div className="flex flex-row justify-center gap-5 my-5">
             {habitDays.map((d, i) => <div className="flex flex-col items-center gap-2 lg:cursor-pointer">
                 <div className="text-gray-300">{['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][i]}</div>
                 <div className={`w-8 h-8 rounded-full flex flex-col justify-center items-center lg:hover:bg-transmain

@@ -21,7 +21,7 @@ const FormDayType = ({ setDayType }) => {
     ]
     return <>
         <div className="cat-row">
-            <div>Day part</div>
+            <div>When?</div>
                 <ToggleGroup type="multiple">
                      {DayTypes().map((d, i) => <ToggleGroupItem value={d.value} aria-label={d.name}
                         onClick={() => setDayType(d)} key={i}>
