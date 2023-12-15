@@ -2,6 +2,7 @@
 import { AxeIcon, ListIcon, PenIcon, Trash2Icon } from "lucide-react";
 import { NoBullshitLogo } from "../../icons/illustrations";
 import { useState } from "react";
+import HabitNotes from "./HabitNotes";
 
 const settingsItems = [
     {
@@ -18,6 +19,27 @@ const settingsItems = [
         icon: <Trash2Icon/>
     },
 
+]
+
+const noteExamples = [
+    {text: 'text', date: '11.2.2015'},
+    {text: 'text', date: '11.2.2015'},
+    {text: 'text', date: '11.2.2015'},   
+    {text: 'text', date: '11.2.2015'},
+    {text: 'text', date: '11.2.2015'},
+    {text: 'text', date: '11.2.2015'},
+    {text: 'text', date: '11.2.2015'},
+    {text: 'text', date: '11.2.2015'},
+    {text: 'text', date: '11.2.2015'},   
+    {text: 'text', date: '11.2.2015'},
+    {text: 'text', date: '11.2.2015'},
+    {text: 'text', date: '11.2.2015'},
+    {text: 'text', date: '11.2.2015'},
+    {text: 'text', date: '11.2.2015'},
+    {text: 'text', date: '11.2.2015'},   
+    {text: 'text', date: '11.2.2015'},
+    {text: 'text', date: '11.2.2015'},
+    {text: 'text', date: '11.2.2015'},
 ]
 
 const HabitMenu = ({ habitId }) => {
@@ -40,8 +62,8 @@ const HabitMenu = ({ habitId }) => {
                     </div>
                 ))}
             </div>
-            <div>
-                {active === 'Notes' && <>Notes</>}
+            <div className="full-w min-w-[70%]">
+                {active === 'Notes' && <HabitNotes notes={noteExamples}/>}
                 {active === 'Edit' && <>Edit</>}
                 {active === 'Stats' && <>Stats</>}
                 {active === 'Delete' && <>Delete</>}
