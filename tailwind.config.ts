@@ -61,8 +61,8 @@ module.exports = {
       },
       keyframes: {
         "accordion-down": {
-          from: { height: 0 },
-          to: { height: "var(--radix-accordion-content-height)" },
+          from: { height: 0, opacity: 0 },
+          to: { height: "var(--radix-accordion-content-height)", opacity: 1 },
         },
         "accordion-up": {
           from: { height: "var(--radix-accordion-content-height)" },
@@ -98,6 +98,17 @@ module.exports = {
           '50%': { transform: 'scale(1.5)', opacity: '.5' },
           '100%': { transform: 'scale(2)', opacity: '0' },
         },
+        'slideIn': {
+          '0%': { transform: 'translateX(-100%)', opacity: '0' },
+          '100%': { transform: 'translateX(100%)', opacity: '1' },
+        },
+        'slideOut': {
+          '0%': { transform: 'translateX(0)', opacity: '0' },
+          '100%': { transform: 'translateX(100%)', opacity: '1' },
+        },'slideInAndOut': {
+          '0%': { transform: 'translateX(-50%)', opacity: '1' },
+          '100%': { transform: 'translateX(100%)', opacity: '1' },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.3s ease-out",
@@ -109,6 +120,10 @@ module.exports = {
         'manual-scroll-left': 'manual-scroll-left 0.5s linear',
         'manual-scroll-right': 'manual-scroll-right 0.5s linear',
         'touch': 'ping 1s cubic-bezier(0, 0, 0.2, 1) 1',
+        'slideIn': 'slideIn 3s ease-out',
+        'slideOut': 'slideOut 0.5s ease-out',
+        'slideInAndOut': 'slideInAndOut 8s ease-out',
+        'fade-in': 'text-fade-in 0.5s ease-out',
       },
 
     },

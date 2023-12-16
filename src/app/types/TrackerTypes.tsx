@@ -9,6 +9,7 @@ export type HabitType = {
     recurrenceType?: string;
     recurrenceInterval?: number;
     specificDays?: boolean[];
+    active?: boolean;
 }
 
 export type RecurrenceObject = {

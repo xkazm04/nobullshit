@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useState, useRef } from "react";
 import HabitsDaily from "./Habits/HabitsDaily";
 import {Dialog,DialogTrigger} from "../ui/dialog";
 import Modal from "../Modal";
@@ -11,12 +11,10 @@ const Today = ({habits}:any) => {
     const today = new Date().getDate();
     const [selectedDay, setSelectedDay] = useState(today);
     const [fullDate, setFullDate] = useState(new Date().toLocaleDateString());
+    // Tbd after mock 
+    const filteredHabits = habits.filter((h:any) => h.date === fullDate);
 
     const scrollContainerRef = useRef(null);
-
-    useEffect(() => {
-        console.log(selectedDay);
-    }, [selectedDay]);
 
     const nextDay = () => {
         if (selectedDay === daysInMonth) {
@@ -79,7 +77,7 @@ const Today = ({habits}:any) => {
                     </ul>
                 </div>
             </div>
-            <HabitsDaily selected={selectedDay.toString()} type={'Goals'} habits={habits} />
+            <HabitsDaily  habits={habits} />
             {renderDialog()}
             </Dialog>
         </div>

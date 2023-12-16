@@ -17,9 +17,12 @@ export type GoalType = {
 
 const taskExamples = [
     { id: 1, name: 'Task 1', completed: true },
-    { id: 2, name: 'Task 2', completed: false },
+    { id: 2, name: 'Task 2', completed: false }, // Optional value
 ]
 
+// Task On complete remove + return back 
+// + Create note
+// note -> Text, Date, Boolean
 
 const Habit = ({ id, name, category, completed, type }: GoalType) => {
     const [comp, setComp] = useState(completed)
@@ -32,6 +35,10 @@ const Habit = ({ id, name, category, completed, type }: GoalType) => {
     const loadingCoeficient = 2
     const hasTasks = tasks.length > 0
     const [percentage, setPercentage] = useState(0)
+    const [noteSent, setNoteSent] = useState(false)
+    const mainColor = '#EEFF87'
+
+    // If note active, stronger stroke width of the icon 
     
     const check = (action: boolean) => {
         if (action === true) {
@@ -40,6 +47,8 @@ const Habit = ({ id, name, category, completed, type }: GoalType) => {
             setComp(false)
         }
     }
+
+    
 
     const completeTask = ({id}) => {
         setTasks(tasks.map((task) => {
@@ -62,6 +71,11 @@ const Habit = ({ id, name, category, completed, type }: GoalType) => {
         console.log('Note sent')
         setShowNote(false);
         setNoteColor('rgb(34 197 94)')
+        setNoteSent(true)
+        setNewNote('')
+        setTimeout(() => {
+            setNoteSent(false)
+        }, 5000)
     }
 
     const renderDialog = () => {
@@ -89,7 +103,7 @@ const Habit = ({ id, name, category, completed, type }: GoalType) => {
                         <ScrollTextIcon strokeWidth={0.75} color={noteColor} />
                     </div>
                     {type === 'Goals' ? <div className='p-1 bg-gray-900 rounded-2xl' onClick={() => { setExpanded(!expanded) }}>
-                        <Maximize2Icon strokeWidth={1.5} size={16} color={noteColor} />
+                        <Maximize2Icon strokeWidth={1.5} size={16} color={mainColor} />
                     </div> : <Checkmark condition={comp} check={check} />}
                 </div>
             </div>
@@ -107,19 +121,21 @@ const Habit = ({ id, name, category, completed, type }: GoalType) => {
             </div>}
             {showNote &&
                 <div className="flex flex-row justify-between items-center bg-gray-950 p-2 mb-5">
-                    <label htmlFor="note" className="sr-only">Note</label>
-                    <textarea
-                        id="note"
-                        className="input flex-grow mr-2"
-                        value={newNote}
-                        onChange={(e) => setNewNote(e.target.value)}
-                        placeholder="Write a note"
-                    />
-                    <button className="btn-mini" onClick={sendNote}>
-                        <ArrowRightIcon color={'#EEFF87'} strokeWidth={0.75} />
-                    </button>
+                <label htmlFor="note" className="sr-only">Note</label>
+                <input
+                    type="text"
+                    id="note"
+                    className="input flex-grow mr-2"
+                    value={newNote}
+                    onChange={(e) => setNewNote(e.target.value)}
+                    placeholder="What did you achieve?"
+                />
+                <button className="btn-mini" onClick={sendNote}>
+                    <ArrowRightIcon color={'#EEFF87'} strokeWidth={0.75} />
+                </button>
                 </div>
             }
+            {noteSent && <div className="absolute text-xs text-green-300 flex flex-row justify-center animate-slideInAndOut w-[700px]">Note sent</div>}
             {renderDialog()}
             </Dialog>
         </div>
