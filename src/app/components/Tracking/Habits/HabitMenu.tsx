@@ -2,7 +2,7 @@
 import { AxeIcon, ListIcon, PenIcon, Trash2Icon } from "lucide-react";
 import { NoBullshitLogo } from "../../icons/illustrations";
 import { useState } from "react";
-import HabitNotes from "./HabitNotes";
+import HabitNotes from "./HabitNotesHistory";
 import HabitDelete from "./HabitDelete";
 
 const settingsItems = [

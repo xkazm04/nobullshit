@@ -15,6 +15,9 @@ const IntroLogin = ({condition,setCondition}: Props) => {
     const [success, setSuccess] = useState(false)
     const [error, setError] = useState(false)
     const [checked, setChecked] = useState(true)
+    const [textIndex, setTextIndex] = useState(0);
+
+    const txt =  "By setting a habbit 5 hours / week you will gain 250h+ expertize at any skill, feel physically better."
 
     const handleSubmit = async(e: any) => {
         setSuccess(false)
@@ -42,7 +45,7 @@ const IntroLogin = ({condition,setCondition}: Props) => {
                 rounded-lg
             ">
                 <div className="typo-long">
-                    By setting a habbit 5 hours / week you will gain 250h+ expertize at any skill, feel physically better.
+                   {txt}
                 </div>
                 <div className="flex flex-row justify-center bg-gray-950 gap-3">
                 <button 

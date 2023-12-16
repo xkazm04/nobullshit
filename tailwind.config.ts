@@ -108,7 +108,11 @@ module.exports = {
         },'slideInAndOut': {
           '0%': { transform: 'translateX(-50%)', opacity: '1' },
           '100%': { transform: 'translateX(100%)', opacity: '1' },
-        },
+        }, 'fadeIn':{
+          from: { opacity: 0, transform: "scale(.95)" }
+        }, 'fadeOut':{
+          to: { opacity: 0, transform: "scale(.95)" }
+        }
       },
       animation: {
         "accordion-down": "accordion-down 0.3s ease-out",
@@ -124,6 +128,8 @@ module.exports = {
         'slideOut': 'slideOut 0.5s ease-out',
         'slideInAndOut': 'slideInAndOut 8s ease-out',
         'fade-in': 'text-fade-in 0.5s ease-out',
+        'fadeIn': "fadeIn 0.4s ease-out",
+        'fadeOut': "fadeOut 0.45s ease-out forwards"
       },
 
     },
