@@ -3,6 +3,7 @@ import { AxeIcon, ListIcon, PenIcon, Trash2Icon } from "lucide-react";
 import { NoBullshitLogo } from "../../icons/illustrations";
 import { useState } from "react";
 import HabitNotes from "./HabitNotes";
+import HabitDelete from "./HabitDelete";
 
 const settingsItems = [
     {
@@ -55,7 +56,7 @@ const HabitMenu = ({ habitId }) => {
                     <div className='flex flex-row items-center justify-between w-full'
                         onClick={() => setActive(item.name)}
                     >
-                        <div className='flex flex-row items-center gap-2'>
+<                   div className={`flex flex-row lg:cursor-pointer items-center gap-2 ${active === item.name ? 'text-green-300' : ''}`}>
                             <div>{item.icon}</div>
                             <div>{item.name}</div>
                         </div>
@@ -66,7 +67,7 @@ const HabitMenu = ({ habitId }) => {
                 {active === 'Notes' && <HabitNotes notes={noteExamples}/>}
                 {active === 'Edit' && <>Edit</>}
                 {active === 'Stats' && <>Stats</>}
-                {active === 'Delete' && <>Delete</>}
+                {active === 'Delete' && <HabitDelete habitId={habitId}/>}
             </div>
         </div>
 

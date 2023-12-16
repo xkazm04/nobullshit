@@ -5,7 +5,7 @@ type FormConditionProps = {
     text: string
 }
 const FormCondition = ({checked, setChecked, text}: FormConditionProps) => {
-    return <div className="flex justify-betwen items-center space-x-2 px-1">
+    return <div className="flex justify-betwen items-center space-x-2 px-1 h-10 ">
     <Switch
       id="email-newsletter"
       checked={checked}
