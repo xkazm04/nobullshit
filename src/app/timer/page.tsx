@@ -1,53 +1,27 @@
 'use client';
-import YouTube from 'react-youtube';
-import Header from '../components/Header';
 import BottomNav from '../components/BottomNav';
 import Timer from '../components/Timing/Timer';
 import { useState } from 'react';
+import Countdown from '../components/Timing/Countdown';
+import HeaderComponent from '../components/ui/header';
+import { Clock8Icon, TimerResetIcon } from 'lucide-react';
 
-const YtOptions = {
-  height: '200',
-  width: '320',
-  playerVars: {
-    autoplay: 1,
-    controls: 0,
-    disablekb: 0
-  },
-};
-
-const menuItems = [
-  { name: 'Countdown', value: 'countdown' },
-  { name: 'Timer', value: 'timer' }
-];
 
 const Page = () => {
-  const [type, setType] = useState('' as string);
-
-  const renderComponent = () => {
-    switch (type) {
-      case 'countdown':
-        return <Timer />;
-      case 'timer':
-        return <Timer />;
-      default:
-        return <Timer />;
-    }
-  };
-
+  const [type, setType] = useState('countdown' as string);
 
   return (
     <div className="page">
-      <div className='absolute z-10 w-full'><Header /></div>      
+        <HeaderComponent page={type} />
         <div className='mt-[10%]'>
-          {renderComponent()}
+          {type === 'countdown' ? <Countdown /> : <Timer />}
         </div>
-        <div className='flex flex-row justify-center gap-10'>
-          {menuItems.map((item) => (
-            <div key={item.name}>
-              <button className='btn-mini'>{item.name}</button>
-            </div>
-          ))}
-        </div>   
+        <div className='absolute right-1 top-16'>
+          <button className='btn-action' onClick={()=>{setType('countdown')}}>{<Clock8Icon/>}</button>
+        </div>
+        <div className='absolute left-1 top-16'>
+          <button className='btn-action' onClick={()=>{setType('timer')}}>{<TimerResetIcon/>}</button>
+        </div>
       <div className='z-10 w-full'><BottomNav /></div>
     </div>
   );
