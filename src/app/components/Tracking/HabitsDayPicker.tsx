@@ -38,7 +38,7 @@ const Today = ({habits}:any) => {
     }
 
     const renderDialog = () => {
-       return <Modal title={'Pick a day from the calendar'} description={''} content={<CalendarPicker setDay={setFullDate}/>} />
+       return <Modal title={'Pick a day from the calendar'} description={''} h={'min-h-[500px]'} content={<CalendarPicker setDay={setFullDate}/>} />
     }
 
 

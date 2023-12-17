@@ -9,12 +9,13 @@ type ModalProps = {
     title: string;
     description?: string;
     content: React.ReactNode;
+    h?: string;
 };
 
 
-const Modal = ({title, description, content}: ModalProps) => {
+const Modal = ({title, description, content, h}: ModalProps) => {
     return (
-        <DialogContent className="sm:max-w-md">
+        <DialogContent className={`sm:max-w-md ${h}`}>
             <DialogHeader>
                 <DialogTitle>{title}</DialogTitle>
                 <DialogDescription>

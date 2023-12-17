@@ -100,8 +100,6 @@ const Habit = ({ id, name, category, completed, type }: GoalType) => {
         }, 5000)
     }
 
-    console.log(percentage*loadingCoeficient)
-
 //style={{ color: getCategoryColor(category) }}
     return (
         <div className="flex flex-col justify-between">
@@ -113,9 +111,11 @@ const Habit = ({ id, name, category, completed, type }: GoalType) => {
                 {type === 'Goals' && 
                 <div className="absolute bottom-2 left-[30%]">
                     <div className="text-xs text-gray-500 ml-[70px]">{percentage} %</div>
-                    <div className="w-[150px] h-[0.7px] bg-gray-600"/>
-                    <div className={`h-[0.5px] bg-gray-100 w-[${percentage * loadingCoeficient}px] ${comp} ? 'bg-green-500' : 'bg-main'}
-                        transition-all duration-500 ease-in-out`}/>
+                    <div className="w-[150px] h-[0.7px] bg-gray-800 z-20"/>
+                    <div 
+                        style={{ width: `${percentage * loadingCoeficient}px` }} 
+                        className={`h-[0.5px] ${comp ? 'bg-green-500' : 'bg-gray-100'} z-0 transition-all duration-500 ease-in-out`}
+                        />
                 </div>}
                 <div className='absolute right-5 flex flex-row mt-1 gap-5'>
                     <div className={`${showNote ? 'animate-vibrate' : ''} transition-all duration-500 ease-in-out`} 
