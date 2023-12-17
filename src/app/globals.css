@@ -107,7 +107,7 @@ body {
   }
   .input{
     @apply w-[180px] px-4 py-1 rounded-xl bg-gray-950 text-gray-100 font-normal font-['Inter'] tracking-wide leading-6 border-transmain
-    border-t-[0.2px] shadow-sm shadow-slate-900 text-sm focus:outline-none placeholder:italic placeholder:text-gray-400
+    border-t-[0.2px] shadow-sm shadow-slate-900 text-xs focus:outline-none placeholder:italic placeholder:text-gray-400
     focus:w-[240px] transition-all duration-200 ease-out delay-100;
   }
   .input-full{

@@ -26,7 +26,7 @@ const HabitsWeekly = ({trackers,handleCheck }) => {
         <QuickPinchZoom onUpdate={onUpdate}>
             <div ref={ref}>
             {trackers.map(tracker => (
-                <div key={tracker.id} className="flex items-center justify-between py-2 relative border-b border-transmain">
+                <div key={tracker.id} className="flex items-center justify-between py-2 relative border-b border-transmain shadow-sm shadow-purple-950">
                     <div className="flex text-[11px] min-w-[150px]" style={{ color: getCategoryColor(tracker.category) }}>
                         {tracker.name}
                     </div>

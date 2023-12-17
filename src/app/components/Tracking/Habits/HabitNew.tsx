@@ -33,6 +33,7 @@ const HabitNew = ({setFn}: Props) => {
 
     // Day type 4x boolean rewrite
 
+
     const createGoal = async() => {
         const url = 'http://localhost:8000/tracker/habit';
         try {
@@ -47,37 +48,38 @@ const HabitNew = ({setFn}: Props) => {
    
     return (
         <div className="page">
-            {!success ?       
-            <div className="w-full p-5 font-['Inter'] capitalize tracking-wide text-sm">
-                    <FormCategory activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
-                    <div className="divider" />
-                    <FormName setName={setTargetName} />
-                    <div className="divider" />
-                    <FormDays habitDays={habitDays} setHabitDays={setHabitDays} label={'Days to complete'} />
-                    <div className="divider" />
-                    <FormDayType setDayType={setDayType} />
-                    <div className="divider" />
-                    <div className='flex flex-row justify-between py-1'>
-                    <FormCondition setChecked={setEnableTime} checked={enableTime} text={'time enabler'} />
-                    {enableTime && <>
-                        <TimeSetting time={time} setTime={setTime}/>
-                        </>}
-                    </div>
-                    <div className='flex flex-row justify-between py-1'>
-                        <FormCondition setChecked={setEnabledDates} checked={enabledDates} text={'More date options'} />
-                        {enabledDates && <>
-                            <FormDateSetting setRecurrence={setRecurrence}/>
-                        </>}
-                    </div>
-                    {recurrence && <>
 
-                    </>}
-                    {error && <>Error. You can finish the process</>}
-                   
-                    <div className="full-w flex flex-row justify-center my-10">
-                        <button className="btn-action" onClick={createGoal}>Create goal</button>
-                    </div>
-                </div>  : <div className="typo-long">Great. Continue</div>}
+            {!success ?       
+                <div className="w-full p-5 font-['Inter'] capitalize tracking-wide text-sm">
+                        <FormCategory activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
+                        <div className="divider" />
+                        <FormName setName={setTargetName} />
+                        <div className="divider" />
+                        <FormDays habitDays={habitDays} setHabitDays={setHabitDays} label={'Days to complete'} />
+                        <div className="divider" />
+                        <FormDayType setDayType={setDayType} />
+                        <div className="divider" />
+                        <div className='flex flex-row justify-between py-1'>
+                        <FormCondition setChecked={setEnableTime} checked={enableTime} text={'time enabler'} />
+                        {enableTime && <>
+                            <TimeSetting time={time} setTime={setTime}/>
+                            </>}
+                        </div>
+                        <div className='flex flex-row justify-between py-1'>
+                            <FormCondition setChecked={setEnabledDates} checked={enabledDates} text={'More date options'} />
+                            {enabledDates && <>
+                                <FormDateSetting setRecurrence={setRecurrence}/>
+                            </>}
+                        </div>
+                        {recurrence && <>
+
+                        </>}
+                        {error && <>Error. You can finish the process</>}
+                    
+                        <div className="full-w flex flex-row justify-center my-10">
+                            <button className="btn-action" onClick={createGoal}>Create goal</button>
+                        </div>
+                    </div>  : <div className="typo-long">Great. Continue</div>}
         </div>
     )
 }

@@ -1,7 +1,7 @@
 
 'use client';
 import { useEffect, useState } from "react";
-import { CheckCheckIcon, MoonIcon, PlusCircleIcon, SunIcon, XCircleIcon } from "lucide-react";
+import { CheckCheckIcon, FlagIcon, MoonIcon, PlusCircleIcon, SunIcon, XCircleIcon } from "lucide-react";
 import { categories } from "@/data/enums";
 import { getCategoryColor } from "@/app/lib/colorGetter";
 import { Dialog, DialogTrigger } from "../../ui/dialog";
@@ -9,6 +9,7 @@ import Modal from "../../Modal";
 import HabitNew from "./HabitNew";
 import { Powah } from "../../icons/illustrations";
 import HabitsWeekly from "./HabitsWeekly";
+import SwitchIcon from "../../form/SwitchIcon";
 
 const trackerExamples = [
     {id:1, name: 'Wake up early', completed: [true, true, false, false, true], category: categories[0].id, dayType: 'morning' },
@@ -27,6 +28,7 @@ const HabitOverview = () => {
     const [days, setDays] = useState(daysExamples);
     const [showDetail, setShowDetail] = useState(false);
     const [trackers, setTrackers] = useState(trackerExamples);
+    const [activeFilter, setActiveFilter] = useState('all')
 
     // How to correctly divide
     useEffect(() => {
@@ -43,6 +45,16 @@ const HabitOverview = () => {
         const days = lastFiveDays();
         setDays(days.map((day, index) => ({id: index, name: day.toLocaleString('en-US', { weekday: 'short' }).toUpperCase(), date: day.getDate().toString()})))
     }, [])
+
+    const filter = (fil) => {
+        if (fil === 'all') {
+            setActiveFilter('all');
+            return trackers;
+        } else {
+            setActiveFilter(fil);
+            return trackers.filter(tracker => tracker.dayType === fil);
+        }
+    }
 
     const handleCheck = (trackerId, dayIndex) => {
         setTrackers(trackers.map(tracker => 
@@ -71,8 +83,9 @@ const HabitOverview = () => {
                             ))}
                         </div>
                         <div className="absolute top-[25px] flex flex-row gap-5">
-                            <div><MoonIcon/></div>
-                            <div><SunIcon/></div>
+                            <SwitchIcon active={activeFilter} myState='all' bgColor={'bg-purple-900'} setActive={()=>{filter('all')}} icon={<FlagIcon/>}/>
+                            <SwitchIcon active={activeFilter} myState='sun' bgColor={'bg-orange-950'} setActive={()=>{filter('sun')}} icon={<SunIcon/>}/>
+                            <SwitchIcon active={activeFilter} myState='moon' bgColor={'bg-blue-900'} setActive={()=>{filter('moon')}} icon={<MoonIcon/>}/>
                         </div>
                         <HabitsWeekly trackers={trackers} handleCheck={handleCheck}/>
                     </div>

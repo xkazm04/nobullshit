@@ -15,7 +15,7 @@ const HabitsDaily = ({habits }) => {
     return (
         <div className='flex flex-col relative'>
             <Dialog>
-                <div className="text-main font-semibold flex flex-row justify-center my-8 relative">
+                <div className="text-main font-semibold flex flex-row justify-center my-8 relative ">
                     <div>Habits</div>
                     <div className="absolute right-0">
                         <DialogTrigger asChild>
