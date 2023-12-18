@@ -7,6 +7,7 @@ import Modal from '../Modal';
 import MusicSelector from './MusicSelector';
 import MusicStarter from './MusicStarter';
 import { decrementHours, decrementMinutes, incrementHours, incrementMinutes } from '@/app/lib/timeFns';
+import { apiGetSingleItem, apiRequest } from '@/app/lib/callers';
 
 interface Timer {
   userId: string; // The ID of the user who owns the timer
@@ -17,22 +18,18 @@ interface Timer {
   state: 'running' | 'stopped' | 'completed'; // The current state of the timer
 }
 
-type GetProps = {
-  userId: string,
-}
 
 const CdExample = {
   "id": "123e4567-e89b-12d3-a456-426614174000",
   "user_id": "123e4567-e89b-12d3-a456-426614174000",
-  "start_datetime": "2022-01-01T00:00:00",
-  "end_datetime": "2022-01-01T01:00:00"
+  "countdown": 120
 }
 
 const Countdown = () => {
 
   const [totalSeconds, setTotalSeconds] = useState(120);
   const size = 80;
-  const totalMilliseconds = totalSeconds * 1000;
+  const [totalMilliseconds, setTotalMiliseconds] = useState(totalSeconds * 1000); // 1 hour = 3600 seconds = 3600000 milliseconds
   const circumference = size * Math.PI * 2;
   const [countdown, setCountdown] = useState(totalMilliseconds);
   const [cd, setCd] = useState({
@@ -42,56 +39,101 @@ const Countdown = () => {
   })
   const [isRunning, setIsRunning] = useState(false);
   const [active, setActive] = useState(false);
-  const strokeDashoffset = (countdown / totalMilliseconds) * circumference;
+  let basicOffset = (countdown / totalMilliseconds) * circumference;
+  const [strokeDashoffset, setStrokeDashoffset] = useState(basicOffset);
+  let arrowSize = 23;
+  const [habitId, setHabitId] = useState(undefined);
+  const [error, setError] = useState('');
 
-  const activeTimer: Timer = {
-    userId: 'user1', // Replace with actual user ID
-    trackerId: 'tracker1', // Replace with actual tracker ID
-    startDatetime: new Date(), // Current datetime
-    currentDatetime: new Date(), // Current datetime
-    endDatetime: new Date(Date.now() + totalMilliseconds), // Current datetime plus the duration of the timer
-    state: 'running'
-  };
 
-  const getTimer = ({ userId }: GetProps) => {
-    // Get the timer from the database
-    let activeTimerSeconds = activeTimer.endDatetime.getTime() - activeTimer.currentDatetime.getTime();
-    let activeTimerTotalSeconds = Math.floor(activeTimerSeconds / 1000);
-    setTotalSeconds(activeTimerTotalSeconds);
-    startTimer()
+  const getTimer = async() => {
+  // Get the timer from the database
+  let user_id = '123e4567-e89b-12d3-a456-426614174000'
+  let url = `http://localhost:8000/tracker/countdown/user/${user_id}`
+  const response = await apiGetSingleItem(url);
+  if (response) {
+      //@ts-ignore
+      setHabitId(response.id)
+      // Convert the datetime strings to Date objects
+      //@ts-ignore
+      let endDatetime = new Date(response.end_datetime);
+      //@ts-ignore
+      let currentDatetime = new Date(response.current_datetime);
+
+      // Calculate the total seconds
+      let activeTimerSeconds = endDatetime.getTime() - currentDatetime.getTime();
+      let activeTimerTotalSeconds = Math.floor(activeTimerSeconds / 1000);
+      let activeTimerHours = Math.floor(activeTimerTotalSeconds / 60 / 60);
+      let activeTimerMinutes = Math.floor(activeTimerTotalSeconds / 60);
+      let activeTimerMiliseconds = activeTimerTotalSeconds * 1000;
+
+      // Update the state and start the timer
+      setTotalMiliseconds(activeTimerMiliseconds);
+      // setCountdown(activeTimerMiliseconds); - errr
+      setTotalSeconds(activeTimerTotalSeconds);
+      setStrokeDashoffset((activeTimerMiliseconds / totalMilliseconds) * circumference);
+
+      startTimer()
+    }
   }
 
   // Online timer + CRUD operations + Notification + Tracker connection + Music randomizzer
 
-  const pauseBeTimer = () => {
-    // Pause the timer, set new currentDatetime and state to 'stopped
-    console.log('Timer paused')
+  const pauseBeTimer = async() => {
+    let id = habitId
+    let url = `http://localhost:8000/tracker/countdown/${id}`
+    let body = {
+      "time": "2022-01-01T00:30:00",
+    }
+    await apiRequest('PUT',url, body)
   }
 
-  const deactivateBeTimer = () => {
+  const deactivateBeTimer = async() => {
     // Set the timer state to 'completed'
-    console.log('Timer deactivated')
+    let id = habitId
+    let url = `http://localhost:8000/tracker/countdown/${id}/finish`
+    let body = {
+      "status": "completed",
+    }
+    try {
+      apiRequest('PUT',url, body)
+    } catch (error) {
+      setError('Update failed')
+    }
   }
 
   const startTimer = () => {
     setIsRunning(true);
     setActive(true);
+    setCountdown(totalMilliseconds);
+  }
+
+  const resumeTimer = () => {
+    setIsRunning(true);
+    setCountdown(countdown)
   }
 
   const stopTimer = () => {
     setIsRunning(false);
+    if (habitId){
+      pauseBeTimer()
+    } 
   }
 
-  const resetTimer = () => {
+  const resetTimer = async() => {
     setIsRunning(false);
     setActive(false);
-    setCountdown(totalMilliseconds);
-    setCd({ hours: Math.floor(countdown / 1000 / 60 / 60), minutes: Math.floor(countdown / 1000 / 60), seconds: Math.floor((countdown / 1000) % 60) })
+    setCountdown(120*1000);
+    setCd({ hours: Math.floor(120 / 60 / 60), minutes: Math.floor(120  / 60), seconds: Math.floor((120 ) % 60) })
+    // Po resetu disablovat BE countdown
   }
 
   useEffect(() => {
+    getTimer()
+  }, [])
+
+  useEffect(() => {
     if (isRunning && countdown > 0) {
-      localStorage.setItem('timerState', JSON.stringify({ countdown, isRunning, active }));
       const interval = setInterval(() => {
         setCountdown((prevCountdown) => prevCountdown - 10);
       }, 10);
@@ -143,50 +185,52 @@ const Countdown = () => {
           </div>
              <div className='flex flex-row relative justify-center'> 
                 <div className='pr-1 text-xl'>{cd.seconds < 10 ? '0' : ''}{cd.seconds}</div>
-                <div className='text-xs absolute right-3'>s</div>
+                <div className='text-xs absolute right-1'>s</div>
              </div>
           </div>
           }
         </div>
       </div>
+      {error && <div className='typo-long text-red-500'>{error}</div>}
+      {!active && <>      
       <div className='typo-long'>Set your time goal</div>
       <div className='flex flex-row gap-5 py-5'>
-      <div>
+      <div className='flex bg-gray-950 p-2 rounded-xl border border-gray-400/30 gap-4'>
         <button onClick={() => incrementHours({hrs: cd.hours, setHrs: setCd({hours: cd.hours + 1, minutes: cd.minutes, seconds: cd.seconds})})}>
-          <ArrowUp size={16}/>
+          <ArrowUp size={arrowSize}/>
         </button>
         h
         <button onClick={() => decrementHours({hrs: cd.hours, setHrs: setCd({hours: cd.hours - 1, minutes: cd.minutes, seconds: cd.seconds})})}>
-          <ArrowDown size={16}/>
+          <ArrowDown size={arrowSize}/>
         </button>
         </div>
         <div>
-        <div className='flex flex-row justify-between'>
+        <div className='flex bg-gray-950 p-2 rounded-xl border border-gray-400/30 gap-4'>
           <button onClick={() => incrementMinutes({mins: cd.minutes, setMins: setCd({hours: cd.hours, minutes: cd.minutes + 1, seconds: cd.seconds})})}>
-            <ArrowUp size={16}/>
+            <ArrowUp size={arrowSize}/>
           </button>
           min
           <button onClick={() => decrementMinutes({mins: cd.minutes, setMins: setCd({hours: cd.hours, minutes: cd.minutes - 1, seconds: cd.seconds})})}>
-            <ArrowDown size={16}/>
+            <ArrowDown size={arrowSize}/>
           </button>
         </div>
         </div>
       </div>
+      </>}
       <div className='flex flex-row gap-5'>
         <div>
-          {!isRunning ?
-            <button onClick={startTimer}><PlayCircleIcon strokeWidth={1} size={30} color={'#86efac'}
-              className='animate-fadeIn transition-all duration-500 ease-in-out'
-            /></button> :
+          {!active && <button onClick={startTimer}><PlayCircleIcon strokeWidth={1} size={30} color={'#86efac'}/></button> }
+          {!isRunning && active && <button onClick={resumeTimer}><PlayCircleIcon strokeWidth={1} size={30} color={'#86efac'}/></button>}
+          {isRunning &&
             <button
               className='animate-fadeIn transition-all duration-500 ease-in-out'
               onClick={stopTimer}><PauseCircleIcon strokeWidth={1} size={30} color={'#fde047'} /></button>}
         </div>
-        <div><button onClick={resetTimer}><Trash2Icon strokeWidth={1} size={30} color={'#fb7185'} /></button></div>
+        {!isRunning && <div><button onClick={resetTimer}><Trash2Icon strokeWidth={1} size={30} color={'#fb7185'} /></button></div>}
       </div>
-      {!active && <MusicStarter/>}
+      {active && <MusicStarter/>}
       {renderDialog()}
-      {countdown === 0 && <div className='typo-long'>Save - {totalSeconds}</div>}
+      {countdown === 0 && <div className='typo-long'>Save</div>}
     </Dialog>
   </div>
 }

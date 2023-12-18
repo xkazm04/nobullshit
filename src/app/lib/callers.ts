@@ -16,7 +16,23 @@ export async function apiGetAllRequest<T>(url: string): Promise<T[]> {
     return data;
 }
 
-export const apiRequest = async (method, endpoint, body = null, params = null, responseType = 'json', requestBodyType = 'json') => {
+export async function apiGetSingleItem<T>(url: string): Promise<T> {
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`GET request failed with status ${response.status}`);
+        }
+        const data = await response.json();
+        if (Array.isArray(data)) {
+            throw new Error('Expected a single item but received an array');
+        }
+        return data;
+    } catch (error) {
+        throw new Error(`GET request failed with status ${response.status}`);
+    }
+}
+
+export const apiRequest = async (method, endpoint, body, params = null, responseType = 'json', requestBodyType = 'json') => {
   const url = endpoint;
   if (params) {
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
