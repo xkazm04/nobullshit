@@ -154,7 +154,7 @@ const Countdown = () => {
   }
 
   return <div className='flex flex-col justify-between items-center h-full'>
-    <TimerWidget />
+    {/* <TimerWidget /> */}
     <Dialog>
       <div className="relative w-64 h-64">
         <svg className={`absolute top-0 left-0 w-full h-full 

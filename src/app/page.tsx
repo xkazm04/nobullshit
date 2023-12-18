@@ -17,7 +17,7 @@ export default function Home() {
       } else {
         router.push('/intro')
       }
-    }, 6000)
+    }, 2000)
   }, []);
 
   return (

@@ -15,10 +15,17 @@ const Page = () => {
             {type === 'countdown' ? <Countdown /> : <Timer />}
           </div>
           <div className='absolute right-1 top-16'>
-            <button className='btn-action' onClick={()=>{setType('countdown')}}>{<Clock8Icon/>}</button>
+            <button 
+              className={`btn-action ${type === 'countdown' ? 'bg-green-900/20' : ''}`} 
+              onClick={()=>{setType('countdown')}}>
+              {<Clock8Icon/>}
+            </button>
           </div>
           <div className='absolute left-1 top-16'>
-            <button className='btn-action' onClick={()=>{setType('timer')}}>{<TimerResetIcon/>}</button>
+            <button 
+              className={`btn-action ${type === 'timer' ? 'bg-green-900/20' : ''}`} 
+              onClick={()=>{setType('timer')}}>{<TimerResetIcon/>}
+            </button>
           </div>
         <div className='z-10 w-full'><BottomNav /></div>
     </div>
