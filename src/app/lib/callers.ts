@@ -28,7 +28,7 @@ export async function apiGetSingleItem<T>(url: string): Promise<T> {
         }
         return data;
     } catch (error) {
-        throw new Error(`GET request failed with status ${response.status}`);
+        throw new Error(`Error: ${error}`);
     }
 }
 
@@ -46,7 +46,6 @@ export const apiRequest = async (method, endpoint, body, params = null, response
         },
         body: body ? (requestBodyType === 'json' ? JSON.stringify(body) : new URLSearchParams(body)) : null,
     });
-    console.log('response', response);
     if (!response.ok) {
         throw new Error(`Network response was not ok: ${response.status} ${await response.text()}`);
     }
@@ -103,5 +102,5 @@ export const retryRequests = async () => {
 
 // Listen for the online event to retry the requests
 if (typeof window !== 'undefined') {
-    window.addEventListener('online', retryRequests);
+   // window.addEventListener('online', retryRequests);
 }

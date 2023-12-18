@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import AuthProvider from './lib/AuthProvider'
+import QueryProvider from './lib/providers/QueryProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -23,13 +23,11 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-      <AuthProvider>
           <main className="flex min-h-screen flex-col items-center justify-between p-24">
             <div className="w-[393px] h-[852px] relative mobile-body rounded-[40px]">
-            {children}
+              <QueryProvider>{children}</QueryProvider>
             </div>
             </main>
-        </AuthProvider>
         </body>
     </html>
   )
