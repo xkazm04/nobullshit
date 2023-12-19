@@ -1,7 +1,7 @@
 import * as React from "react"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { X } from "lucide-react"
-import {motion} from 'framer-motion'
+import {motion, AnimatePresence} from 'framer-motion'
 import { cn } from "@/app/lib/utils"
 
 
@@ -37,7 +37,7 @@ const DialogContent = React.forwardRef<
     <DialogPrimitive.Content
       ref={ref}
       className={cn(
-        "absolute left-[50%] top-[50%] z-50 w-full h-auto max-h-[750px]  ease-linear overflow-y-hidden translate-x-[-50%] translate-y-[-50%] gap-4 border border-transmain bg-gray-950 p-6 shadow-lg  data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:rounded-lg",
+        "absolute left-[50%] top-[50%] z-50 w-full h-auto min-h-[600px] max-h-[750px]  ease-linear overflow-y-hidden translate-x-[-50%] translate-y-[-50%] gap-4 border border-transmain bg-gray-950 p-6 shadow-lg  data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:rounded-lg",
         className
       )}
       {...props}
@@ -45,6 +45,7 @@ const DialogContent = React.forwardRef<
       <motion.div
         initial={{opacity: 0, transform: 'translateX(-100%)'}}
         animate={{opacity: 1, transform: 'translateX(0%)'}}
+        transition={{duration: 0.2, ease: 'easeInOut'}}
     >
       {children}</motion.div>
       <DialogPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity 

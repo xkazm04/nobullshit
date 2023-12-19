@@ -1,7 +1,7 @@
 
 'use client';
 import { useEffect, useState } from "react";
-import { CheckCheckIcon, FlagIcon, MoonIcon, PlusCircleIcon, SunIcon, XCircleIcon } from "lucide-react";
+import { FlagIcon, MoonIcon, PlusCircleIcon, SunIcon } from "lucide-react";
 import { categories } from "@/data/enums";
 import { getCategoryColor } from "@/app/lib/colorGetter";
 import { Dialog, DialogTrigger } from "../../ui/dialog";
@@ -10,6 +10,8 @@ import HabitNew from "./HabitNew";
 import { Powah } from "../../icons/illustrations";
 import HabitsWeekly from "./HabitsWeekly";
 import SwitchIcon from "../../form/SwitchIcon";
+import { getHabits } from "@/app/apiFns/habitApis";
+import { useQuery } from "@tanstack/react-query";
 
 const trackerExamples = [
     {id:1, name: 'Wake up early', completed: [true, true, false, false, true], category: categories[0].id, dayType: 'morning' },
@@ -29,8 +31,13 @@ const HabitOverview = () => {
     const [showDetail, setShowDetail] = useState(false);
     const [trackers, setTrackers] = useState(trackerExamples);
     const [activeFilter, setActiveFilter] = useState('all')
+    
+    // Use data after Postman tests
+    const {data, error} = useQuery({
+        queryKey: ['habits'],
+        queryFn: getHabits
+    })
 
-    // How to correctly divide
     useEffect(() => {
         const lastFiveDays = () => {
             const today = new Date();
@@ -65,7 +72,7 @@ const HabitOverview = () => {
     }
 
     const renderDialog = () => {
-        return <Modal title={'Create new goal'} description={''} content={<HabitNew/>} />
+        return <Modal title={'Create new habit'} description={''} content={<HabitNew/>} />
     }
 
 
@@ -95,6 +102,7 @@ const HabitOverview = () => {
                     {trackers.length < 5 && <div className="flex flex-row justify-center opacity-50 mt-[50%]">
                             <Powah/>
                         </div>}
+                    {error && <div className="alert-error">Error API</div>}
                 </div>
                 {renderDialog()}
             </Dialog>

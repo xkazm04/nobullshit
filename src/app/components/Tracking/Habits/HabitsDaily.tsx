@@ -1,4 +1,3 @@
-
 import Habit from './Habit';
 import NoFound from '../../typography/NoFound';
 import { IlustratedFire } from '../../icons/illustrations';
@@ -6,29 +5,38 @@ import { Dialog, DialogTrigger } from '../../ui/dialog';
 import Modal from '../../Modal';
 import HabitNew from './HabitNew';
 import { HabitType } from '@/app/types/TrackerTypes';
+import { useQuery } from '@tanstack/react-query';
+import { getHabits } from '@/app/apiFns/habitApis';
 
-const HabitsDaily = ({habits }) => {
+const HabitsDaily = ({day }) => {
     const renderDialog = () => {
-        return <Modal title={'Create a goal'} description={''} content={<HabitNew setFn={undefined} />} />
+        return <Modal title={'Create a habit'} description={''} content={<HabitNew/>} />
     }
+    const {data, error} = useQuery({
+        queryKey: ['habits'],
+        queryFn: getHabits
+    })
 
+    // Day to filter day
     return (
-        <div className='flex flex-col relative'>
+        <div className='flex flex-col relative my-5 full-h'>
             <Dialog>
-                <div className="text-main font-semibold flex flex-row justify-center my-8 relative ">
+                <div className="text-main font-mono flex flex-row justify-start px-3 py-3">
                     <div>Habits</div>
-                    <div className="absolute right-0">
+                    {error && <div>Error fetching</div>}
+                    <div className="absolute right-2 top-0">
                         <DialogTrigger asChild>
-                            <button className="btn-mini">+</button>
+                            <button className="btn-action">+</button>
                         </DialogTrigger>
                     </div>
                 </div>
-
-                {habits && habits.length > 0 ? habits.map((h:HabitType) => (
-                    <Habit id={h.id} key={h.id} name={h.name} category={h.category} completed={h.completed} type={'Goals'}/>
+                <div className='flex flex-col gap-1'>
+                {data && data.length > 0 ? data.map((h:HabitType) => (
+                    <Habit habit={h} />
                 ))
                 : <NoFound title={'No activities found'} description={'Add a new target to be better'} picture={<IlustratedFire/>}/>
                 }
+                </div>
                 {renderDialog()}
             </Dialog>
         </div>

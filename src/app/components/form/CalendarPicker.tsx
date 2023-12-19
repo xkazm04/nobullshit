@@ -33,7 +33,7 @@ const slideVariants = {
 };
 
 
-const CalendarPicker = ({ setDay }:any) => {
+const CalendarPicker = ({ setDay, setSelectedDay }:any) => {
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
   const [direction, setDirection] = useState('left');
@@ -59,6 +59,7 @@ const CalendarPicker = ({ setDay }:any) => {
   const handleDateClick = (day: any) => {
     // Sett full date 
     setDay(new Date(currentYear, currentMonth, day).toLocaleDateString())
+    setSelectedDay(day)
   }
   const today = new Date();
   const isToday = (date:any) => today.getDate() === date && today.getMonth() === currentMonth && today.getFullYear() === currentYear;

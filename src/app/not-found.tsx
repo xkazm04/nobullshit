@@ -10,8 +10,8 @@ const PageNotFound = () => {
         <div className='absolute z-10 w-full'><Header /></div>   
         <div className="flex flex-col justify-center h-full">
             <NoFound
-                title="Seems like someone procrastinated when needed..."
-                description="Error was reported, now it's my turn :)"
+                title="Sorry, I fucked up..."
+                description="Error was reported, my turn to fix :)"
                 picture={<Image src={fap} alt="fap" width={300} height={300} />}
             />
         </div>

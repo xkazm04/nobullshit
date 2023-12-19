@@ -7,16 +7,12 @@ import FormCategory from "../../form/FormCategory";
 import FormDays from "../../form/FormDays";
 import FormDayType from "../../form/FormDayType";
 import FormCondition from "../../form/FormCondition";
-import { apiRequest } from "@/app/lib/callers";
 import { HabitType, RecurrenceObject } from "@/app/types/TrackerTypes";
 import FormDateSetting from "../../form/FormDateSetting";
-import { trackerExampleReq } from "@/data/examples";
+import { useMutation } from "@tanstack/react-query";
+import { createHabit } from "@/app/apiFns/habitApis";
 
-type Props = {
-    setFn: (condition?: boolean) => void
-}
-
-const HabitNew = ({setFn}: Props) => {
+const HabitNew = () => {
 
     const [targetName, setTargetName] = useState('') 
     const [time, setTime] = useState(0)
@@ -24,31 +20,64 @@ const HabitNew = ({setFn}: Props) => {
     const [habitDays, setHabitDays] = useState([false, false, false, false, false, false, false])
     const [dayType, setDayType] = useState([false, false, false, false])
     const [dateFrom, setDateFrom] = useState(new Date())
-    const [dateTo, setDateTo] = useState()
+    const [dateTo, setDateTo] = useState<Date | undefined>();
     const [enabledDates, setEnabledDates] = useState(false)
     const [activeCategory, setActiveCategory] = useState(categories[0].id)
     const [recurrence, setRecurrence] = useState<RecurrenceObject>();
     const [error, setError] = useState(false)
     const [success, setSuccess] = useState(false)
 
-    // Day type 4x boolean rewrite
+    // Test needed 
 
-
-    const createGoal = async() => {
-        const url = 'http://localhost:8000/tracker/habit';
-        try {
-            await apiRequest('POST', url, trackerExampleReq)
-            setFn(true)
-            setSuccess(true)
-        } catch (err) { 
-            setError(true)
-            setFn(true)
+    const verifyInput = () => {
+        const newHabit: HabitType = {
+            userId: '1',
+            name: targetName,
+            category: activeCategory,
+            dateFrom: dateFrom.toISOString(),
+            dateTo: dateTo?.toISOString(),
+            isRecurring: recurrence?.isRecurring,
+            recurrenceType: recurrence?.recurrenceType,
+            recurrenceInterval: recurrence?.recurrenceInterval,
+            specificDays: recurrence?.specificDays,
+            active: true
         }
+        console.log(newHabit)
     }
-   
+
+
+    const handleSubmit = () => {
+        // Create a new habit
+        const newHabit: HabitType = { 
+            userId: '1',
+            name: targetName,
+            category: activeCategory,
+            dateFrom: dateFrom.toISOString(),
+            dateTo: dateTo?.toISOString(),
+            isRecurring: recurrence?.isRecurring,
+            recurrenceType: recurrence?.recurrenceType,
+            recurrenceInterval: recurrence?.recurrenceInterval,
+            specificDays: recurrence?.specificDays,
+            active: true
+        }
+        mutation.mutate(newHabit)
+    }
+
+    // Day type 4x boolean rewrite
+    const mutation = useMutation({
+        mutationFn: (habit: HabitType) => createHabit(habit),
+        onSuccess: () => {
+            setSuccess(true)
+        },
+        onError: () => {
+            setError(true)
+        }
+        
+    })
+
     return (
         <div className="page">
-
+      
             {!success ?       
                 <div className="w-full p-5 font-['Inter'] capitalize tracking-wide text-sm">
                         <FormCategory activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
@@ -77,9 +106,10 @@ const HabitNew = ({setFn}: Props) => {
                         {error && <>Error. You can finish the process</>}
                     
                         <div className="full-w flex flex-row justify-center my-10">
-                            <button className="btn-action" onClick={createGoal}>Create goal</button>
+                            <button className="btn-action" onClick={verifyInput}>Create goal</button>
                         </div>
-                    </div>  : <div className="typo-long">Great. Continue</div>}
+                    </div>  : <div className="typo-long">Success. Continue</div>}
+                    {mutation.isError && <div className="alert-error">Error API</div>}
         </div>
     )
 }

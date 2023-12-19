@@ -2,15 +2,16 @@
 import { useState, useEffect } from 'react';
 import { MenuIcon } from './icons/IconsNav';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './accordion';
-import { ArrowRight, GoalIcon, Tally5Icon, Zap } from 'lucide-react';
+import { ArrowRight, BookCheckIcon, CalendarDaysIcon, CrownIcon, GoalIcon, Tally5Icon, TimerResetIcon, Zap } from 'lucide-react';
 import { NoBullshitLogo } from './icons/illustrations';
 const mainColor = '#EEFF87'
 
 const navigation = [
-    { name: 'Daily', href: '/daily', logo: <GoalIcon color={mainColor} strokeWidth={0.75} size={20} /> },
-    { name: 'Overview', href: '/weekly', logo: <Zap color={mainColor} strokeWidth={0.75} size={20} /> },
-    { name: 'Goals', href: '/goals', logo: <Tally5Icon color={mainColor} strokeWidth={0.75} size={20} /> },
-    { name: 'Challenges', href: '/challenges', logo: <GoalIcon color={mainColor} strokeWidth={0.75} size={20} /> },
+    { name: 'Daily', href: '/daily', logo: <CalendarDaysIcon color={mainColor} strokeWidth={0.75} size={20} /> },
+    { name: 'Weekly Goals', href: '/weekly', logo: <GoalIcon color={mainColor} strokeWidth={0.75} size={20} /> },
+    { name: 'Tasks', href: '/tasks', logo: <BookCheckIcon color={mainColor} strokeWidth={0.75} size={20} />},
+    { name: 'Timer', href: '/timer', logo: <TimerResetIcon color={mainColor} strokeWidth={0.75} size={20} /> },
+    { name: 'Challenges', href: '/challenges', logo: <CrownIcon color={mainColor} strokeWidth={0.75} size={20} /> },
 ]
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);

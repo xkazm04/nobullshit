@@ -1,24 +1,14 @@
 'use client';
-import { useEffect, useState } from "react"
-import { ArrowRightIcon, Maximize2Icon, MinusIcon, PlusCircle, ScrollTextIcon } from "lucide-react";
+import { useState } from "react"
+import { ArrowRightIcon, Maximize2Icon, PlusCircle, ScrollTextIcon } from "lucide-react";
 import Checkmark from "../../form/Checkmark";
 import Task from "../Task";
 import { FormTextInput } from "../../form/FormTextInput";
 import { apiRequest } from "@/app/lib/callers";
 import ConfirmationMini from "../../form/ConfirmationMini";
 import { motion, AnimatePresence } from "framer-motion"
-type TaskType = {
-    id: string,
-    name: string,
-    completed: boolean,
-}
+import { HabitType } from "@/app/types/TrackerTypes";
 
-export type GoalType = {
-    id: number,
-    name: string,
-    category: string,
-    completed: boolean,
-}
 
 const taskExamples = [
     { id: 1, name: 'Task 1', completed: true },
@@ -29,8 +19,8 @@ const taskExamples = [
 // + Create note
 // note -> Text, Date, Boolean
 
-const Habit = ({ id, name, category, completed, type }: GoalType) => {
-    const [comp, setComp] = useState(completed)
+const Habit = ({habit}: {habit: HabitType}) => {
+    const [comp, setComp] = useState(false)
     const [tasks, setTasks] = useState(taskExamples)
     const [expanded, setExpanded] = useState(false)
     const [showNote, setShowNote] = useState(false)
@@ -42,7 +32,6 @@ const Habit = ({ id, name, category, completed, type }: GoalType) => {
     const [percentage, setPercentage] = useState(0)
     const [noteSent, setNoteSent] = useState(false)
     const mainColor = '#EEFF87'
-    const [showConfirmation, setShowConfirmation] = useState(false)
     // If note active, stronger stroke width of the icon 
     const check = (action: boolean) => {
         if (action === true) {
@@ -51,12 +40,6 @@ const Habit = ({ id, name, category, completed, type }: GoalType) => {
             setComp(false)
         }
     }
-
-    useEffect(() => {
-        console.log('tasks retrieved')
-    }, [])
-
-    
 
     const completeTask = ({id}) => {
         setTasks(tasks.map((task) => {
@@ -84,7 +67,7 @@ const Habit = ({ id, name, category, completed, type }: GoalType) => {
     const sendNote = async() => {
         console.log('Note sent')
         const addedNote = {
-            "habitId": id,
+            "habitId": habit.habitId,
             "created": new Date().toISOString(),
             "text": newNote
         } 
@@ -101,14 +84,13 @@ const Habit = ({ id, name, category, completed, type }: GoalType) => {
     }
 
 //style={{ color: getCategoryColor(category) }}
-    return (
-        <div className="flex flex-col justify-between">
+    return ( <div className="flex flex-col justify-between">
             <div
-                key={id}
-                className={`${category} p-3 flex flex-row justify-start gap-5 border-t border-gray-800 bg-gray-950 relative`}
+                key={habit.habitId}
+                className={`${habit.category} p-3 flex flex-row justify-start gap-5 border-t border-gray-800 bg-gray-950 relative`}
             >
-                <div className="flex text-sm min-w-[150px] font-white">{name}</div>
-                {type === 'Goals' && 
+                <div className="flex text-sm min-w-[150px] font-white">{habit.name}</div>
+                {!hasTasks && 
                 <div className="absolute bottom-2 left-[30%]">
                     <div className="text-xs text-gray-500 ml-[70px]">{percentage} %</div>
                     <div className="w-[150px] h-[0.7px] bg-gray-800 z-20"/>
@@ -122,7 +104,7 @@ const Habit = ({ id, name, category, completed, type }: GoalType) => {
                         onClick={() => { setShowNote(!showNote) }}>
                         <ScrollTextIcon strokeWidth={0.75} color={noteColor} />
                     </div>
-                        {type === 'Goals' ? <div className='p-1 bg-gray-900 rounded-2xl' onClick={() => { setExpanded(!expanded) }}>
+                        {!hasTasks ? <div className='p-1 bg-gray-900 rounded-2xl' onClick={() => { setExpanded(!expanded) }}>
                             <Maximize2Icon strokeWidth={1.5} size={16} color={mainColor} />
                         </div> : <Checkmark condition={comp} check={check} />}
                 </div>
@@ -134,7 +116,7 @@ const Habit = ({ id, name, category, completed, type }: GoalType) => {
                     animate={{ opacity: 1, height: 'auto' }}
                     exit={{ opacity: 0, height: 0 }}
                     >
-                    {type === 'Goals' && tasks.map((task) => (
+                    {!hasTasks && tasks.map((task) => (
                         <Task 
                             task={task} 
                             length={tasks.length} 

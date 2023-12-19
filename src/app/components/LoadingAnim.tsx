@@ -2,8 +2,6 @@ import React from 'react';
 import { NoBullshitLogo } from './icons/illustrations';
 import ProgressBar from './animations/ProgressBar';
 
-
-
 const LoadingAnim: React.FC = () => {
 
   return (

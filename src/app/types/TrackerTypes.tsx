@@ -1,8 +1,9 @@
 export type HabitType = {
-    userId: string;
-    dayType: boolean[];
+    habitId?: string;
+    userId?: string;
+    dayType?: boolean[];
     name: string;
-    category: string;
+    category: number;
     dateFrom?: string;
     dateTo?: string;
     isRecurring?: boolean;
@@ -11,6 +12,7 @@ export type HabitType = {
     specificDays?: boolean[];
     active?: boolean;
 }
+
 
 export type RecurrenceObject = {
     dateFrom: Date,
