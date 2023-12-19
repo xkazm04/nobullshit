@@ -1,7 +1,7 @@
 import { IlustratedFire } from "../icons/illustrations";
 import { DialogClose } from "../ui/dialog";
 
-const ConfirmationDialog = ({yesFn}) => {
+const ConfirmationDialog = ({yesFn}:any) => {
     return <div className="w-full h-full mt-10 ">
         <div className="flex flex-col items-center justify-center">
             <div><IlustratedFire/></div>

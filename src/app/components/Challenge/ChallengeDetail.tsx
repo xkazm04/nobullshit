@@ -1,4 +1,11 @@
-const ChallengeDetail = ({chName,chDescOne, chDescTwo, startFn}) => {
+type Props = {
+    chName: string;
+    chDescOne: string;
+    chDescTwo: string;
+    startFn: () => void;
+};
+
+const ChallengeDetail = ({chName,chDescOne, chDescTwo, startFn}: Props) => {
     return  <>              
     <div className="cat-row p-5">{chName}</div>
     <div className="flex flex-col items-start gap-1 p-5 text-sm">

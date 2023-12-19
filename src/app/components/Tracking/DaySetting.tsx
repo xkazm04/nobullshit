@@ -1,7 +1,7 @@
 'use client'
 import { useState } from "react"
 
-const DaySetting = ({ habitDays, setHabitDays, d, i }) => {
+const DaySetting = ({ habitDays, setHabitDays, d, i }:any) => {
     const [days, setDays] = useState([false, false, false, false, false, false, false])
     const [isClicked, setIsClicked] = useState(false);
 

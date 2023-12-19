@@ -6,7 +6,7 @@ import { useState } from "react"
 
 
 
-const FormDayType = ({ setDayType }) => {
+const FormDayType = ({ setDayType }:any) => {
     const [morningColor, setMorningColor] = useState('#EEFF87')
     const [noonColor, setNoonColor] = useState('#EEFF87')
     const [eveningColor, setEveningColor] = useState('#EEFF87')

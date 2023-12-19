@@ -5,15 +5,18 @@ const TimerWidget = () => {
     const [isRunning, setIsRunning] = useState(false);
     const [active, setActive] = useState(false);
     useEffect(() => {
-        // Load the timer state from localStorage when the component mounts
-        const timerState = JSON.parse(localStorage.getItem('timerState'));
-        console.log(timerState)
-        if (timerState) {
-          setCountdown(timerState.countdown);
-          setIsRunning(timerState.isRunning);
-          setActive(timerState.active);
-        }
-      }, []);
+      // Load the timer state from localStorage when the component mounts
+      const timerStateString = localStorage.getItem('timerState');
+      if (timerStateString) {
+          const timerState = JSON.parse(timerStateString);
+          console.log(timerState)
+          if (timerState) {
+              setCountdown(timerState.countdown);
+              setIsRunning(timerState.isRunning);
+              setActive(timerState.active);
+          }
+      }
+  }, []);
 
     return <> 
     {active &&

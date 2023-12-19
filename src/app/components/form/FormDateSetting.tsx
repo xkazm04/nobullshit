@@ -8,7 +8,7 @@ import FormDateComponent from './FormDateComponent';
 
 const FormDateSetting = ({ setRecurrence }: any) => {
     const [dateFrom, setDateFrom] = useState(new Date());
-    const [dateTo, setDateTo] = useState();
+    const [dateTo, setDateTo] = useState(new Date());
     const [recurrenceType, setRecurrenceType] = useState<RecurrenceRepetition>('Week');
     const [recurrenceInterval, setRecurrenceInterval] = useState(0);
     const [specificDays, setSpecificDays] = useState([false, false, false, false, false, false, false]);

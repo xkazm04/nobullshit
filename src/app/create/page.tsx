@@ -36,9 +36,9 @@ const Page = () => {
     return <div className="flex flex-col h-full">
         <div className="flex flex-row justify-between p-7"><button onClick={goBack}><ArrowLeft color="#EEFF87"/></button></div>
         <div className="flex flex-row  mb-8">
-            {menuOptions.map(m => <div className="justify-center p-1">
-                <div className={`btn-mini
-                    ${menu === m.id ? 'bg-main text-gray-900' : 'bg-gray-900 text-gray-300'}`}
+            {menuOptions.map(m => <div key={m.id} className="justify-center p-1">
+                <div 
+                    className={`btn-mini ${menu === m.id ? 'bg-main text-gray-900' : 'bg-gray-900 text-gray-300'}`}
                     onClick={() => setMenu(m.id)}
                 >
                     {m.name}

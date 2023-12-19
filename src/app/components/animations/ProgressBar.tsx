@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react';
 
-const ProgressBar = ({ duration }) => {
+const ProgressBar = ({ duration }: any) => {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {

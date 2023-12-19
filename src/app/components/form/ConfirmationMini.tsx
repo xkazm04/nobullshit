@@ -7,19 +7,25 @@ type Props = {
     question: string;
 }
 
-const Menu = (props) => <MenuInner {...props} menuClassName={menuClassName} />;
+type MenuProps = {
+    hover: boolean;
+    disabled: boolean;
+    submenu: boolean;
+}
 
-const MenuItem = (props) => (
+const Menu = (props: any) => <MenuInner {...props} menuClassName={menuClassName} />;
+
+const MenuItem = (props: any) => (
     <MenuItemInner {...props} className={menuItemClassName} />
   );
   
 
-const menuClassName = ({ state }) =>
+const menuClassName = ({ state }:any) =>
   `flex flex-col items-center
   box-border z-50 text-sm text-main bg-gray-950 p-1.5 text-mono border border-gray-800 rounded-xl shadow-lg select-none focus:outline-none min-w-[9rem] 
   ${state === "opening" && "animate-fadeIn"} ${state === "closing" && "animate-fadeOut"}`;
 
-const menuItemClassName = ({ hover, disabled, submenu }) =>
+const menuItemClassName = ({ hover, disabled, submenu }:MenuProps) =>
   `flex flex-row justify-center rounded-md w-full px-3 py-5 focus:outline-none border-t border-gray-800
   ${hover && "text-white bg-gray-700"
   } ${disabled && "text-gray-400"} ${submenu && "flex items-center"}`;

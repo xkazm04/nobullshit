@@ -30,32 +30,33 @@ const Countdown = () => {
   const [cdId, setCdId] = useState(undefined);
   const [err, setErr] = useState('');
 
-  const getCds = async() => {
-  // Get the timer from the database
-  let url = `${process.env.NEXT_PUBLIC_BE_URL}/tracker/countdown/user/123e4567-e89b-12d3-a456-426614174000`
-  const response = await apiGetSingleItem(url)
-    if (response === undefined){
-      setErr('err')}
-    else {
-      //@ts-ignore
-      setCdId(response.id)
-      //@ts-ignore
-      let elapsed = response.elapsed;
-       //@ts-ignore
-      let total = response.countdown;
-      setCountdown(total-elapsed)
-      let activeTimerMiliseconds = total * 1000;
-      setTotalMiliseconds(activeTimerMiliseconds);
-      setTotalSeconds(total);
-      setStrokeDashoffset((activeTimerMiliseconds / totalMilliseconds) * circumference);
-      startTimer()
-    }
-    }
+
   
   useEffect(() => {
     setErr('')
-    getCds()
-  }, [])
+    const getCds = async() => {
+      // Get the timer from the database
+      let url = `${process.env.NEXT_PUBLIC_BE_URL}/tracker/countdown/user/123e4567-e89b-12d3-a456-426614174000`
+      const response = await apiGetSingleItem(url)
+        if (response === undefined){
+          setErr('err')}
+        else {
+          //@ts-ignore
+          setCdId(response.id)
+          //@ts-ignore
+          let elapsed = response.elapsed;
+           //@ts-ignore
+          let total = response.countdown;
+          setCountdown(total-elapsed)
+          let activeTimerMiliseconds = total * 1000;
+          setTotalMiliseconds(activeTimerMiliseconds);
+          setTotalSeconds(total);
+          setStrokeDashoffset((activeTimerMiliseconds / totalMilliseconds) * circumference);
+          startTimer()
+        }
+        }
+      getCds()
+  }, [countdown, isRunning, circumference, totalMilliseconds])
 
   // Online timer + CRUD operations + Notification + Tracker connection + Music randomizzer
 
@@ -137,6 +138,7 @@ const Countdown = () => {
       setIsRunning(false);
       updateBeTimer('completed')
     }
+    //@ts-ignore
   }, [countdown, isRunning]);
 
   useEffect(() => {

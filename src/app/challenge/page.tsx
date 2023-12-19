@@ -15,17 +15,17 @@ const challengeExamples = [
     { id: 4, title: 'Squats', description: 'From 50 to 100', points: 400 },
 ]
 
-export enum Choices {
-    our = "our",
-    own = "own",
-    friend = "friend"
+const choices = {
+    our: 'our',
+    own: 'own',
+    friend: 'friend'
 }
 const Page = () => {
     const [showDetail, setShowDetail] = useState(false);
     const [friends, setFriends] = useState([])
     const [activeChoice, setActiveChoice] = useState('our' as string)
 
-    const rendedDialog = (category) => {
+    const renderedDialog = (category: any) => {
         return <Modal title='' description="" content={<Leaderboard/>} />
     }
 
@@ -39,22 +39,22 @@ const Page = () => {
                 <div className="flex flex-row justify-between p-5 text-sm font-mono">
                     <div className={`font-semibold py-2 px-4 rounded bg-gray-950 border-r  lg:hover:cursor-pointer
                     ${activeChoice === 'our' ? 'text-main font-bold border-main' : 'text-gray-400'}`}
-                       onClick={() => { setActiveChoice(Choices.our) }}>
+                       onClick={() => { setActiveChoice(choices.our) }}>
                         Our challenges
                     </div>
                     <div className={`font-semibold py-2 px-4 rounded bg-gray-950 border-r  lg:hover:cursor-pointer
                     ${activeChoice === 'own' ? 'text-main font-bold border-main' : 'text-gray-400'}`}
-                       onClick={() => { setActiveChoice(Choices.own) }}>
+                       onClick={() => { setActiveChoice(choices.own) }}>
                         Create your own
                     </div>
                     <div className={`font-semibold py-2 px-4 rounded bg-gray-950 border-r lg:hover:cursor-pointer
                     ${activeChoice === 'friend' ? 'text-main font-bold border-main' : 'text-gray-400'}`}
-                       onClick={() => { setActiveChoice(Choices.friend) }}>
+                       onClick={() => { setActiveChoice(choices.friend) }}>
                         By your friends
                     </div>
                 </div>
                 <div className="flex flex-row flex-wrap justify-center">
-                    {challengeExamples.map(b => <div className={`flex flex-col items-start gap-1 p-2 w-[160px] m-1 text-sm rounded-xl
+                    {challengeExamples.map(b => <div key={b.id} className={`flex flex-col items-start gap-1 p-2 w-[160px] m-1 text-sm rounded-xl
                     lg:cursor-pointer lg:hover:bg-gray-900 bg-cc
                 `}
                         onClick={() => { setShowDetail(true) }}
@@ -75,7 +75,7 @@ const Page = () => {
                     <div className="btn-action">Open leaderboard</div>
                 </div>
             </DialogTrigger>}
-           {rendedDialog('health')}
+           {renderedDialog('health')}
         </Dialog>
         <div className='z-10 w-full'><BottomNav /></div>
     </div>

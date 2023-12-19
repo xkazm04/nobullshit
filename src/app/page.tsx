@@ -18,7 +18,7 @@ export default function Home() {
         router.push('/intro')
       }
     }, 2000)
-  }, []);
+  }, [router]);
 
   return (
     <div className="flex flex-col h-full w-full">

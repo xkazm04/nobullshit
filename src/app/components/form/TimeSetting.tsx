@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Dialog, DialogClose, DialogTrigger } from "../ui/dialog";
 import Modal from "../Modal";
 
-const TimeSetting = ({time, setTime}) => {
+const TimeSetting = ({time, setTime}: any) => {
     const [hours, setHours] = useState(0);
     const [minutes, setMinutes] = useState(0);
     const totalMinutes = hours * 60 + minutes;

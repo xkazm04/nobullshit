@@ -41,7 +41,7 @@ const MusicSelector = () => {
     const [description, setDescription] = useState('' as string)
     const [link, setLink] = useState('' as string)
 
-    const changeDescription = ({description, link}) => {
+    const changeDescription = ({description, link}:any) => {
         setDescription(description)
         setLink(link)
         // use animate

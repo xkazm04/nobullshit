@@ -80,15 +80,15 @@ const CalendarPicker = ({ setDay, setSelectedDay }:any) => {
           </div>
           </AnimatePresence>
           <div className="grid grid-cols-7 gap-1 mt-4">
-            {daysOfWeek.map((day, index) => (
-              <div key={index} className="text-center font-medium" >
+            {daysOfWeek.map((day) => (
+              <div key={day} className="text-center font-medium" >
                 {day}
               </div>
             ))}
             {Array.from({ length: daysInMonth }, (_, i) => (
-              <DialogClose>
+              <DialogClose key={i}>
                 <div
-                  key={i}
+                  key={i + 1}
                   className={`h-12 w-12 flex items-center justify-center rounded-2xl cursor-pointer hover:bg-green-900 hover:border-green-500 hover:opacity-20 transition-all 
                                 ${isToday(i + 1) ? 'bg-orange-800' : 'bg-gray-950 border border-gray-800'}`}
                   onClick={() => handleDateClick(i + 1)}

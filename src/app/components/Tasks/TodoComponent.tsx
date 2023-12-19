@@ -1,6 +1,6 @@
 'use client';
 import { useState } from "react";
-const TodoComponent = ({data}) => {
+const TodoComponent = ({data}:any) => {
     const [checked, setChecked] = useState(false)
     const [show, setShow] = useState(false)
     

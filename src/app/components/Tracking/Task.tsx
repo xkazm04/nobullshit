@@ -37,7 +37,7 @@ const Task = ({task, percentage, setPercentage, length, complete}: TaskProps) =>
 
     
 
-    return <div className="flex flex-row justify-start gap-5 border-t border-gray-800 bg-gray-950 py-1">
+    return <div key={task.id} className="flex flex-row justify-start gap-5 border-t border-gray-800 bg-gray-950 py-1">
     <div className={`flex flex-col gap-1 py-1 transition-all duration-500 ease-in-out ${striked ? 'line-through text-gray-500' : ''}`}>
         <div>{task.name}</div>
     </div>

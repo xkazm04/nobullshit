@@ -16,11 +16,11 @@ const IntroPromo = ({setCondition}: Props) => {
         },
       };
 
-    useEffect(() => {
+      useEffect(() => {
         setTimeout(() => {
             setCondition(true)
         }, 1000)
-    }, [])
+    }, [setCondition])
     
     return (
         <div className="flex flex-col w-full h-full items-center justify-center gap-20">

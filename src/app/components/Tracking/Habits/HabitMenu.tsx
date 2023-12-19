@@ -53,7 +53,9 @@ const HabitMenu = ({ habitId }) => {
         <div className="flex flex-row justify-between">
             <div className={`flex flex-col items-start gap-5 justify-start h-full text-sm py-1 px-2 font-mono rounded-xl transition-all duration-200 ease-out  tracking-wide`}>
                 {settingsItems.map((item) => (
-                    <div className='flex flex-row items-center justify-between w-full'
+                    <div 
+                        key={item.name}
+                        className='flex flex-row items-center justify-between w-full'
                         onClick={() => setActive(item.name)}
                     >
 <                   div className={`flex flex-row lg:cursor-pointer items-center gap-2 ${active === item.name ? 'text-green-300' : ''}`}>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const Offline = ({children}) => {
+const Offline = ({children}:any) => {
     const [isOffline, setIsOffline] = useState(typeof navigator !== 'undefined' ? !navigator.onLine : false);
     const [isVisible, setIsVisible] = useState(true);
 

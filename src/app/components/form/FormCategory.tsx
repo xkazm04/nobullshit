@@ -1,6 +1,6 @@
 import { categories } from "@/data/enums";
 
-const FormCategory = ({ activeCategory, setActiveCategory }) => {
+const FormCategory = ({ activeCategory, setActiveCategory }: any) => {
     return (
         <> 
             <div className="cat-row">Which area you want to improve?</div>
