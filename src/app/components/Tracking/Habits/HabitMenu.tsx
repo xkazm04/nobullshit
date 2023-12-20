@@ -22,28 +22,7 @@ const settingsItems = [
 
 ]
 
-const noteExamples = [
-    {text: 'text', date: '11.2.2015'},
-    {text: 'text', date: '11.2.2015'},
-    {text: 'text', date: '11.2.2015'},   
-    {text: 'text', date: '11.2.2015'},
-    {text: 'text', date: '11.2.2015'},
-    {text: 'text', date: '11.2.2015'},
-    {text: 'text', date: '11.2.2015'},
-    {text: 'text', date: '11.2.2015'},
-    {text: 'text', date: '11.2.2015'},   
-    {text: 'text', date: '11.2.2015'},
-    {text: 'text', date: '11.2.2015'},
-    {text: 'text', date: '11.2.2015'},
-    {text: 'text', date: '11.2.2015'},
-    {text: 'text', date: '11.2.2015'},
-    {text: 'text', date: '11.2.2015'},   
-    {text: 'text', date: '11.2.2015'},
-    {text: 'text', date: '11.2.2015'},
-    {text: 'text', date: '11.2.2015'},
-]
-
-const HabitMenu = ({ habitId }) => {
+const HabitMenu = ({ habitId }: {habitId:string}) => {
     const [active, setActive] = useState('Notes')
     return <>
         <div className='absolute right-0'><NoBullshitLogo color={'rgba(238, 255, 135, 0.15)'} /></div>
@@ -66,7 +45,7 @@ const HabitMenu = ({ habitId }) => {
                 ))}
             </div>
             <div className="full-w min-w-[70%]">
-                {active === 'Notes' && <HabitNotes notes={noteExamples}/>}
+                {active === 'Notes' && <HabitNotes habitId={habitId} />}
                 {active === 'Edit' && <>Edit</>}
                 {active === 'Stats' && <>Stats</>}
                 {active === 'Delete' && <HabitDelete habitId={habitId}/>}

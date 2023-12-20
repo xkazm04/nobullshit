@@ -1,5 +1,5 @@
 export type HabitType = {
-    habitId?: string;
+    id?: string;
     userId?: string;
     dayType?: boolean[];
     name: string;
@@ -27,7 +27,7 @@ export type RecurrenceRepetition = 'Week' | 'Month'
 
 
 export type NoteType = {
-    id: number,
+    id: string,
     date: string,
     text: string
 }

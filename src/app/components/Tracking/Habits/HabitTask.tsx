@@ -1,8 +1,8 @@
 'use client';
 import { useState } from 'react'
 import { MinusIcon } from "lucide-react"
-import { DialogTrigger } from "../ui/dialog"
-import Checkmark from "../form/Checkmark"
+import { DialogTrigger } from "../../ui/dialog"
+import Checkmark from "../../form/Checkmark"
 
 type TaskProps = {
     id: string,
