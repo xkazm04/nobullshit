@@ -15,7 +15,6 @@ type TaskProps = {
     setPercentage: any,
     length: number,
     complete: any,
-    comp: boolean,
 }
 
 const Task = ({task, percentage, setPercentage, length, complete}: TaskProps) => {

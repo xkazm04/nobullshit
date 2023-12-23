@@ -32,7 +32,7 @@ const HabitsDaily = ({day }) => {
                 </div>
                 <div className='flex flex-col gap-1'>
                 {data && data.length > 0 ? data.map((h:HabitType) => (
-                    <div key={h.habitId}><Habit habit={h} /></div>
+                    <div key={h.id}><Habit habit={h} /></div>
                 ))
                 : <NoFound title={'No activities found'} description={'Add a new target to be better'} picture={<IlustratedFire/>}/>
                 }

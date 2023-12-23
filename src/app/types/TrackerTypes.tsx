@@ -31,3 +31,23 @@ export type NoteType = {
     date: string,
     text: string
 }
+
+export type TaskInput = {
+    user_id: string;
+    tracker_id: string;
+    name: string;
+}
+
+export type TaskUpdate = {
+    name?: string;
+    completed?: boolean;
+}
+
+export type TaskType = {
+    id: string;
+    user_id: string;
+    tracker_id: string;
+    name: string;
+    completed: boolean;
+    date: string;
+}

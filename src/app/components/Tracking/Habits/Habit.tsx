@@ -22,7 +22,7 @@ const Habit = ({ habit }: { habit: HabitType }) => {
     const [newNote, setNewNote] = useState('' as string)
     const [noteColor, setNoteColor] = useState('#EEFF87' as string)
     const [newTaskName, setNewTaskName] = useState('' as string)
-    const loadingCoeficient = 1.5
+
     const [percentage, setPercentage] = useState(0)
     const [tasksCompleted, setTasksCompleted] = useState(0)
     const [noteSent, setNoteSent] = useState(false)
@@ -80,15 +80,6 @@ const Habit = ({ habit }: { habit: HabitType }) => {
             className={`${habit.category} p-3 flex flex-row justify-start gap-5 border-t border-gray-800 bg-gray-950 relative`}
         >
             <div className="flex text-sm min-w-[150px] font-white">{habit.name}</div>
-            {tasksCompleted > 0 &&
-                <div className="absolute bottom-2 left-[30%]">
-                    <div className="text-xs text-gray-500 ml-[70px]">{percentage} %</div>
-                    <div className="w-[150px] h-[0.7px] bg-gray-800 z-20" />
-                    <div
-                        style={{ width: `${percentage * loadingCoeficient}px` }}
-                        className={`h-[0.5px] ${comp ? 'bg-green-500' : 'bg-gray-100'} z-0 transition-all duration-500 ease-in-out`}
-                    />
-                </div>}
             <div className='absolute right-5 flex flex-row mt-1 gap-5'>
                 <div className={`${showNote ? 'animate-vibrate' : ''} transition-all duration-500 ease-in-out`}
                     onClick={() => { setShowNote(!showNote) }}>
@@ -106,7 +97,7 @@ const Habit = ({ habit }: { habit: HabitType }) => {
                 animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }}
             >
-               <HabitTasks habitId={habit.id} percentage={percentage} setPercentage={setPercentage} tasksCompleted={tasksCompleted} setTasksCompleted={setTasksCompleted}/>
+               <HabitTasks habitId={habit.id} />
                 <div className="flex flex-row justify-between my-3 ">
                     <div className="flex flex-row justify-center gap-3">
                         <FormTextInput placeholder="Quest subject" label={'New'} type={'text'} setNew={setNewTaskName} />

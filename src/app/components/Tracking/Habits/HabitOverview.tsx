@@ -12,6 +12,8 @@ import HabitsWeekly from "./HabitsWeekly";
 import SwitchIcon from "../../form/SwitchIcon";
 import { getHabits } from "@/app/apiFns/habitApis";
 import { useQuery } from "@tanstack/react-query";
+import ConfirmationMini from "../../form/ConfirmationMini";
+import HabitSelection from "./HabitSelection";
 
 const trackerExamples = [
     {id:1, name: 'Wake up early', completed: [true, true, false, false, true], category: categories[0].id, dayType: 'morning' },
@@ -72,7 +74,7 @@ const HabitOverview = () => {
     }
 
     const renderDialog = () => {
-        return <Modal title={'Create new habit'} description={''} content={<HabitNew/>} />
+        return <Modal title={''} description={''} content={<HabitSelection/>} />
     }
 
 
