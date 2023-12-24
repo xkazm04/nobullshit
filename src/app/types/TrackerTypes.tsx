@@ -11,6 +11,7 @@ export type HabitType = {
     recurrenceInterval?: number;
     specificDays?: boolean[];
     active?: boolean;
+    ai?: boolean;
 }
 
 

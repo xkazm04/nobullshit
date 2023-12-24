@@ -80,7 +80,7 @@ const FormDateSetting = ({ setRecurrence }: any) => {
             <div className="flex flex-row justify-center">
                 <DialogClose>
                     <button className="btn-action" type="submit"  onClick={handleSave}>
-                        Create your first goal
+                        Save date preferences
                     </button>
                 </DialogClose>
             </div>

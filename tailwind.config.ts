@@ -128,7 +128,7 @@ module.exports = {
         "accordion-up": "accordion-up 0.3s ease-out",
         "accordion-right": "accordion-right 0.3s ease-out",
         "accordion-left": "accordion-left 0.3s ease-out",
-        'pulse-scale': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'pulse-scale': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         'infinite-scroll': 'infinite-scroll 25s linear infinite',
         'manual-scroll-left': 'manual-scroll-left 0.5s linear',
         'manual-scroll-right': 'manual-scroll-right 0.5s linear',
