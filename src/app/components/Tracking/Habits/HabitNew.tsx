@@ -10,9 +10,10 @@ import { useMutation } from "@tanstack/react-query";
 import { createHabit } from "@/app/apiFns/habitApis";
 import useGetUser from "@/app/lib/hooks/useGetUser";
 
+
 const HabitNew = () => {
 
-    const [habitName, setHabitName] = useState('') 
+    const [habitName, setHabitName] = useState('')
     const [enableAi, setEnableAi] = useState(false)
     const [dayType, setDayType] = useState([false, false, false, false])
     const [activeCategory, setActiveCategory] = useState(categories[0])
@@ -25,7 +26,7 @@ const HabitNew = () => {
 
 
     const handleSubmit = () => {
-        const newHabit: HabitType = { 
+        const newHabit: HabitType = {
             userId: user,
             name: habitName,
             category: activeCategory.id,
@@ -51,26 +52,27 @@ const HabitNew = () => {
         onError: () => {
             setError(true)
         }
-        
+
     })
 
     return (
         <div className="page">
-            {!success ?       
+            {!success ?
                 <div className="w-full font-['Inter'] tracking-wide text-sm py-5">
-                        <FormCategory activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
-                        <div className="divider" />
-                        <FormName setName={setHabitName} />
-                        <div className="divider" />
-                        <FormDays habitDays={specificDays} setHabitDays={setSpecificDays} label={'Repeat on'} />
-                        <div className="divider" />
-                        <FormCondition setChecked={setEnableAi} checked={enableAi} text={'Enable AI tasks recommendation'} />
-                        {error && <>Error. You can finish the process</>}
-                        <div className="full-w flex flex-row justify-center my-10">
-                         {habitName !== '' &&  <button className="btn-action" onClick={handleSubmit}>Create {habitName} - ({activeCategory.name})</button>}
-                        </div>
-                    </div>  : <div className="typo-long">Success. Continue</div>}
-                    {mutation.isError && <div className="alert-error">Error API</div>}
+                    <div className="divider" />
+                    <FormName setName={setHabitName} />
+                    <div className="divider" />
+                    <FormCategory activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
+                    <div className="divider" />
+                    <FormDays habitDays={specificDays} setHabitDays={setSpecificDays} label={'Repeat on'} />
+                    <div className="divider" />
+                    <FormCondition setChecked={setEnableAi} checked={enableAi} text={'Enable AI tasks recommendation'} />
+                    {error && <>Error. You can finish the process</>}
+                    <div className="full-w flex flex-row justify-center my-10">
+                        {habitName !== '' && <button className="btn-action" onClick={handleSubmit}>Create {habitName} - ({activeCategory.name})</button>}
+                    </div>
+                </div> : <div className="typo-long">Success. Continue</div>}
+            {mutation.isError && <div className="alert-error">Error API</div>}
         </div>
     )
 }

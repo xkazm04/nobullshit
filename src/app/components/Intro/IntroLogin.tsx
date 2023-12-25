@@ -15,7 +15,6 @@ const IntroLogin = ({condition,setCondition}: Props) => {
     const [success, setSuccess] = useState(false)
     const [error, setError] = useState(false)
     const [checked, setChecked] = useState(true)
-    const [textIndex, setTextIndex] = useState(0);
 
     const txt =  "By setting a habbit 5 hours / week you will gain 250h+ expertize at any skill, feel physically better."
 
@@ -56,10 +55,14 @@ const IntroLogin = ({condition,setCondition}: Props) => {
                     onClick={() => setSignType('email')}>M</button>
                 </div>
                 {signType === 'email' && <div className="flex flex-col w-full gap-2">
-                    <FormTextInput setNew={setUsername} placeholder="JohnyBoy69" label="Username" type='text'/>
-                    <FormTextInput setNew={setEmail} placeholder="jb69@mail.com" label="Email" type='email'/>
-                    <FormTextInput setNew={setPassword} placeholder="" label="Password" type='password'/>
-                    <button className="btn-action py-3 my-5" onClick={handleSubmit}>Register</button>
+                    <FormTextInput setNew={setUsername} label="Username" type='text'/>
+                    <FormTextInput setNew={setEmail}  label="Email" type='email'/>
+                    <FormTextInput setNew={setPassword}  label="Password" type='password'/>
+                    {username === '' || email === '' || password === '' ? 
+                        <button className="btn-disabled py-3 my-5 " disabled >Register</button> :
+                        <button className="btn-action py-3 my-5 animate-fadeIn" onClick={handleSubmit}>Register</button>
+                        }
+
                 </div>}
                 {signType === 'google' && <div>
                     <button className="fullbox">Sign in with Google</button>
@@ -68,7 +71,7 @@ const IntroLogin = ({condition,setCondition}: Props) => {
                 <FormCondition checked={checked} setChecked={setChecked} text="I agree to process my data for recommnedation"/>
                 <FormCondition checked={condition} setChecked={()=>{setCondition(!condition)}} text="Check me"/>
                 {error && <div className="fullbox">Error</div>}
-                {success && <div className="fullbox">Success</div>}
+                {success && <div className="fullbox text-green-400 border border-green-400/20">Registration completed</div>}
             </div>
         </div>
     )
