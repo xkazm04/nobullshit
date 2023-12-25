@@ -56,9 +56,8 @@ const HabitNew = () => {
 
     return (
         <div className="page">
-      
             {!success ?       
-                <div className="w-full p-5 font-['Inter'] tracking-wide text-sm">
+                <div className="w-full font-['Inter'] tracking-wide text-sm py-5">
                         <FormCategory activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
                         <div className="divider" />
                         <FormName setName={setHabitName} />
@@ -68,7 +67,7 @@ const HabitNew = () => {
                         <FormCondition setChecked={setEnableAi} checked={enableAi} text={'Enable AI tasks recommendation'} />
                         {error && <>Error. You can finish the process</>}
                         <div className="full-w flex flex-row justify-center my-10">
-                         {habitName !== '' &&  <button className="btn-action" onClick={handleSubmit}>Create goal</button>}
+                         {habitName !== '' &&  <button className="btn-action" onClick={handleSubmit}>Create {habitName} - ({activeCategory.name})</button>}
                         </div>
                     </div>  : <div className="typo-long">Success. Continue</div>}
                     {mutation.isError && <div className="alert-error">Error API</div>}
