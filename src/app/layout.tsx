@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import QueryProvider from './lib/providers/QueryProvider'
+import BottomNav from './components/BottomNav'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -15,6 +16,8 @@ export const viewport: Viewport = {
   themeColor: '#0E1017',
 }
 
+// 768 x 1024 - Google = md
+
 export default async function RootLayout({
   children,
 }: {
@@ -23,11 +26,15 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-          <main className="flex min-h-screen flex-col items-center justify-between p-24">
-            <div className="w-[393px] h-[852px] relative mobile-body rounded-[40px]">
-              <QueryProvider>{children}</QueryProvider>
+          <main className="flex  flex-col items-center justify-between p-24">
+            <div className="relative mobile-body rounded-[40px] w-full h-full
+             min-h-[768px] max-w-[1500px] ">
+              <QueryProvider>
+                {children}
+                <div className='absolute bottom-0 w-full'><BottomNav/></div>
+              </QueryProvider>
             </div>
-            </main>
+            </main>        
         </body>
     </html>
   )

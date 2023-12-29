@@ -5,7 +5,7 @@ import ProgressBar from './animations/ProgressBar';
 const LoadingAnim: React.FC = () => {
 
   return (
-    <div className="flex flex-col justify-between items-center h-full py-10 w-full">
+    <div className="page">
       <div className=''>Your Turn</div>
        <div className="animate-pulse bg-main rounded-full h-12 w-12"></div>
        <NoBullshitLogo color={'#e5e5e5'}/>

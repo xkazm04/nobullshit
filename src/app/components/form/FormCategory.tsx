@@ -11,7 +11,7 @@ const FormCategory = ({ activeCategory, setActiveCategory }: any) => {
         <>
             <div className="cat-row">Which area you want to improve?</div>
             <div className="flex flex-row w-full gap-5">
-                <div className=" bg-gray-900 p-6 rounded-xl border border-gray-700/40 h-[120px] my-5 w-full flex flex-row justify-between" >
+                <div className=" bg-gray-600/20 p-6 rounded-xl border border-gray-700/40 h-[120px] my-5 w-full flex flex-row justify-between" >
                     <div className="flex flex-col gap-2">
                         <AnimatePresence>
                             <motion.div

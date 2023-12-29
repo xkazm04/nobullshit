@@ -20,7 +20,7 @@ const Page = () => {
         Router.push('/daily')
     }
     return <>
-        <div className="relative h-full">
+        <div className="page">
         {steps[currentStep].nextComponent}
         <div className="absolute bottom-5 w-full">
           <Stepper 

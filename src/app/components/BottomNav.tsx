@@ -22,7 +22,7 @@ export default function BottomNav() {
 
 
   return (
-    <div className="asbsolute bottom-0 w-full bg-slate-950 font-['Inter'] capitalize tracking-wide font-light text-sm py-2">
+    <div className=" bg-slate-950 font-['Inter'] capitalize tracking-wide font-light text-sm py-2">
       <nav className="max-w-md mx-auto px-4 py-2 flex justify-around">
         {navItems.map((item) => (
           <Link key={item.href} href={item.href}>

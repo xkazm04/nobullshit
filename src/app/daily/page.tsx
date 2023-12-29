@@ -13,14 +13,13 @@ const Page = async() => {
         queryFn: getHabits, 
     })
 
-    return <div className='relative flex flex-col justify-between h-full'>
+    return <div className='page'>
         <HeaderComponent page={'Daily'}/>
-        <div className="flex flex-col gap-5 justify-start mt-20 max-h-[700px] overflox-y-hiddenw">
+        <div className="flex flex-col gap-5 justify-start mt-20 overflox-y-hidden">
         <HydrationBoundary state={dehydrate(queryClient)}>
             <Today/>
         </HydrationBoundary>
         </div>
-        <div className='z-10 w-full'><BottomNav /></div>
     </div>
 }
 

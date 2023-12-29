@@ -7,7 +7,7 @@ type Props = {
 const FormDays = ({habitDays, setHabitDays, label}: Props) => {
     return (<>
         <div className="cat-row">{label}</div>
-        <div className="flex flex-row justify-center gap-5 my-5">
+        <div className="flex flex-row justify-center gap-5 my-5 bg-gray-600/20 rounded-xl py-3 px-4">
             {habitDays.map((d, i) => <div key={i} className="flex flex-col items-center gap-2 lg:cursor-pointer">
                 <div className="text-gray-300">{['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][i]}</div>
                 <div className={`w-8 h-8 rounded-xl flex flex-col justify-center items-center 
