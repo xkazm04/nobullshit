@@ -3,6 +3,8 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import QueryProvider from './lib/providers/QueryProvider'
 import BottomNav from './components/BottomNav'
+import AuthContext from './lib/providers/AuthProvider'
+
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -29,10 +31,12 @@ export default async function RootLayout({
           <main className="flex  flex-col items-center justify-between p-24">
             <div className="relative mobile-body rounded-[40px] w-full h-full
              min-h-[768px] max-w-[1500px] ">
+              <AuthContext>
               <QueryProvider>
                 {children}
                 <div className='absolute bottom-0 w-full'><BottomNav/></div>
               </QueryProvider>
+              </AuthContext>
             </div>
             </main>        
         </body>

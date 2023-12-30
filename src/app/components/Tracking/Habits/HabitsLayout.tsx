@@ -55,7 +55,7 @@ const Today = () => {
 
 
     return (
-        <div className="flex flex-col  overflow-x-scroll hide-scrollbar relative">
+        <div className="flex flex-col  overflow-x-scroll hide-scrollbar relative max-w-[370px]">
             <Dialog>
             <DatePicker nextDay={nextDay} prevDay={prevDay} fullDate={fullDate} />
             <div className="flex flex-row justify-between relative">

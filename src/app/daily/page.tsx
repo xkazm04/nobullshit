@@ -1,6 +1,5 @@
 
 import Today from '../components/Tracking/Habits/HabitsLayout';
-import BottomNav from '../components/BottomNav';
 import HeaderComponent from '../components/ui/header';
 import { getHabits } from '../apiFns/habitApis';
 import {dehydrate,HydrationBoundary,QueryClient} from '@tanstack/react-query'

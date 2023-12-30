@@ -5,6 +5,7 @@ import { updateTaskState } from "@/app/apiFns/taskApis"
 import { useMutation } from "@tanstack/react-query"
 import { TaskUpdate } from "@/app/types/TrackerTypes"
 import { BanIcon, PenIcon } from "lucide-react"
+import { FormTextInput } from "../form/FormTextInput"
 
 const Todo = ({ task }: { task: TaskType }) => {
     const [checked, setChecked] = useState(false)
@@ -35,15 +36,15 @@ const Todo = ({ task }: { task: TaskType }) => {
         mutation.mutate(taskUpdate)
 
     }
-    return <div key={task.id} className="flex flex-col justify-center gap-1 w-full font-mono">
-        <div className="p-3 flex flex-row justify-start gap-5 border-t border-gray-600 bg-gray-950 relative w-full">
+    return <div key={task.id} className="">
+        <div className="p-3 flex flex-row justify-start gap-5 border-t  border-gray-700 bg-gray-950/20  relative w-full">
             <div className="flex flex-row justify-between gap-2 w-full">
                 {!showEdit ? <>
                     {!checked  ? <div className="text-gray-200">{task.name}</div> :
                         <div className="text-gray-500 line-through">{task.name}</div>}
                 </> :
                     <div className="flex flex-row gap-2">
-                        <input className="input" type="text" value={newName} onChange={(e) => setNewName(e.target.value)} />
+                        <FormTextInput label={`Edit name - ${task.name}`} setNew={setNewName} />
                         <button className="btn-action" onClick={() => handleNewName()}>Save</button>
                     </div>}
                 <div className="flex flex-row gap-5 px-5">

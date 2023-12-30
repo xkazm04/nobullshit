@@ -88,7 +88,7 @@ body {
     hover:bg-yellow-950 transition-colors duration-200 ease-out lg:cursor-pointer;
   }
   .btn-action{
-    @apply inline-flex items-center justify-center px-4 py-3 border rounded-lg shadow-sm text-sm text-main border-gray-600 
+    @apply inline-flex items-center justify-center px-4 py-2 border rounded-xl  text-sm text-main border-gray-600/50 bg-black/75 shadow-lg shadow-slate-900
    transition-colors duration-200 ease-out lg:cursor-pointer; 
   }
   .btn-disabled{

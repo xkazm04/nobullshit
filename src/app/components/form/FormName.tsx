@@ -6,7 +6,7 @@ type Props = {
 
 const FormName = ({setName}: Props) => {
     return <>
-            <FormTextInput setNew={setName} label={'Tracker name'} type={'text'} />
+        <FormTextInput setNew={setName} label={'Habit name'} type={'text'} />
     </>
 }
 

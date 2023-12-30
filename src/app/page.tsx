@@ -2,6 +2,8 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import LoadingAnim from "./components/LoadingAnim";
+import useGetUser from "./lib/hooks/useGetUser";
+
 
 
 export default function Home() {
@@ -9,11 +11,11 @@ export default function Home() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const isUserIdentified = localStorage.getItem('user');
+    const isUserIdentified = useGetUser()
     setTimeout(() => {
       setLoading(false)
       if (isUserIdentified) {
-        router.push('/intro')
+        router.push('/daily')
       } else {
         router.push('/intro')
       }

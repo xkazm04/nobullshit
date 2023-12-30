@@ -11,7 +11,10 @@ const FormCategory = ({ activeCategory, setActiveCategory }: any) => {
         <>
             <div className="cat-row">Which area you want to improve?</div>
             <div className="flex flex-row w-full gap-5">
-                <div className=" bg-gray-600/20 p-6 rounded-xl border border-gray-700/40 h-[120px] my-5 w-full flex flex-row justify-between" >
+                <div className=" bg-gray-600/20 hover:bg-gray-600/60 lg:cursor-pointer transition-all duration-200 ease-in-out
+                p-6 rounded-xl border border-gray-700/40 h-[120px] my-5 w-full flex flex-row justify-between" 
+                    onClick={() => setActiveCategory(display)}
+                >
                     <div className="flex flex-col gap-2">
                         <AnimatePresence>
                             <motion.div
@@ -26,7 +29,6 @@ const FormCategory = ({ activeCategory, setActiveCategory }: any) => {
                                     <div
                                         className={'w-5 h-5 rounded-full inline-block mr-2 lg:cursor-pointer transition-all duration-300 ease-in-out'}
                                         style={activeCategory.id === display.id ? { backgroundColor: hexColor } : { backgroundColor: 'transparent', border: '1px solid #4B5563' }}
-                                        onClick={() => setActiveCategory(display)}
                                     />
                                     <div>{display.name}</div>
                                 </div>

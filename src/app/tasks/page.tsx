@@ -16,7 +16,7 @@ const Page = async () => {
         <HeaderComponent page={'Tasks'} />
         <div className="flex flex-col mt-[20%]">
             <div className='typo-long'>Simple todolist, like thousands of others</div>
-            <div className='flex flex-col gap-1'>
+            <div className='flex flex-col gap-1 py-5'>
                 <HydrationBoundary state={dehydrate(queryClient)}>
                     <TaskOverview />
                 </HydrationBoundary>
@@ -24,7 +24,6 @@ const Page = async () => {
         </div>
         <div className='z-10 w-full'>
             <div><TodoNew /></div>
-            <BottomNav />
         </div>
     </div>
 }

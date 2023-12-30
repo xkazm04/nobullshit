@@ -52,3 +52,8 @@ export type TaskType = {
     completed: boolean;
     date: string;
 }
+
+export type UserType = {
+    username?: string;
+    email: string;
+}

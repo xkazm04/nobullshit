@@ -12,8 +12,7 @@ const Page = async() => {
         queryFn: getHabits, 
     })
 
-    return <div className="flex flex-col justify-between items-center w-full h-full relative">
-        
+    return <div className="page">
             <div className='flex flex-row justify-between absolute z-10 w-full'>
                 <HeaderComponent page={'Weekly trackers'}/>
             </div>
@@ -22,7 +21,6 @@ const Page = async() => {
                 <HabitOverview />
             </HydrationBoundary>
             </div>
-            <div className='z-10 w-full'><BottomNav /></div>
     </div>
 }
 

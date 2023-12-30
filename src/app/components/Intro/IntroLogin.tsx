@@ -1,62 +1,91 @@
 'use client'
 import { useState } from "react"
-import { apiRequest } from "@/app/lib/callers"
-import { FormTextInput } from "../form/FormTextInput"
 import FormCondition from "../form/FormCondition"
-import { PlayCircleIcon } from "lucide-react"
+import { GithubIcon, PlayCircleIcon } from "lucide-react"
+import { signIn, useSession } from "next-auth/react"
+import { useMutation } from "@tanstack/react-query"
+import { registerUser } from "@/app/apiFns/userApis"
+import { UserType } from "@/app/types/TrackerTypes"
+
 
 type Props = {
     condition: boolean
     setCondition: (condition: boolean) => void
 }
 const IntroLogin = ({condition,setCondition}: Props) => {
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
-    const [email, setEmail] = useState('')
     const [success, setSuccess] = useState(false)
     const [error, setError] = useState(false)
     const [checked, setChecked] = useState(true)
+    const {data: session} = useSession()
+
+    const mutation = useMutation({
+        mutationFn: (user: UserType) => registerUser(user),
+        onSuccess: () => {
+            setChecked(!checked)
+            setError(false)
+        },
+        onError: () => {
+            setError(true)
+        }
+    })
 
     const txt =  "By setting a habbit 5 hours / week you will gain 250h+ expertize at any skill, feel physically better."
 
-    const handleSubmit = async(e: any) => {
+    const handleSubmit = async(user) => {
         setSuccess(false)
         setError(false)
-        e.preventDefault()
-        const url = 'http://localhost:8000/user/register';
-        const user = {
-            username: username,
-            password: password,
-            email: email
-        }
-        try{
-            await apiRequest('POST', url, user as any)
-            setSuccess(true)
-            localStorage.setItem('user', JSON.stringify(user.username))
-            setCondition(true)
-        } catch (err) {
-            setError(true)
-        }
+        mutation.mutate(user)
     }
+      const guestLogin = async () => {
+        console.log('guest login')
+        const userIpAddress = await fetch('https://api.ipify.org')
+        let user = {
+            email: userIpAddress + '@guest.com',
+            username: userIpAddress
+        }
+        await handleSubmit(user)
+      }
+      const githubLogin = async () => {
+            await signIn('github', {callbackUrl: 'http://localhost:3000'})     
+            if (session) {
+                console.log(session.user);
+                localStorage.setItem('user', JSON.stringify(session.user))
+                let user = {
+                    email: session.user.email,
+                    username: session.user.name
+                }
+                await handleSubmit(user)
+              }
+      }
+        const googleLogin = async () => {
+            await signIn('google', {callbackUrl: 'http://localhost:3000'})
+            if (session) {
+                console.log(session.user);
+                localStorage.setItem('user', JSON.stringify(session.user))
+                if (session.user.email && session.user.name){
+                    let user = {
+                        email: session.user.email,
+                        username: session.user.name
+                    }
+                    await handleSubmit(user)
+                }
+              }
+        }
 
     return (
-        <div className="flex flex-col justify-center items-center  h-full">
+        <div className="flex flex-col justify-center items-center py-10  h-full">
             <div className="flex flex-col w-[90%] gap-5 rounded-lg ">
                 <div className="typo-long">
                    {txt}
                 </div>
-                <div className="flex flex-col w-full gap-2">
-                    <FormTextInput setNew={setUsername} label="Username" type='text'/>
-                    <FormTextInput setNew={setEmail}  label="Email" type='email'/>
-                    <FormTextInput setNew={setPassword}  label="Password" type='password'/>
-                    {username === '' || email === '' || password === '' ? 
-                        <button className="btn-disabled py-3 my-5 " disabled >Register</button> :
-                        <button className="btn-action py-3 my-5 animate-fadeIn" onClick={handleSubmit}>Register</button>
-                        }
+                <div className="flex flex-between w-full gap-2">
+                    <div className="w-[50%] bg-gray-950 py-10 px-5 rounded-xl border border-gray-600/50" onClick={googleLogin}><PlayCircleIcon size={40} strokeWidth={1}/></div>
+                    <div className="w-[50%] bg-gray-950 py-10 px-5 rounded-xl border border-gray-600/50" onClick={githubLogin}><GithubIcon size={40} strokeWidth={1}/></div>
                 </div>
                 <div className="w-full relative mb-5">
                     <div className="border-t border-gray-700/60"/>
-                    <div className="bg-transparent absolute -top-2 left-[47%]"><PlayCircleIcon/></div>
+                    <div className="absolute top-[-10px] left-1/2 transform -translate-x-1/2 bg-gray-900/50 px-2 text-sm font-mono text-blue-200 lg:cursor-pointer"
+                        onClick={guestLogin}>get in as guest</div>
                 </div>
                 <FormCondition checked={checked} setChecked={setChecked} text="I agree to process my data for recommnedation"/>
                 <FormCondition checked={condition} setChecked={()=>{setCondition(!condition)}} text="Check me"/>

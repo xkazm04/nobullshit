@@ -1,6 +1,6 @@
 'use client'
 import { NoteType } from "@/app/types/TrackerTypes";
-import { MinusIcon } from "lucide-react";
+import { GoalIcon, MessageSquare, MinusIcon } from "lucide-react";
 import { useMutation } from "@tanstack/react-query";
 import { deleteNote } from "@/app/apiFns/notesApis";
 import ConfirmationMini from "../form/ConfirmationMini";
@@ -24,9 +24,12 @@ const Note = (note: NoteType) => {
     })
     
     return <>
-        <div key={note.id} className='italic text-sm flex flex-row justify-between'>
+        <div key={note.id} className='italic text-sm flex flex-row justify-between w-full'>
             {!deleted ? <div>
-                {note.text}
+           <div className="flex gap-2">     
+                    {note.type === 'task' ? <div className='text-green-300'><GoalIcon size={12}/></div> : <div className='text-yellow-300'><MessageSquare size={12}/></div>}
+                    <div>{note.text}</div>
+                </div>
                 <div className='text-xs text-gray-500'>{note.date}</div>
             </div> : <div className='text-gray-500'>Note deleted</div>}
             {!deleted && <div>

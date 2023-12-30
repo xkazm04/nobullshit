@@ -77,7 +77,7 @@ const Habit = ({ habit }: { habit: HabitType }) => {
     return (<div key={habit.id} className="flex flex-col justify-between">
         <div
             key={habit.id}
-            className={`${habit.category} p-3 flex flex-row justify-start gap-5 border-t border-gray-800 bg-gray-950 relative`}
+            className={`${habit.category} p-3 flex flex-row justify-start gap-5 border-t border-gray-400 bg-gray-950/20 relative`}
         >
             <div className="flex text-sm min-w-[150px] font-white">{habit.name}</div>
             <div className='absolute right-5 flex flex-row mt-1 gap-5'>
