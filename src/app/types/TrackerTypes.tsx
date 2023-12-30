@@ -57,3 +57,9 @@ export type UserType = {
     username?: string;
     email: string;
 }
+
+export type CompType = {
+    habit_id: string
+    day: string
+    completed: boolean
+}

@@ -6,7 +6,7 @@ import FormCategory from "../../form/FormCategory";
 import FormDays from "../../form/FormDays";
 import FormCondition from "../../form/FormCondition";
 import { HabitType, RecurrenceObject } from "@/app/types/TrackerTypes";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createHabit } from "@/app/apiFns/habitApis";
 import useGetUser from "@/app/lib/hooks/useGetUser";
 
@@ -22,7 +22,10 @@ const HabitNew = () => {
     const [specificDays, setSpecificDays] = useState([false, false, false, false, false, false, false])
     const [success, setSuccess] = useState(false)
 
-    const user = useGetUser()
+    const user = useGetUser() || ''
+    // Timestamp without time zone 
+    const dateFrom = new Date().toISOString().slice(0, 19).replace('T', ' ')
+    const futureDate = '2999-12-31 00:00:00'
 
 
     const handleSubmit = () => {
@@ -31,28 +34,30 @@ const HabitNew = () => {
             name: habitName,
             category: activeCategory.id,
             dayType: dayType,
-            dateFrom: recurrence?.dateFrom.toISOString(),
+            dateFrom: dateFrom,
+            dateTo: futureDate,
             isRecurring: true,
-            recurrenceType: 'weekly',
+            recurrenceType: 'Week',
             recurrenceInterval: 1,
             specificDays: specificDays,
             active: true,
             ai: enableAi,
         }
-        console.log(newHabit)
-        // mutation.mutate(newHabit)
+        mutation.mutate(newHabit)
     }
+    const queryClient = useQueryClient();
 
     // Day type 4x boolean rewrite
     const mutation = useMutation({
         mutationFn: (habit: HabitType) => createHabit(habit),
         onSuccess: () => {
             setSuccess(true)
+            //@ts-ignore
+            queryClient.invalidateQueries('habits');
         },
         onError: () => {
             setError(true)
         }
-
     })
 
     return (

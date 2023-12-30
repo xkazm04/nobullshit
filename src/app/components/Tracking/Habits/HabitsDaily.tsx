@@ -6,20 +6,24 @@ import Modal from '../../Modal';
 import HabitNew from './HabitNew';
 import { HabitType } from '@/app/types/TrackerTypes';
 import { useQuery } from '@tanstack/react-query';
-import { getHabits } from '@/app/apiFns/habitApis';
+import { getUserHabits } from '@/app/apiFns/habitApis';
+import useGetUser from '@/app/lib/hooks/useGetUser'; 
+import LoadingAnim from '../../LoadingAnim';
 
-const HabitsDaily = ({day }) => {
+const HabitsDaily = ({day}) => {
+    const userId = useGetUser();
     const renderDialog = () => {
         return <Modal title={'Create a habit'} description={''} content={<HabitNew/>} />
     }
-    const {data, error} = useQuery({
+    const {data, error, isLoading} = useQuery({
         queryKey: ['habits'],
-        queryFn: getHabits
+        queryFn: () => getUserHabits(userId || '')
     })
 
     // Day to filter day
     return (
         <div className='flex flex-col relative my-5 full-h'>
+            {isLoading ? <LoadingAnim/> :
             <Dialog>
                 <div className="text-main font-mono flex flex-row justify-start px-3 py-3">
                     <div>Habits</div>
@@ -39,6 +43,7 @@ const HabitsDaily = ({day }) => {
                 </div>
                 {renderDialog()}
             </Dialog>
+             }
         </div>
     );
 }

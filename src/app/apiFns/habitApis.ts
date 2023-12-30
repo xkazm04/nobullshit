@@ -11,6 +11,11 @@ export async function getHabits () {
     return response.data;
   }
 
+export async function getUserHabits (userId: string) {
+  const response = await habitsApi.get('/user/'+userId);
+  return response.data
+}
+
 export async function createHabit (habit: HabitType) {
     const response = await habitsApi.post('/', habit);
     return response.data;

@@ -13,7 +13,7 @@ type NoteUpdate = {
 }
 
 const notesApi = axios.create({
-    baseURL: "http://localhost:8000/habit/notes"
+    baseURL: "http://localhost:8000/tracker/notes"
     });
 
 export async function getNotes (habitId: string) {

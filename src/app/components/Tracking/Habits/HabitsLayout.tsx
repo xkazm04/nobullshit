@@ -6,18 +6,14 @@ import Modal from "../../Modal";
 import CalendarPicker from "../../form/CalendarPicker";
 import DatePicker from "../../form/DatePicker";
 
-
 const Today = () => {
     const daysInMonth = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate();
     const days = Array.from({ length: daysInMonth }, (_, i) => i + 1);
     const today = new Date().getDate();
     const [selectedDay, setSelectedDay] = useState(today);
     const [fullDate, setFullDate] = useState(new Date().toLocaleDateString());
-    // Tbd after mock 
     // const filteredHabits = habits.filter((h:any) => h.date === fullDate);
     // Filter habits by date
-
-
     const scrollContainerRef = useRef(null);
 
     const clickDay = (day: any) => {

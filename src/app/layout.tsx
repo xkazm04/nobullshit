@@ -32,10 +32,10 @@ export default async function RootLayout({
             <div className="relative mobile-body rounded-[40px] w-full h-full
              min-h-[768px] max-w-[1500px] ">
               <AuthContext>
-              <QueryProvider>
-                {children}
-                <div className='absolute bottom-0 w-full'><BottomNav/></div>
-              </QueryProvider>
+                <QueryProvider>
+                  {children}
+                  <div className='absolute bottom-0 w-full'><BottomNav/></div>
+                </QueryProvider>
               </AuthContext>
             </div>
             </main>        

@@ -6,8 +6,8 @@ const usersApi = axios.create({
         baseURL: "http://localhost:8000/user"
     });
 
-export async function getMe () {
-    const response = await usersApi.get('/user/123e4567-e89b-12d3-a456-426614174000');
+export async function getMe (email: string) {
+    const response = await usersApi.get(`/${email}`);
     return response.data;
   }
 
