@@ -44,7 +44,7 @@ const Todo = ({ task }: { task: TaskType }) => {
                         <div className="text-gray-500 line-through">{task.name}</div>}
                 </> :
                     <div className="flex flex-row gap-2">
-                        <FormTextInput label={`Edit name - ${task.name}`} setNew={setNewName} />
+                        <FormTextInput type="text" label={`Edit name - ${task.name}`} setNew={setNewName} />
                         <button className="btn-action" onClick={() => handleNewName()}>Save</button>
                     </div>}
                 <div className="flex flex-row gap-5 px-5">

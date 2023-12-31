@@ -8,22 +8,27 @@ import { HabitType } from '@/app/types/TrackerTypes';
 import { useQuery } from '@tanstack/react-query';
 import { getUserHabits } from '@/app/apiFns/habitApis';
 import useGetUser from '@/app/lib/hooks/useGetUser'; 
-import LoadingAnim from '../../LoadingAnim';
+import { useEffect } from 'react';
 
-const HabitsDaily = ({day}) => {
+const HabitsDaily = ({day}:any) => {
     const userId = useGetUser();
+    const {data, error, isLoading, refetch} = useQuery({
+        queryKey: ['habits-daily', userId, day],
+        queryFn: () => getUserHabits({userId: userId || '', day: day})
+    })
+
+    useEffect(() => {
+        refetch()
+    }, [day])
+
     const renderDialog = () => {
         return <Modal title={'Create a habit'} description={''} content={<HabitNew/>} />
     }
-    const {data, error, isLoading} = useQuery({
-        queryKey: ['habits'],
-        queryFn: () => getUserHabits(userId || '')
-    })
 
     // Day to filter day
     return (
         <div className='flex flex-col relative my-5 full-h'>
-            {isLoading ? <LoadingAnim/> :
+            {isLoading ? <></> :
             <Dialog>
                 <div className="text-main font-mono flex flex-row justify-start px-3 py-3">
                     <div>Habits</div>
@@ -42,8 +47,7 @@ const HabitsDaily = ({day}) => {
                 }
                 </div>
                 {renderDialog()}
-            </Dialog>
-             }
+            </Dialog>}
         </div>
     );
 }

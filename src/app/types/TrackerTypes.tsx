@@ -14,6 +14,10 @@ export type HabitType = {
     ai?: boolean;
 }
 
+export type Habits = {
+    habits: HabitType[];
+}
+
 
 export type RecurrenceObject = {
     dateFrom: Date,
@@ -35,7 +39,7 @@ export type NoteType = {
 
 export type TaskInput = {
     user_id: string;
-    tracker_id: string;
+    habit_id: string;
     name: string;
 }
 

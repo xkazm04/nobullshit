@@ -5,8 +5,8 @@ const taskApi = axios.create({
     baseURL: "http://localhost:8000/tracker/task"
     });
 
-export async function getAllTasks () {
-    const response = await taskApi.get('/user/123e4567-e89b-12d3-a456-426614174000');
+export async function getAllTasks (userId: string) {
+    const response = await taskApi.get('/user/' + userId);
     return response.data;
   }
 

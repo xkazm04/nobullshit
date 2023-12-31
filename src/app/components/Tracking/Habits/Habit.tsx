@@ -4,7 +4,7 @@ import { Maximize2Icon, PlusCircle, ScrollTextIcon } from "lucide-react";
 import { FormTextInput } from "../../form/FormTextInput";
 import ConfirmationMini from "../../form/ConfirmationMini";
 import { motion, AnimatePresence } from "framer-motion"
-import { CompType, HabitType } from "@/app/types/TrackerTypes";
+import { HabitType } from "@/app/types/TrackerTypes";
 import HabitTasks from "./HabitTasks";
 import HabitNoteNew from "./HabitNoteNew";
 import { getCategoryColor } from "@/app/lib/colorGetter";

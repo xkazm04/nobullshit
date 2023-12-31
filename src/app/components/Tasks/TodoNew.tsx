@@ -1,11 +1,46 @@
 'use client';
 import { BanIcon, EarIcon, Link2Icon, PlusCircleIcon, PlusIcon } from "lucide-react";
 import { useState } from "react";
-const TodoNew = () => {
+import { createTask } from "@/app/apiFns/taskApis";
+import { useMutation } from "@tanstack/react-query";
+import { TaskInput } from "@/app/types/TrackerTypes";
+
+type Props = {
+    habit: string,
+    user: string
+}
+
+const TodoNew = ({habit,user}:Props) => {
     const [show, setShow] = useState(false)
     const [loading, setLoading] = useState(false)
+    const [success, setSuccess] = useState(false)
+    const [taskName, setTaskName] = useState('' as string)
+    const [error, setError] = useState(false)
     const s = () => {
         setShow(!show)
+    }
+
+    const mutation = useMutation({
+        mutationFn: (task: TaskInput) => createTask(task),
+        onSuccess: () => {
+            setSuccess(true)
+        },
+        onError: () => {
+            setError(true)
+        }
+    })
+
+    // Habit, User, Name, Created
+
+    const create = () => {
+        setSuccess(false)
+        setError(false)
+        const newTask = {
+            name: taskName,
+            user: user,
+            habit: habit,
+        }
+        mutation.mutate(task)
     }
 
     const recommend = () => {
@@ -14,17 +49,16 @@ const TodoNew = () => {
 
     const Form = () => {
         return <div 
-            className="asbolute bottom-[10%] left-0 w-full min-h-[200px] z-10 flex flex-col items-center justify-center bg-black bg-opacity-50
+            className="w-full min-h-[200px] z-10 flex flex-col items-center justify-center bg-black bg-opacity-50
                 animate-fadeIn transition-all duration-500 gap-5">
             <div className="flex flex-row justify-center relative gap-1">
-                <div><input className="input" placeholder="Enter a name" /></div>
-                <div><button className="btn-action"><Link2Icon size={18}/></button></div>
-                <div className="absolute text-xs right-0 top-[-25px] italic font-mono">habit not selected</div>
+                <div><input className="input" placeholder="Enter a name" onChange={(e)=>{setTaskName(e.target.value)}}/></div>
+                <div className="absolute text-xs right-0 top-[-25px] italic font-mono">{habit}</div>
             </div>
             <div className="flex flex-row justify-between gap-5">
                 <button className="btn-action" onClick={()=>{recommend()}}><EarIcon/></button>
                 <button className="btn-action" onClick={s}><BanIcon/></button>
-                <button className="btn-action" onClick={s}><PlusIcon/></button>
+                <button className="btn-action" onClick={create}><PlusIcon/></button>
             </div>
         </div>
     }
