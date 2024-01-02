@@ -1,12 +1,12 @@
 'use client';
-import { BanIcon, EarIcon, Link2Icon, PlusCircleIcon, PlusIcon } from "lucide-react";
+import { BanIcon, EarIcon, Link2Icon, PlusIcon } from "lucide-react";
 import { useState } from "react";
 import { createTask } from "@/app/apiFns/taskApis";
 import { useMutation } from "@tanstack/react-query";
-import { TaskInput } from "@/app/types/TrackerTypes";
+import { HabitType, TaskInput } from "@/app/types/TrackerTypes";
 
 type Props = {
-    habit: string,
+    habit: HabitType,
     user: string
 }
 
@@ -31,42 +31,39 @@ const TodoNew = ({habit,user}:Props) => {
     })
 
     // Habit, User, Name, Created
+    const handleChangeName = (e: any) => {
+        e.preventDefault()
+        setTaskName(e.target.value)
+    }   
 
     const create = () => {
         setSuccess(false)
         setError(false)
         const newTask = {
             name: taskName,
-            user: user,
-            habit: habit,
+            user_id: user,
+            habit_id: habit.id || '',
         }
-        mutation.mutate(task)
+        mutation.mutate(newTask)
     }
 
     const recommend = () => {
         setLoading(true)
     }
 
-    const Form = () => {
-        return <div 
-            className="w-full min-h-[200px] z-10 flex flex-col items-center justify-center bg-black bg-opacity-50
+    return (
+        <div className="w-full min-h-[200px] z-10 flex flex-col items-center justify-center bg-gray-600/10 rounded-xl p-5
                 animate-fadeIn transition-all duration-500 gap-5">
             <div className="flex flex-row justify-center relative gap-1">
-                <div><input className="input" placeholder="Enter a name" onChange={(e)=>{setTaskName(e.target.value)}}/></div>
-                <div className="absolute text-xs right-0 top-[-25px] italic font-mono">{habit}</div>
+                <div><input className="input" placeholder="Enter a name" onChange={(e) => handleChangeName(e)}/></div>
+                <div className="absolute text-xs right-0 top-[-25px] italic font-mono">{habit.name}</div>
             </div>
             <div className="flex flex-row justify-between gap-5">
                 <button className="btn-action" onClick={()=>{recommend()}}><EarIcon/></button>
                 <button className="btn-action" onClick={s}><BanIcon/></button>
                 <button className="btn-action" onClick={create}><PlusIcon/></button>
             </div>
-        </div>
-    }
-
-    return (
-        <div className="flex flex-row justify-end">
-             {!show && <button className="absolute btn-action z-20 bottom-[10%]" onClick={s}><PlusCircleIcon /></button>}
-                {show && <Form key="newTodoForm" />}
+            {success && <div className='alert-success max-w-[500px]'>Task created!</div>}
         </div>
     );
 }

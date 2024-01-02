@@ -1,11 +1,16 @@
 'use client';
 import { useQuery } from "@tanstack/react-query";
 import { getAllTasks } from "@/app/apiFns/taskApis";
-import Todo from "./Todo";
 import useGetUser from "@/app/lib/hooks/useGetUser";
 import { getHabits } from "@/app/apiFns/habitApis";
 import TodoNew from "./TodoNew";
 import { groupBy } from 'lodash';
+import { Dialog } from "../ui/dialog";
+import { DialogTrigger } from "@radix-ui/react-dialog";
+import Modal from "../Modal";
+import { HabitType } from "@/app/types/TrackerTypes";
+import Todos from "./Todos";
+
 
 
 export type TaskType = {
@@ -16,6 +21,7 @@ export type TaskType = {
 
 const TaskOverview = () => {
     const userId = useGetUser()
+
     const { data, error, isLoading } = useQuery({
         queryKey: ['tasks', userId],
         queryFn: () => getAllTasks(userId || '')
@@ -26,27 +32,31 @@ const TaskOverview = () => {
         queryFn: () => getHabits(userId || '')
     })
 
-    // Todo new task not working + fix styling
+    // Todo new task not working + fix stylingS
+    const renderDialog = (habit: HabitType) => {
+        return <Modal content={<TodoNew user={userId} habit={habit} title="" description=""/>}/> 
+    }
 
-    const tasksByHabit = data ? groupBy(data, 'habitId') : {};
+    const tasksByHabit = data ? groupBy(data, 'habit_id') : {};
 
-    return <div className="flex flex-col gap-3">
-        {habits && habits.map(habit => (
-            <div key={habit.id} className="bg-gray-600/10 p-2">
-                <div className="text-xs">{habit.name}</div>
-                {tasksByHabit[habit.id] && tasksByHabit[habit.id].length > 0 ? tasksByHabit[habit.id].map((task: TaskType) => (<>
-                    <div key={task.id}>
-                        <Todo task={task} />
+    return <div className="flex flex-col gap-3 items-center">
+        <Dialog>
+        {habits && habits.map((habit: HabitType) => {
+            const tasks = tasksByHabit[habit.id] || [];
+            return (
+                <div key={habit.id} className="bg-gray-600/10 p-2 flex flex-row justify-between relative rounded-xl items-center min-w-[350px]">
+                       {renderDialog(habit)}
+                    <div className="text-xs">
+                            {habit.name} 
+                            <Todos tasks={tasks}/>
                     </div>
-                    <div className='z-10 w-full'>
-                        <div><TodoNew user={userId} habit={habit.id} /></div>
-                    </div></>))
-                    : <div>No tasks</div>
-                }
-            </div>
-        ))}
-
-        {error && <div className="alert-error">API error</div>}
+                    <DialogTrigger>
+                        <div className="px-5 rounded-lg bg-gray-700">+</div>
+                    </DialogTrigger>
+                </div>
+            );
+        })}
+        </Dialog>
     </div>
 }
 

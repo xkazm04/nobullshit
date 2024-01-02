@@ -9,9 +9,8 @@ import useGetUser from "./lib/hooks/useGetUser";
 export default function Home() {
   const router = useRouter()
   const [loading, setLoading] = useState(true)
-
+  const isUserIdentified = useGetUser()
   useEffect(() => {
-    const isUserIdentified = useGetUser()
     setTimeout(() => {
       setLoading(false)
       if (isUserIdentified) {

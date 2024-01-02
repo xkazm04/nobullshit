@@ -1,5 +1,5 @@
 import Checkmark from "../../form/Checkmark"
-import { createCompletion, getCompletion } from "@/app/apiFns/compApis";
+import { createCompletion, getDayCompletion } from "@/app/apiFns/compApis";
 import { CompType, HabitType } from "@/app/types/TrackerTypes";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
@@ -14,7 +14,7 @@ const HabitCompletion = ({habit, setError}: Props) => {
     const [comp, setComp] = useState(false)
     const {data} = useQuery({
         queryKey: [`completion-${habit.id}-${today}`],
-        queryFn: () => getCompletion(habit.id || '')
+        queryFn: () => getDayCompletion(habit.id || '')
     })
 
     useEffect(() => {

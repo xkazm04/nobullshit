@@ -1,13 +1,20 @@
 import Checkmark from "../form/Checkmark"
-import { TaskType } from "./TaskOverview"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { updateTaskState } from "@/app/apiFns/taskApis"
 import { useMutation } from "@tanstack/react-query"
-import { TaskUpdate } from "@/app/types/TrackerTypes"
-import { BanIcon, PenIcon } from "lucide-react"
-import { FormTextInput } from "../form/FormTextInput"
+import { TaskType, TaskUpdate } from "@/app/types/TrackerTypes"
+import { BanIcon, CheckCheckIcon, PenIcon } from "lucide-react"
+import { useRef } from 'react';
 
-const Todo = ({ task }: { task: TaskType }) => {
+type Props = {
+    task: TaskType,
+    setPercentage: (percentage: number) => void
+    length: number
+    percentage: number
+}
+
+
+const Todo: React.FC<Props> = ({ task, setPercentage, length, percentage }) => {
     const [checked, setChecked] = useState(false)
     const [newName, setNewName] = useState('' as string)
     const [showEdit, setShowEdit] = useState(false)
@@ -26,8 +33,26 @@ const Todo = ({ task }: { task: TaskType }) => {
         const taskUpdate = {
             completed: !checked
         }
+        if (!checked) {
+            setPercentage(percentage + 100 / length)
+        } else {
+            setPercentage(percentage - 100 / length)
+        }
         mutation.mutate(taskUpdate)
     }
+
+    useEffect(() => {
+        setChecked(task.completed)
+    }, [task])
+
+    const inputRef = useRef(null);
+
+    const handleEditClick = () => {
+        setShowEdit(true);
+        setNewName(task.name);
+        //@ts-ignore
+        setTimeout(() => inputRef.current && inputRef.current.focus(), 0);
+    };
 
     const handleNewName = () => {
         const taskUpdate = {
@@ -36,26 +61,34 @@ const Todo = ({ task }: { task: TaskType }) => {
         mutation.mutate(taskUpdate)
 
     }
-    return <div key={task.id} className="">
-        <div className="p-3 flex flex-row justify-start gap-5 border-t  border-gray-700 bg-gray-950/20  relative w-full">
-            <div className="flex flex-row justify-between gap-2 w-full">
-                {!showEdit ? <>
-                    {!checked  ? <div className="text-gray-200">{task.name}</div> :
-                        <div className="text-gray-500 line-through">{task.name}</div>}
-                </> :
-                    <div className="flex flex-row gap-2">
-                        <FormTextInput type="text" label={`Edit name - ${task.name}`} setNew={setNewName} />
-                        <button className="btn-action" onClick={() => handleNewName()}>Save</button>
-                    </div>}
-                <div className="flex flex-row gap-5 px-5">
-                    {!showEdit ? <> <div onClick={() => { setShowEdit(true) }}><PenIcon size={16} /></div>
-                        <Checkmark check={check} condition={checked} /></> : 
-                        <div onClick={()=>{setShowEdit(false)}}><BanIcon/></div>}
-                </div>
-            </div>
+    return <>
+    <div key={task.id} className="flex flex-row justify-between gap-2 pl-7 py-1 border-t  border-gray-700/80 bg-gray-950/20 relative w-full min-w-[320px]">
+        {!showEdit ? (
+            !checked ? <div className="text-gray-200">{task.name}</div> :
+            <div className="text-gray-500 line-through">{task.name}</div>
+        ) : (
+            <input
+                ref={inputRef}
+                type="text"
+                value={newName}
+                onChange={e => setNewName(e.target.value)}
+                onBlur={handleNewName}
+                className="text-gray-200 bg-transparent border-none"
+            />
+        )}
+        <div className="flex flex-row gap-5 px-5 z-20">
+            {!showEdit ? (
+                <>
+                    <div onClick={handleEditClick}><PenIcon size={20} /></div>
+                    <Checkmark check={check} condition={checked} />
+                </>
+            ) : (
+                <div onClick={() => { setShowEdit(false); }}><CheckCheckIcon size={18} /></div>
+            )}
         </div>
-        {error && <div className="alert-error">API error</div>}
     </div>
+    {error && <div className="alert-error">API error</div>}
+</>
 }
 
 export default Todo

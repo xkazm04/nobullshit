@@ -24,7 +24,7 @@ const HabitNotesHistory = ({habitId}:{habitId:string}) => {
         {error && <div className='alert-error'>Something went wrong...</div>}
         <div className='divider'/>
         <div>Recommendation module TBD</div>
-    </div>
+    </div>e
 }
 
 export default HabitNotesHistory;
