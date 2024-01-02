@@ -34,28 +34,28 @@ const TaskOverview = () => {
 
     // Todo new task not working + fix stylingS
     const renderDialog = (habit: HabitType) => {
-        return <Modal content={<TodoNew user={userId} habit={habit} title="" description=""/>}/> 
+        return <Modal content={<TodoNew user={userId} habit={habit} title="" description="" />} />
     }
 
     const tasksByHabit = data ? groupBy(data, 'habit_id') : {};
 
     return <div className="flex flex-col gap-3 items-center">
         <Dialog>
-        {habits && habits.map((habit: HabitType) => {
-            const tasks = tasksByHabit[habit.id] || [];
-            return (
-                <div key={habit.id} className="bg-gray-600/10 p-2 flex flex-row justify-between relative rounded-xl items-center min-w-[350px]">
-                       {renderDialog(habit)}
-                    <div className="text-xs">
-                            {habit.name} 
-                            <Todos tasks={tasks}/>
+            {habits && habits.map((habit: HabitType) => {
+                const tasks = tasksByHabit[habit.id] || [];
+                return <div className="flex flex-row relative">
+                    <div key={habit.id} className="bg-gray-600/10 p-2 flex flex-row justify-between relative rounded-xl items-center min-w-[350px]">
+                        {renderDialog(habit)}
+                        <div className="text-xs">
+                            {habit.name}
+                            {tasks && tasks.length > 0 && <Todos tasks={tasks} />}
+                        </div>
                     </div>
                     <DialogTrigger>
-                        <div className="px-5 rounded-lg bg-gray-700">+</div>
+                        <div className="px-5 rounded-lg bg-gray-600/20 absolute right-0 top-0">+</div>
                     </DialogTrigger>
                 </div>
-            );
-        })}
+            })}
         </Dialog>
     </div>
 }
