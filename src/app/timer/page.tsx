@@ -1,5 +1,4 @@
 'use client';
-import BottomNav from '../components/BottomNav';
 import Timer from '../components/Timing/Timer';
 import { useState } from 'react';
 import Countdown from '../components/Timing/Countdown';
@@ -27,7 +26,6 @@ const Page = () => {
               onClick={()=>{setType('timer')}}>{<TimerResetIcon/>}
             </button>
           </div>
-        <div className='z-10 w-full'><BottomNav /></div>
     </div>
   );
 };

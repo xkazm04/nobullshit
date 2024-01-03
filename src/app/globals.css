@@ -131,12 +131,18 @@ body {
   .typo-long{
     @apply flex flex-row justify-center text-center text-sm tracking-wider px-7 text-gray-100 leading-6;
   }
+  .typo-label{
+    @apply flex flex-row w-full justify-start text-left text-xs tracking-wider text-gray-100 leading-6;
+  }
   .alert-error{
     @apply bg-red-950/70 text-red-300 text-sm py-2 px-4 rounded-xl w-full;
   }
   .alert-success{
     @apply bg-green-950/70 text-green-300 text-sm py-2 px-4 rounded-xl w-full;
-  } 
+  }
+  .box-dark{
+    @apply flex flex-row gap-5 bg-gray-950 w-full min-w-[350px] p-3 justify-center border border-gray-400/20 rounded-lg
+  }
 }
 
 .cal {
