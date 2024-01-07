@@ -7,7 +7,7 @@ import { useCallback, useRef } from "react";
 import QuickPinchZoom, { make3dTransformValue } from "react-quick-pinch-zoom";
 import { Habits } from "@/app/types/TrackerTypes";
 import HabitCompletions from "./HabitCompletions";
-
+import { categories } from "@/data/enums";
 
 const HabitsWeekly = ({ habits}: Habits ) => {
     const ref = useRef<HTMLDivElement | null>(null);
@@ -30,8 +30,11 @@ const HabitsWeekly = ({ habits}: Habits ) => {
                 {habits && [...habits].sort((a, b) => a.category - b.category).map(h => (
                     <div key={h.id} className="flex items-center justify-between py-2 relative border-b border-transmain shadow-sm shadow-purple-950">
                         <DialogTrigger asChild>
-                            <div className="flex text-[11px] min-w-[120px]" style={{ color: getCategoryColor(h.category) }}>
-                                {h.name}
+                            <div className="flex flex-col min-w-[120px] relative" style={{ color: getCategoryColor(h.category) }}>
+                                <div className="text-xs">{h.name}</div>
+                                <div className="text-[10px] -bottom-4 opacity-30 absolute">
+                                    {categories[h.category].name}
+                                </div>
                             </div>
                         </DialogTrigger>
                         {renderDialog(h.id as string)}

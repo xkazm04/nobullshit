@@ -16,7 +16,7 @@ export async function getHabitTasks (habitId: string) {
 }
 
 export async function createTask (task: TaskInput) {
-    const response = await taskApi.post('/', task);
+    const response = await taskApi.post('', task);
     return response.data;
   }
 

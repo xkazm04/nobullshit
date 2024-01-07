@@ -12,6 +12,9 @@ import { HabitType } from "@/app/types/TrackerTypes";
 import Todos from "./Todos";
 import Spinner from "../Spinner";
 import { useState } from "react";
+import TasksStats from "./TasksStats";
+import Divider from "../animations/Divider";
+import { getCategoryColor } from "@/app/lib/colorGetter";
 
 export type TaskType = {
     id: string,
@@ -49,19 +52,22 @@ const TaskOverview = () => {
             {!tasksLoading && !habitsLoading && habits && habits.map((habit: HabitType) => {
                 const tasks = tasksByHabit[habit.id] || [];
                 return <div className="flex flex-row relative">
-                    <div key={habit.id} className="bg-gray-600/10 p-2 flex flex-row justify-between relative rounded-xl items-center min-w-[350px]">
-                     
+                    <div key={habit.id} className="bg-gray-600/10 p-2 flex flex-row justify-between relative rounded items-center min-w-[350px]"
+                        style={{ borderLeft: `2px solid ${getCategoryColor(habit.category)}` }}
+                    >
                         <div className="text-xs">
                             <div className="min-w-[200px]" >{habit.name}</div>
                             {tasks && tasks.length > 0 && <Todos tasks={tasks} />}
                         </div>
                     </div>
                     <DialogTrigger onClick={() => setSelectedHabit(habit)}>
-                        <div className="px-5 rounded-lg bg-gray-600/20 absolute right-0 top-0">+</div>
+                        <div className="px-3 rounded bg-gray-600/20 absolute right-0 top-0">+</div>
                     </DialogTrigger>
                 </div>
             })}
         </Dialog>
+        {!tasksLoading && <Divider/>}
+        {data && data.length > 0 && <TasksStats tasks={data}/>}
     </div>
 }
 

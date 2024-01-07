@@ -7,6 +7,9 @@ import ChallengeDetail from "../components/Challenge/ChallengeDetail";
 import { ArrowUp } from "lucide-react";
 import HeaderComponent from "../components/ui/header";
 import ChallengeAiRecommended from "../components/Challenge/ChallengeAiHabits";
+import {AnimatePresence, motion} from 'framer-motion'
+import ChallengesDefault from "../components/Challenge/ChallengesDefault";
+import Divider from "../components/animations/Divider";
 
 const challengeExamples = [
     { id: 1, title: 'Plank', description: '2 min daily', points: 100 },
@@ -22,12 +25,40 @@ const choices = {
 }
 const Page = () => {
     const [showDetail, setShowDetail] = useState(false);
-    const [friends, setFriends] = useState([])
     const [activeChoice, setActiveChoice] = useState('our' as string)
+    const [detail, setDetail] = useState('' as string) 
 
     const renderedDialog = (category: any) => {
         return <Modal title='' description="" content={<Leaderboard/>} />
     }
+
+    const MenuItem = ({setActiveChoice, choice, label}) => {
+        return <div 
+            onClick={() => { setActiveChoice(choice) }}
+            className={`menu-item ${activeChoice === choice ? 'text-main' : 'text-gray-400'}`}>
+        {label}
+        <AnimatePresence>
+        {activeChoice === choice && 
+        <motion.div 
+                initial={{opacity:0, x:-100}}
+                animate={{opacity:1, x:0}}
+                exit={{opacity:0, x:100}}
+                className="absolute bottom-0 left-0 w-full h-[1px] bg-main"/>}
+        </AnimatePresence>
+        </div>
+    }
+
+    const renderSection = (choice: any) => {
+        switch (choice) {
+            case choices.our:
+                return <ChallengesDefault c={challengeExamples} setDetail={setDetail}/>
+            case choices.own:
+                return <div>Own</div>
+            case choices.friend:
+                return  <ChallengeAiRecommended />
+            default:
+                <ChallengesDefault c={challengeExamples} setDetail={setDetail}/>
+    }}
 
     const startChallenge = () => {
         console.log('startChallenge');
@@ -35,37 +66,15 @@ const Page = () => {
     return <div className="page">
         <div className='absolute z-10 w-full'><HeaderComponent page="Challenge"  /></div>
         <Dialog>
-            <div className="flex flex-col mt-[15%] pl-5">
-                <div className="flex flex-row justify-start w-full p-5 text-sm font-mono">
-                    <div className={`font-semibold py-2 px-4 rounded bg-gray-950 border-r  lg:hover:cursor-pointer
-                    ${activeChoice === 'our' ? 'text-main font-bold border-main' : 'text-gray-400'}`}
-                       onClick={() => { setActiveChoice(choices.our) }}>
-                        Recommended
-                    </div>
-                    <div className={`font-semibold py-2 px-4 rounded bg-gray-950 border-r  lg:hover:cursor-pointer
-                    ${activeChoice === 'own' ? 'text-main font-bold border-main' : 'text-gray-400'}`}
-                       onClick={() => { setActiveChoice(choices.own) }}>
-                        Your
-                    </div>
-                    <div className={`font-semibold py-2 px-4 rounded bg-gray-950 border-r lg:hover:cursor-pointer
-                    ${activeChoice === 'friend' ? 'text-main font-bold border-main' : 'text-gray-400'}`}
-                       onClick={() => { setActiveChoice(choices.friend) }}>
-                        Friends
-                    </div>
+            <div className="flex flex-col mt-[15%] p-2 w-full">
+                <div className="flex flex-row justify-start w-full">
+                     <MenuItem setActiveChoice={setActiveChoice} choice={choices.our} label='Our'/>
+                    <MenuItem setActiveChoice={setActiveChoice} choice={choices.own} label='Your'/>
+                    <MenuItem setActiveChoice={setActiveChoice} choice={choices.friend} label='Recommended'/>
                 </div>
-                <div className="flex flex-row flex-wrap justify-center">
-                    {challengeExamples.map(b => <div key={b.id} className={`flex flex-col items-start gap-1 p-2 w-[160px] m-1 text-sm rounded-xl
-                    lg:cursor-pointer lg:hover:bg-gray-900 bg-cc
-                `}
-                        onClick={() => { setShowDetail(true) }}
-                    >
-                        <div className="font-mono">{b.title}</div>
-                        <div className="font-thin">{b.description}</div>
-                    </div>)}
-                </div>
-                <div className="divider" />
-                
+                {renderSection(activeChoice)}
                 {showDetail && <div className="relative">
+                    <Divider/>
                     <div className="absolute right-0" onClick={()=>{setShowDetail(false)}}><ArrowUp/></div>
                     <ChallengeDetail chName='Plank' chDescOne='2 min daily' chDescTwo={'Description two'} startFn={startChallenge} />
                 </div>}
@@ -77,7 +86,6 @@ const Page = () => {
             </DialogTrigger>}
            {renderedDialog('health')}
         </Dialog>
-        <ChallengeAiRecommended />
     </div>
 }
 

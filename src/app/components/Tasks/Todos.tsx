@@ -12,6 +12,7 @@ type Props = {
 const Todos = ({tasks}: Props) => {
     const [percentage, setPercentage] = useState(0)
     const [expanded, setExpanded] = useState(false)
+    const [comp, setComp] = useState(0)
     // Completed state does not persist
 
     useEffect(() => {
@@ -19,6 +20,7 @@ const Todos = ({tasks}: Props) => {
             const completed = tasks.filter((task: TaskType) => task.completed).length;
             const total = tasks.length;
             setPercentage((completed / total) * 100);
+            setComp(completed)
         }
     }, [tasks]);
 
@@ -36,15 +38,10 @@ const Todos = ({tasks}: Props) => {
             </motion.div>
         ))}
         </AnimatePresence>
-        <div className="flex flex-row w-full min-w-[335px]" onClick={() => setExpanded(!expanded)}>
+        <div className="flex flex-row w-full absolute h-[20px] min-w-[335px] cursor-pointer hover:bg-slate-950/20 transition-colors duration-300 ease-in-out"
+            onClick={() => setExpanded(!expanded)}>
                 {tasks && tasks.length > 0 && <ProgressBar percentage={percentage}/>}
-            <div className="text-xs text-gray-500 flex flex-row cursor-pointer hover:opacity-50 rounded-xl bg-gray-950 p-1 absolute right-0 bottom-0">
-                <div>+{tasks.length}</div> 
-                <div>
-                    {!expanded ? <ArrowDown className="inline-block" size={12} /> : 
-                    <ArrowDown className="inline-block transform rotate-180" size={12} />}
-                </div>
-            </div>
+                {tasks && tasks.length > 0 && <div className="text-xs text-gray-500 absolute bg-gray-950 px-2 right-0 -bottom-1">{comp}/{tasks.length}</div>}
         </div>
     </div>
 }

@@ -12,7 +12,7 @@ type Props = {
 const CountdownControl = ({ active, isRunning, startTimer, resumeTimer, stopTimer, resetTimer }: Props) => {
     return <>
     <div className='typo-label'>Control panel</div>
-        <div className='box-dark'>
+        <div className='box-dark justify-center'>
             <div>
                 {!active && <button onClick={startTimer}><PlayCircleIcon strokeWidth={1} size={30} color={'#86efac'} /></button>}
                 {!isRunning && active && <button onClick={resumeTimer}><PlayCircleIcon strokeWidth={1} size={30} color={'#86efac'} /></button>}

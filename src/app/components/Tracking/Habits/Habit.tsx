@@ -16,7 +16,6 @@ const Habit = ({ habit }: { habit: HabitType }) => {
     const [showNote, setShowNote] = useState(false)
     const [noteColor, setNoteColor] = useState('#EEFF87' as string)
     const [newTaskName, setNewTaskName] = useState('' as string)
-    const [percentage, setPercentage] = useState(0)
     const [tasksCompleted, setTasksCompleted] = useState(0)
     const [noteSent, setNoteSent] = useState(false)
     const mainColor = '#EEFF87'
@@ -31,8 +30,8 @@ const Habit = ({ habit }: { habit: HabitType }) => {
     return (<div key={habit.id} className="flex flex-col justify-between">
         <div
             key={habit.id}
-            className={`${habit.category} p-3 flex flex-row justify-start gap-5 border-t border-gray-400 bg-gray-950/20 relative`}
-            style={error ? { border: '2px solid red' } : {border: '2px solid transparent'}}
+            className={`box-dark`}
+            style={error ? { border: '2px solid red' } : {borderLeft: `2px solid ${getCategoryColor(habit.category)}`}}
         >
             <div className="flex text-sm min-w-[150px]" style={{ color: getCategoryColor(habit.category) }}>{habit.name}</div>
             <div className='absolute right-5 flex flex-row mt-1 gap-5'>

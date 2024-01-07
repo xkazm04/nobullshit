@@ -166,7 +166,7 @@ const Countdown = () => {
       {err && <div className='typo-long text-red-500'>{err}</div>}
       {cdId && <>{cdId}</>}
       <CountdownControl active={active} isRunning={isRunning} startTimer={startTimer} stopTimer={stopTimer} resetTimer={resetTimer} resumeTimer={resumeTimer} />
-      <div className='box-dark h-[100px]'>
+      <div className='box-dark justify-center h-[100px]'>
         {!active && !isRunning && <CountdownSetup cd={cd} setCd={setCd}  />}
         {active && <MusicStarter/>}
       </div>
@@ -174,7 +174,7 @@ const Countdown = () => {
       {countdown === 0 && <div className='typo-long'>Save</div>}
     </Dialog>
     <div className='typo-label'>tbd add footer</div>
-    <div className='box-dark'>
+    <div className='box-dark justify-center'>
           Project
     </div>
   </div>

@@ -33,15 +33,15 @@ const ChallengeAiHabits = () => {
         <div className="flex flex-row flex-wrap p-4 gap-2">
             {habits && habits.map((habit: HabitType) => (
                 <div key={habit.id} onClick={()=>{activate(habit)}}
-                    className={`p-2 ${active == habit.name ? 'bg-gray-600/20' : 'bg-gray-600/10'} 
-                    rounded-xl border border-gray-600/50 text-xs
-                    transition-all duration-100 ease-in-out hover:bg-gray-600/20 cursor-pointer`}
+                    className={`${active == habit.name ? 'bg-gray-950/80 text-main' : 'bg-gray-600/10'} 
+                    rounded-xl border border-gray-600/50 text-xs p-2 
+                    transition-all duration-200 ease-in-out hover:bg-gray-600/20 cursor-pointer`}
                 >
                     {habit.name}
                 </div>
             ))}
         </div>
-        {active != '' && activeHabit && <ChallengeAiRecommend habit={activeHabit} />}
+        {active != '' && activeHabit && <ChallengeAiRecommend habit={activeHabit} user={user} />}
     </>
 }
 
