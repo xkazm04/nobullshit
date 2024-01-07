@@ -7,7 +7,7 @@ const DatePicker = ({nextDay, prevDay, fullDate}:any) => {
     </div>
     <div>
         <DialogTrigger asChild>
-            <button className="btn-mini mx-8 bg-transmain w-[150px]">
+            <button className="btn-action mx-8 bg-transmain w-[150px] border border-main/20 shadow-lg shadow-black">
                 {fullDate}
             </button>
         </DialogTrigger>

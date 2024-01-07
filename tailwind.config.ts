@@ -88,8 +88,8 @@ module.exports = {
           '0%, 100%': { transform: 'scale(1)' },
           '50%': { transform: 'scale(1.2)' },
         },'infinite-scroll': {
-          from: { transform: 'translateX(0)' },
-          to: { transform: 'translateX(-100%)' },
+          from: { transform: 'translateX(-100%)' },
+          to: { transform: 'translateX(100%)' },
         },'manual-scroll-left': {
           from: { transform: 'translateX(0)' },
           to: { transform: 'translateX(-300px)' },

@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { DialogClose } from '../ui/dialog';
-import {motion, AnimatePresence} from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -33,7 +33,7 @@ const slideVariants = {
 };
 
 
-const CalendarPicker = ({ setDay, setSelectedDay }:any) => {
+const CalendarPicker = ({ setDay, setSelectedDay }: any) => {
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
   const [direction, setDirection] = useState('left');
@@ -61,44 +61,49 @@ const CalendarPicker = ({ setDay, setSelectedDay }:any) => {
     setDay(new Date(currentYear, currentMonth, day).toLocaleDateString())
     setSelectedDay(day)
   }
+
+  const isFuture = (date: any) => {
+    const dateToCheck = new Date(currentYear, currentMonth, date);
+    return dateToCheck > today;
+  };
   const today = new Date();
-  const isToday = (date:any) => today.getDate() === date && today.getMonth() === currentMonth && today.getFullYear() === currentYear;
+  const isToday = (date: any) => today.getDate() === date && today.getMonth() === currentMonth && today.getFullYear() === currentYear;
   return <>
-    <div className=''>
-      <div className='flex flex-row items-center justify-center gap-10 absolute z-10 '>
-        <div className="bg-gray-950 text-white p-4 rounded-lg relative w-full">
-          <AnimatePresence>
-          <div className="flex justify-between full-w overflow-hidden">
-            <button  className="text-red-600" onClick={handlePrevMonth}>{"<"}</button>
-            <motion.span
-                        key={months[currentMonth]}
-                        variants={slideVariants}
-                        initial={direction === "right" ? "hiddenRight" : "hiddenLeft"}
-                        animate="visible"
-                        exit="exit" className="text-xl font-bold">{months[currentMonth]} {currentYear}</motion.span>
-            <button className="text-red-600" onClick={handleNextMonth}>{">"}</button>
-          </div>
-          </AnimatePresence>
-          <div className="grid grid-cols-7 gap-1 mt-4">
-            {daysOfWeek.map((day) => (
-              <div key={day} className="text-center font-medium" >
-                {day}
-              </div>
-            ))}
-            {Array.from({ length: daysInMonth }, (_, i) => (
-              <DialogClose key={i}>
-                <div
-                  key={i + 1}
-                  className={`h-12 w-12 flex items-center justify-center rounded-2xl cursor-pointer hover:bg-green-900 hover:border-green-500 hover:opacity-20 transition-all 
-                                ${isToday(i + 1) ? 'bg-orange-800' : 'bg-gray-950 border border-gray-800'}`}
-                  onClick={() => handleDateClick(i + 1)}
-                >
-                  {i + 1}
-                </div>
-              </DialogClose>
-            ))}
-          </div>
+    <div className='flex flex-col items-center justify-center gap-10 my-2 z-10 bg-gray-700/20 text-white p-4 rounded-lg relative w-full'>
+      <AnimatePresence>
+        <div className="flex justify-between w-full overflow-hidden">
+          <button className="text-red-600" onClick={handlePrevMonth}>{"<"}</button>
+          <motion.span
+            key={months[currentMonth]}
+            variants={slideVariants}
+            initial={direction === "right" ? "hiddenRight" : "hiddenLeft"}
+            animate="visible"
+            exit="exit" className=" flex flex-col">
+              <div className='text-xl font-bold'>{months[currentMonth]} {currentYear}</div>
+              <div className='text-xs font-sans'>Daily habits</div>
+            </motion.span>
+          <button className="text-red-600" onClick={handleNextMonth}>{">"}</button>
         </div>
+      </AnimatePresence>
+      <div className="grid grid-cols-7 gap-1 mt-4">
+        {daysOfWeek.map((day) => (
+          <div key={day} className="text-center font-medium" >
+            {day}
+          </div>
+        ))}
+        {Array.from({ length: daysInMonth }, (_, i) => (
+          <DialogClose key={i}>
+            <div
+              key={i + 1}
+              className={`h-12 w-12 flex items-center justify-center rounded-2xl transition-all duration-200 font-sans
+              ${isToday(i + 1) ? 'bg-orange-800' : 'bg-gray-950/30 border border-gray-800'}
+              ${isFuture(i + 1) ? 'opacity-50 cursor-none' : 'lg:hover:border-main  cursor-pointer lg:hover:text-main'}`}
+              onClick={() => handleDateClick(i + 1)}
+            >
+              {i + 1}
+            </div>
+          </DialogClose>
+        ))}
       </div>
     </div>
   </>

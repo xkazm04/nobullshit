@@ -22,12 +22,12 @@ const daysExamples = [
 const HabitOverview = () => {
     const [days, setDays] = useState(daysExamples);
     const [activeFilter, setActiveFilter] = useState('all')
-
+    const today = new Date();
     const userId = useGetUser();
     // Use data after Postman tests
     const {data, error} = useQuery({
         queryKey: ['habits-all', userId],
-        queryFn: () => getHabits(userId),
+        queryFn: () => getHabits(userId ? userId : ""),
     })
 
     useEffect(() => {
@@ -55,12 +55,12 @@ const HabitOverview = () => {
     return <>
         <div className="flex flex-col relative justify-between items-start w-full h-full bg-gray-950 py-1 rounded-2xl text-sm ">
             <Dialog>
-                <div className=" text-white w-full text-[9px]">
+                <div className=" text-white w-full text-[10px]">
                     <div className="container mx-auto px-4 py-6 relative">
                         <div className="flex items-center justify-end mb-4 relative gap-5">
                             {days.map(day => (
                                 <div key={day.id} className="flex flex-col justify-center w-[20px]">
-                                    <div>{day.name}</div>
+                                    <div style={day.id === 0 ? { color: '#EEFF87' } : {}}>{day.name}</div>
                                     <div className="ml-1">{day.date}</div>
                                 </div>
                             ))}
@@ -80,7 +80,7 @@ const HabitOverview = () => {
                     {data && data.length < 5 && <div className="flex flex-row justify-center opacity-50 mt-[50%]">
                             <Powah/>
                         </div>}
-                    {error && <div className="alert-error">Error API</div>}
+                    {error && <div className="alert-error">Technical issues.</div>}
                 </div>
                 {renderDialog()}
             </Dialog>

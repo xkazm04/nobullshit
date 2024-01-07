@@ -5,6 +5,7 @@ import {Dialog} from "../../ui/dialog";
 import Modal from "../../Modal";
 import CalendarPicker from "../../form/CalendarPicker";
 import DatePicker from "../../form/DatePicker";
+import Divider from "../../animations/Divider";
 
 const HabitsLayout = () => {
     const daysInMonth = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate();
@@ -64,7 +65,7 @@ const HabitsLayout = () => {
                                 <div
                                     key={day}
                                     onClick={() => clickDay(day)}
-                                    className={`flex-none p-3 border-2 border-transmain rounded-2xl text-center 
+                                    className={`flex-none p-2 border-2 border-transmain rounded-2xl text-center 
                                     lg:cursor-pointer lg:hover:bg-transmain 
                                     ${day === today ? 'bg-transmain' : day === selectedDay ? 'bg-gray-950 text-main font-bold' : ''}`}
                                 >
@@ -74,6 +75,7 @@ const HabitsLayout = () => {
                         </ul>
                     </div>
                 </div>
+                <Divider/>
                 <HabitsDaily day={appDate} />
                 {renderDialog()}
             </Dialog>
