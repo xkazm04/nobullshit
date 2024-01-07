@@ -56,7 +56,7 @@ const Header = () => {
                                     href={item.href}
                                     className={`flex flex-col items-start justify-start h-full text-sm py-1 px-2 font-mono rounded-xl
                                                 transition-all duration-200 ease-out  tracking-wide
-                                                lg:cursor-pointer lg:focus-within:bg-gray-950 lg:hover:font-bold lg:hover:bg-cc
+                                                md:cursor-pointer md:focus-within:bg-gray-950 md:hover:font-bold md:hover:bg-cc
                                                 ${activeRoute === item.name ? 'bg-gray-950' : ''}`}
                                     onClick={() => {
                                         setActiveRoute(item.name);
@@ -83,7 +83,7 @@ const Header = () => {
                 </AccordionItem>
             </Accordion>
             <div className='hidden'>
-                <div className={`lg:block ${isOpen ? 'block' : 'hidden'}`}>
+                <div className={`md:block ${isOpen ? 'block' : 'hidden'}`}>
                     {navigation.map((item) => (
                         <a
                             key={item.name}

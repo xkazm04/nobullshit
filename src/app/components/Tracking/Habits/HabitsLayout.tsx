@@ -55,7 +55,7 @@ const HabitsLayout = () => {
 
 
     return (
-        <div className="flex flex-col  overflow-x-scroll hide-scrollbar relative max-w-[370px] lg:max-w-[620px]">
+        <div className="flex flex-col  overflow-x-scroll hide-scrollbar relative max-w-[370px] md:max-w-[620px]">
             <Dialog>
                 <DatePicker nextDay={nextDay} prevDay={prevDay} fullDate={fullDate} />
                 <div className="flex flex-row justify-between relative">
@@ -66,7 +66,7 @@ const HabitsLayout = () => {
                                     key={day}
                                     onClick={() => clickDay(day)}
                                     className={`flex-none p-2 border-2 border-transmain rounded-2xl text-center 
-                                    lg:cursor-pointer lg:hover:bg-transmain 
+                                    md:cursor-pointer md:hover:bg-transmain 
                                     ${day === selectedDay ? 'bg-gray-950 text-main font-bold' : ''}`}
                                 >
                                     {day}

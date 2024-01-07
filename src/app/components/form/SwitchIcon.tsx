@@ -9,7 +9,7 @@ type Props = {
 const SwitchIcon = ({bgColor, active, myState, icon, setActive}: Props) => {
 return <>
     <div className={`${active === myState ? `${bgColor}` : 'text-gray-500 bg-gray-950'}
-        p-1 rounded-xl lg:hover:text-gray-700 lg:cursor-pointer animate-fadeIn transition-all duration-500 ease-in-out
+        p-1 rounded-xl md:hover:text-gray-700 md:cursor-pointer animate-fadeIn transition-all duration-500 ease-in-out
     `}
         onClick={() => {setActive(myState)}}
     >{icon}</div>

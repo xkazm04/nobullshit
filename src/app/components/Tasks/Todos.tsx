@@ -45,7 +45,7 @@ const Todos = ({tasks}: Props) => {
                         {!expanded ? <ArrowDown strokeWidth={1.5} size={16}  />
                         : <ArrowDown strokeWidth={1.5} size={16} style={{transform: 'rotate(180deg)'}}/>}
                     </div>
-                {tasks && tasks.length > 0 && <div className="text-xs lg:text-md text-gray-500 absolute bg-gray-950 px-2 right-2 bottom-0">{comp}/{tasks.length}</div>}
+                {tasks && tasks.length > 0 && <div className="text-xs md:text-md text-gray-500 absolute bg-gray-950 px-2 right-2 bottom-0">{comp}/{tasks.length}</div>}
         </div>
     </div>
 }

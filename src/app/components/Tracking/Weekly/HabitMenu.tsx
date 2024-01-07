@@ -35,7 +35,7 @@ const HabitMenu = ({ habitId }: {habitId:string}) => {
                         className='flex flex-row items-center justify-between w-full'
                         onClick={() => setActive(item.name)}
                     >
-<                   div className={`flex flex-row lg:cursor-pointer items-center gap-2 ${active === item.name ? 'text-green-300' : ''}`}>
+<                   div className={`flex flex-row md:cursor-pointer items-center gap-2 ${active === item.name ? 'text-green-300' : ''}`}>
                             <div>{item.icon}</div>
                             <div>{item.name}</div>
                         </div>

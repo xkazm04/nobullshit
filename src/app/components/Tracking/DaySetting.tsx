@@ -13,7 +13,7 @@ const DaySetting = ({ habitDays, setHabitDays, d, i }:any) => {
     return (
         <div className="flex flex-col items-center gap-2">
             <div className="text-gray-300">{['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][i]}</div>
-            <div className={`w-8 h-8 rounded-full flex flex-col justify-center items-center lg:hover:bg-transmain
+            <div className={`w-8 h-8 rounded-full flex flex-col justify-center items-center md:hover:bg-transmain
                     ${isClicked ? 'animate-touch' : ''}
                     ${d ? 'bg-main text-gray-900' : 'bg-gray-900 text-gray-300'}`}
                 onClick={() => handleClick()}

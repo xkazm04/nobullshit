@@ -34,7 +34,7 @@ const Habit = ({ habit }: { habit: HabitType }) => {
             className={`box-dark`}
             style={error ? { border: '2px solid red' } : {borderLeft: `2px solid ${getCategoryColor(habit.category)}`}}
         >
-            <div className="flex justify-between text-sm lg:text-lg w-full lg:px-[5%]" style={{ color: getCategoryColor(habit.category) }}>
+            <div className="flex justify-between text-sm md:text-lg w-full md:px-[5%]" style={{ color: getCategoryColor(habit.category) }}>
                 <div>{habit.name}</div>
                 <div className='flex flex-row mt-1 gap-5'>
                     <div className={`${showNote ? 'animate-vibrate' : ''} transition-all duration-500 ease-in-out`}

@@ -76,7 +76,7 @@ const HabitTemplate = () => {
                             exit={{ opacity: 0, translateX: 100 }}
                             transition={{ duration: 0.3 }}
                             key={item.name}
-                            className='flex flex-row items-center justify-between w-full  lg:cursor-pointer'
+                            className='flex flex-row items-center justify-between w-full md:cursor-pointer'
                             onClick={() => setActive(item.name)}
                         >
                             <div className={`flex flex-row items-center gap-2 ${active === item.name ? 'text-green-300' : ''}`}>

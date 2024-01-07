@@ -68,9 +68,9 @@ const Page = () => {
         <Dialog>
             <div className="flex flex-col mt-[10%] p-2 w-full">
                 <div className="flex flex-row justify-start w-full">
-                     <MenuItem setActiveChoice={setActiveChoice} choice={choices.our} label='Our'/>
-                    <MenuItem setActiveChoice={setActiveChoice} choice={choices.own} label='Your'/>
-                    <MenuItem setActiveChoice={setActiveChoice} choice={choices.friend} label='Recommended'/>
+                     <MenuItem setActiveChoice={setActiveChoice} choice={choices.our} label='Best practices'/>
+                    <MenuItem setActiveChoice={setActiveChoice} choice={choices.own} label='Yours'/>
+                    <MenuItem setActiveChoice={setActiveChoice} choice={choices.friend} label='AI recommended'/>
                 </div>
                 <div className="mt-[10%]">
                     {renderSection(activeChoice)}

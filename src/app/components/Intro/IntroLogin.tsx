@@ -90,7 +90,7 @@ const IntroLogin = ({condition,setCondition}: Props) => {
                 <div className="w-full relative mb-5">
                     <div className="border-t border-gray-700/60"/>
                     <div className="absolute top-[-10px] left-1/2 transform -translate-x-1/2 bg-gray-900/50 px-2 text-sm font-mono text-blue-200 
-                    lg:cursor-pointer lg:hover:text-blue-400"
+                    md:cursor-pointer md:hover:text-blue-400"
                         onClick={guestLogin}>get in as guest</div>
                 </div>
                 <FormCondition checked={condition} setChecked={()=>{setCondition(!condition)}} text="I agree to process my data for recommnedation"/>

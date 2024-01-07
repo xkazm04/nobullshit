@@ -21,7 +21,7 @@ const GuideHabit = () => {
     <p>Choose your habit you would like to focus on</p>
     <div className="flex flex-row flex-wrap justify-start p-5">
         {exampleBoxes.map(b => <div key={b.id} className={`flex flex-col items-center gap-2 p-2 w-[160px] m-1 text-sm rounded-xl
-            lg:cursor-pointer lg:hover:bg-gray-900 ${activeHabit.id === b.id ? 'bg-gray-900 border border-main' : 'bg-transmain'}
+            md:cursor-pointer md:hover:bg-gray-900 ${activeHabit.id === b.id ? 'bg-gray-900 border border-main' : 'bg-transmain'}
         `}
             onClick={() => setActiveHabit(b)}
         >

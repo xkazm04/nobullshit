@@ -52,13 +52,13 @@ const HabitOverview = () => {
 
 
     return <>
-        <div className="flex flex-col relative justify-between items-start w-full h-full bg-gray-950 py-1 rounded-2xl text-sm lg:p-5 ">
+        <div className="flex flex-col relative justify-between items-start w-full h-full bg-gray-950 py-1 rounded-2xl text-sm md:p-5 ">
             <Dialog>
-                <div className=" text-white w-full text-[10px] lg:text-[13px]">
+                <div className=" text-white w-full text-[10px] md:text-[14px]">
                     <div className="container mx-auto px-4 py-6 relative">
                         <div className="flex items-center justify-end mb-4 relative gap-5">
                             {days.map(day => (
-                                <div key={day.id} className="flex flex-col justify-center w-[20px]">
+                                <div key={day.id} className="flex flex-col justify-center w-[20px] md:w-[27px]">
                                     <div style={day.id === 0 ? { color: '#EEFF87' } : {}}>{day.name}</div>
                                     <div className="ml-1">{day.date}</div>
                                 </div>

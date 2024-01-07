@@ -11,7 +11,7 @@ const FormCategory = ({ activeCategory, setActiveCategory }: any) => {
         <>
             <div className="cat-row">Which area you want to improve?</div>
             <div className="flex flex-row w-full gap-5">
-                <div className=" bg-gray-600/20 hover:bg-gray-600/60 lg:cursor-pointer transition-all duration-200 ease-in-out
+                <div className=" bg-gray-600/20 hover:bg-gray-600/60 md:cursor-pointer transition-all duration-200 ease-in-out
                 p-6 rounded-xl border border-gray-700/40 h-[120px] my-5 w-full flex flex-row justify-between" 
                     onClick={() => setActiveCategory(display)}
                 >
@@ -27,7 +27,7 @@ const FormCategory = ({ activeCategory, setActiveCategory }: any) => {
                             >
                                 <div className="flex flex-row items-center">
                                     <div
-                                        className={'w-5 h-5 rounded-full inline-block mr-2 lg:cursor-pointer transition-all duration-300 ease-in-out'}
+                                        className={'w-5 h-5 rounded-full inline-block mr-2 md:cursor-pointer transition-all duration-300 ease-in-out'}
                                         style={activeCategory.id === display.id ? { backgroundColor: hexColor } : { backgroundColor: 'transparent', border: '1px solid #4B5563' }}
                                     />
                                     <div>{display.name}</div>
@@ -54,7 +54,7 @@ const FormCategory = ({ activeCategory, setActiveCategory }: any) => {
             <div className="flex flex-row w-full">
                 {categories.map(c => (
                     <div key={c.id} className="flex flex-row items-center justify-center w-1/4">
-                        <div className={`lg:cursor-pointer text-xs transition-all duration-300 ease-in-out
+                        <div className={`md:cursor-pointer text-xs transition-all duration-300 ease-in-out
                                     ${display.id === c.id ? `${activeCategory.id === c.id ? 'text-main' : 'text-gray-300'}
                                         ` : `${activeCategory.id === c.id ? 'text-main' : 'text-gray-600 hover:text-gray-400'}`}`}
                             onClick={() => setDisplay(c)}

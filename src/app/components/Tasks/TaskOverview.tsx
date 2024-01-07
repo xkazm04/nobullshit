@@ -52,10 +52,10 @@ const TaskOverview = () => {
             {!tasksLoading && !habitsLoading && habits && habits.map((habit: HabitType) => {
                 const tasks = tasksByHabit[habit.id] || [];
                 return <div className="flex flex-row relative">
-                    <div key={habit.id} className="bg-gray-600/10 p-2 flex flex-row justify-between relative rounded items-center min-w-[350px] lg:min-w-[500px]"
+                    <div key={habit.id} className="bg-gray-600/10 p-2 flex flex-row justify-between relative rounded items-center min-w-[350px] md:min-w-[500px]"
                         style={{ borderLeft: `2px solid ${getCategoryColor(habit.category)}` }}
                     >
-                        <div className="text-xs lg:text-sm">
+                        <div className="text-xs md:text-sm">
                             <div className="min-w-[200px] font-sans" >{habit.name}</div>
                             {tasks && tasks.length > 0 && <Todos tasks={tasks} />}
                         </div>

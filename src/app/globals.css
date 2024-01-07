@@ -87,15 +87,15 @@ body {
 @layer components {
   .btn-mini{
     @apply inline-flex items-center justify-center px-4 py-3 border rounded-xl shadow-sm text-sm text-main border-main bg-transmain 
-    hover:bg-yellow-950 transition-colors duration-200 ease-out lg:cursor-pointer;
+    hover:bg-yellow-950 transition-colors duration-200 ease-out md:cursor-pointer;
   }
   .btn-action{
     @apply inline-flex items-center justify-center px-4 py-2 border rounded-xl  text-sm text-main border-gray-600/50 bg-black/75 shadow-lg shadow-slate-900
-   transition-colors duration-200 ease-out lg:cursor-pointer; 
+   transition-colors duration-200 ease-out md:cursor-pointer; 
   }
   .btn-disabled{
     @apply inline-flex items-center justify-center px-4 py-2 border rounded-xl shadow-sm text-sm text-main border-gray-600
-   transition-colors duration-200 ease-out lg:cursor-not-allowed capitalize opacity-50; 
+   transition-colors duration-200 ease-out md:cursor-not-allowed capitalize opacity-50; 
   }
   .divider{
     @apply border-t border-gray-400/60 my-5;
@@ -106,7 +106,7 @@ body {
   }
   .page{
     @apply relative flex flex-col justify-between items-center h-full w-full p-2 sm:px-2 md:px-4 lg:px-10 lg:w-[90%] xl:w-[80%] 2xl:w-[70%] mx-auto shadow-lg shadow-gray-950 border border-gray-700/30 my-5
-    lg:min-w-[600px] lg:min-h-[700px] 
+    md:min-w-[600px] md:min-h-[700px] 
     ;
   }
   .input{
@@ -145,10 +145,10 @@ body {
     @apply bg-green-950/70 text-green-300 text-sm py-2 px-4 rounded-xl w-full;
   }
   .box-dark{
-    @apply flex flex-row gap-5 bg-gray-950 w-full min-w-[350px] p-3 border border-gray-400/20 rounded-xl font-sans lg:px-10;
+    @apply flex flex-row gap-5 bg-gray-950 w-full min-w-[350px] p-3 border border-gray-400/20 rounded-xl font-sans md:px-10;
   }
   .box-medium{
-    @apply bg-gray-600/10 p-2 flex flex-row justify-between relative rounded-xl items-center min-w-[350px] w-full lg:px-10;
+    @apply bg-gray-600/10 p-2 flex flex-row justify-between relative rounded-xl items-center min-w-[350px] w-full md:px-10;
   }
   .button-icon{
     @apply w-[60px] cursor-pointer flex flex-col items-center justify-center bg-gray-600/70 rounded-xl px-2 py-1 hover:bg-gray-950/80 transition-colors duration-200 ease-out;

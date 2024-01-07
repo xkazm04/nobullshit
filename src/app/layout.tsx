@@ -30,7 +30,7 @@ export default async function RootLayout({
       <body className={inter.className}>
           <main className="flex  flex-col items-center justify-between p-24">
             <div className="relative mobile-body rounded-[40px] w-full h-full
-             min-h-[768px] max-w-[1500px] lg:max-w-[1000px] lg:min-h-[850px] ">
+             min-h-[768px] max-w-[1500px] md:max-w-[1000px] md:min-h-[850px] ">
               <AuthContext>
                 <QueryProvider>
                   {children}

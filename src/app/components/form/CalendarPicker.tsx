@@ -97,7 +97,7 @@ const CalendarPicker = ({ setDay, setSelectedDay }: any) => {
               key={i + 1}
               className={`h-12 w-12 flex items-center justify-center rounded-2xl transition-all duration-200 font-sans
               ${isToday(i + 1) ? 'bg-orange-800' : 'bg-gray-950/30 border border-gray-800'}
-              ${isFuture(i + 1) ? 'opacity-50 cursor-none' : 'lg:hover:border-main  cursor-pointer lg:hover:text-main'}`}
+              ${isFuture(i + 1) ? 'opacity-50 cursor-none' : 'md:hover:border-main  cursor-pointer md:hover:text-main'}`}
               onClick={() => handleDateClick(i + 1)}
             >
               {i + 1}

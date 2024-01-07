@@ -51,8 +51,8 @@ const HabitCompletion = ({c, setCompletions, habit, index}:Props) => {
             style={error ? {border: '1px solid red'} : {}}
         >
             {c ? 
-                <CheckCheckIcon className="h-4 w-4 " style={{ color: getCategoryColor(habit.category) }} /> : 
-                <XCircleIcon className="h-4 w-4 text-gray-500" />}
+                <CheckCheckIcon className="h-4 w-4 md:h-6 md:w-6" style={{ color: getCategoryColor(habit.category) }} /> : 
+                <XCircleIcon className="h-4 w-4 md:h-6 md:w-6 text-gray-500" />}
         </button></>
 }
 
