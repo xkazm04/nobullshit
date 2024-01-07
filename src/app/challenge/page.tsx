@@ -1,12 +1,12 @@
 'use client';
 import { useState } from "react";
-import BottomNav from "../components/BottomNav";
-import Header from "../components/Header";
 import { Dialog, DialogTrigger } from "../components/ui/dialog";
 import Modal from "../components/Modal";
 import Leaderboard from "../components/Challenge/Leaderboard";
 import ChallengeDetail from "../components/Challenge/ChallengeDetail";
 import { ArrowUp } from "lucide-react";
+import HeaderComponent from "../components/ui/header";
+import ChallengeAiRecommended from "../components/Challenge/ChallengeAiHabits";
 
 const challengeExamples = [
     { id: 1, title: 'Plank', description: '2 min daily', points: 100 },
@@ -33,24 +33,24 @@ const Page = () => {
         console.log('startChallenge');
     }
     return <div className="page">
-        <div className='absolute z-10 w-full'><Header /></div>
+        <div className='absolute z-10 w-full'><HeaderComponent page="Challenge"  /></div>
         <Dialog>
             <div className="flex flex-col mt-[15%] pl-5">
-                <div className="flex flex-row justify-between p-5 text-sm font-mono">
+                <div className="flex flex-row justify-start w-full p-5 text-sm font-mono">
                     <div className={`font-semibold py-2 px-4 rounded bg-gray-950 border-r  lg:hover:cursor-pointer
                     ${activeChoice === 'our' ? 'text-main font-bold border-main' : 'text-gray-400'}`}
                        onClick={() => { setActiveChoice(choices.our) }}>
-                        Our challenges
+                        Recommended
                     </div>
                     <div className={`font-semibold py-2 px-4 rounded bg-gray-950 border-r  lg:hover:cursor-pointer
                     ${activeChoice === 'own' ? 'text-main font-bold border-main' : 'text-gray-400'}`}
                        onClick={() => { setActiveChoice(choices.own) }}>
-                        Create your own
+                        Your
                     </div>
                     <div className={`font-semibold py-2 px-4 rounded bg-gray-950 border-r lg:hover:cursor-pointer
                     ${activeChoice === 'friend' ? 'text-main font-bold border-main' : 'text-gray-400'}`}
                        onClick={() => { setActiveChoice(choices.friend) }}>
-                        By your friends
+                        Friends
                     </div>
                 </div>
                 <div className="flex flex-row flex-wrap justify-center">
@@ -77,7 +77,7 @@ const Page = () => {
             </DialogTrigger>}
            {renderedDialog('health')}
         </Dialog>
-        <div className='z-10 w-full'><BottomNav /></div>
+        <ChallengeAiRecommended />
     </div>
 }
 

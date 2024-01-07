@@ -79,7 +79,7 @@ const Todo: React.FC<Props> = ({ task, setPercentage, length, percentage }) => {
         <div className="flex flex-row gap-5 px-5 z-20">
             {!showEdit ? (
                 <>
-                    <div onClick={handleEditClick}><PenIcon size={20} /></div>
+                    <div onClick={handleEditClick}><PenIcon size={18} strokeWidth={1} /></div>
                     <Checkmark check={check} condition={checked} />
                 </>
             ) : (

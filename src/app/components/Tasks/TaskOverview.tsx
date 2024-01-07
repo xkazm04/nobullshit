@@ -10,8 +10,8 @@ import { DialogTrigger } from "@radix-ui/react-dialog";
 import Modal from "../Modal";
 import { HabitType } from "@/app/types/TrackerTypes";
 import Todos from "./Todos";
-
-
+import Spinner from "../Spinner";
+import { useState } from "react";
 
 export type TaskType = {
     id: string,
@@ -21,37 +21,42 @@ export type TaskType = {
 
 const TaskOverview = () => {
     const userId = useGetUser()
-
-    const { data, error, isLoading } = useQuery({
+    const [selectedHabit, setSelectedHabit] = useState<HabitType | null>(null);
+    const { data, isLoading: tasksLoading } = useQuery({
         queryKey: ['tasks', userId],
         queryFn: () => getAllTasks(userId || '')
     })
 
-    const { data: habits, error: habitsError } = useQuery({
+    const { data: habits, isLoading: habitsLoading } = useQuery({
         queryKey: ['habits', userId],
         queryFn: () => getHabits(userId || '')
     })
 
     // Todo new task not working + fix stylingS
-    const renderDialog = (habit: HabitType) => {
-        return <Modal content={<TodoNew user={userId} habit={habit} title="" description="" />} />
+    const renderDialog = () => {
+        if (selectedHabit) {
+            return <Modal content={<TodoNew user={userId} habit={selectedHabit} />} title={selectedHabit.name} description=""  />;
+        }
+        return null;
     }
 
     const tasksByHabit = data ? groupBy(data, 'habit_id') : {};
 
     return <div className="flex flex-col gap-3 items-center">
         <Dialog>
-            {habits && habits.map((habit: HabitType) => {
+            {tasksLoading && <Spinner/>}   
+            {renderDialog()}
+            {!tasksLoading && !habitsLoading && habits && habits.map((habit: HabitType) => {
                 const tasks = tasksByHabit[habit.id] || [];
                 return <div className="flex flex-row relative">
                     <div key={habit.id} className="bg-gray-600/10 p-2 flex flex-row justify-between relative rounded-xl items-center min-w-[350px]">
-                        {renderDialog(habit)}
+                     
                         <div className="text-xs">
-                            {habit.name}
+                            <div className="min-w-[200px]" >{habit.name}</div>
                             {tasks && tasks.length > 0 && <Todos tasks={tasks} />}
                         </div>
                     </div>
-                    <DialogTrigger>
+                    <DialogTrigger onClick={() => setSelectedHabit(habit)}>
                         <div className="px-5 rounded-lg bg-gray-600/20 absolute right-0 top-0">+</div>
                     </DialogTrigger>
                 </div>
