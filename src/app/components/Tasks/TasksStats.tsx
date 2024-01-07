@@ -25,7 +25,7 @@ const TasksStats = ({ tasks }: Props) => {
         <button onClick={expand} className="typo-long">Weekly stats</button>
         {expanded && <motion.div className='h-[0px] overflow-hidden flex flex-col gap-3 items-center'
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto', minHeight: '300px' }}
+            animate={{ opacity: 1, height: 'auto', minHeight: '150px' }}
             exit={{ opacity: 0, height: 0 }}
         >
             <div className="grid grid-cols-2 gap-3">

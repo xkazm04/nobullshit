@@ -9,6 +9,7 @@ import HabitTasks from "./HabitTasks";
 import HabitNoteNew from "./HabitNoteNew";
 import { getCategoryColor } from "@/app/lib/colorGetter";
 import HabitCompletion from "./HabitCompletion";
+import ItemDivider from "../../animations/ItemDivider";
 
 const Habit = ({ habit }: { habit: HabitType }) => {
 
@@ -33,16 +34,20 @@ const Habit = ({ habit }: { habit: HabitType }) => {
             className={`box-dark`}
             style={error ? { border: '2px solid red' } : {borderLeft: `2px solid ${getCategoryColor(habit.category)}`}}
         >
-            <div className="flex text-sm min-w-[150px]" style={{ color: getCategoryColor(habit.category) }}>{habit.name}</div>
-            <div className='absolute right-5 flex flex-row mt-1 gap-5'>
-                <div className={`${showNote ? 'animate-vibrate' : ''} transition-all duration-500 ease-in-out`}
-                    onClick={() => { setShowNote(!showNote) }}>
-                    <ScrollTextIcon strokeWidth={0.75} color={noteColor} />
+            <div className="flex justify-between text-sm lg:text-lg w-full lg:px-[5%]" style={{ color: getCategoryColor(habit.category) }}>
+                <div>{habit.name}</div>
+                <div className='flex flex-row mt-1 gap-5'>
+                    <div className={`${showNote ? 'animate-vibrate' : ''} transition-all duration-500 ease-in-out`}
+                        onClick={() => { setShowNote(!showNote) }}>
+                        <ScrollTextIcon strokeWidth={0.75} color={noteColor} />
+                    </div>
+                    <ItemDivider/>
+                    {tasksCompleted > 0 ? <div className='p-1 bg-gray-900 rounded-2xl' onClick={() => { setExpanded(!expanded) }}>
+                        <Maximize2Icon strokeWidth={1.5} size={16} color={mainColor} />
+                    </div> : <HabitCompletion habit={habit} setError={setError}/>}
                 </div>
-                {tasksCompleted > 0 ? <div className='p-1 bg-gray-900 rounded-2xl' onClick={() => { setExpanded(!expanded) }}>
-                    <Maximize2Icon strokeWidth={1.5} size={16} color={mainColor} />
-                </div> : <HabitCompletion habit={habit} setError={setError}/>}
             </div>
+
         </div>
         <AnimatePresence>
             {expanded && <motion.div

@@ -31,8 +31,8 @@ const HabitsWeekly = ({ habits}: Habits ) => {
                     <div key={h.id} className="flex items-center justify-between py-2 relative border-b border-transmain shadow-sm shadow-purple-950">
                         <DialogTrigger asChild>
                             <div className="flex flex-col min-w-[120px] relative" style={{ color: getCategoryColor(h.category) }}>
-                                <div className="text-xs">{h.name}</div>
-                                <div className="text-[10px] -bottom-4 opacity-30 absolute">
+                                <div className="text-xs lg:text-sm">{h.name}</div>
+                                <div className="text-[10px] -bottom-4 opacity-60 absolute">
                                     {categories[h.category].name}
                                 </div>
                             </div>

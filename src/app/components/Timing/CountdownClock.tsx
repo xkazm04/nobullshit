@@ -1,7 +1,16 @@
 import { CheckCheckIcon } from "lucide-react";
 import { useEffect, useState } from "react";
+type Props = {
+    countdown: number
+    totalMilliseconds: number
+    cd: any
+    data: any
+    setCountdown: any
+    setTotalMiliseconds: any
+    setTotalSeconds: any
+}
 
-const CountdownClock = ({countdown, totalMilliseconds, cd,data,setCountdown,setTotalMiliseconds,setTotalSeconds}) => {
+const CountdownClock = ({countdown, totalMilliseconds, cd,data,setCountdown,setTotalMiliseconds,setTotalSeconds}: Props) => {
    
     const size = 80;
     const circumference = size * Math.PI * 2;

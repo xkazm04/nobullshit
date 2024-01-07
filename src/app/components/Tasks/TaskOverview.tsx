@@ -45,18 +45,18 @@ const TaskOverview = () => {
 
     const tasksByHabit = data ? groupBy(data, 'habit_id') : {};
 
-    return <div className="flex flex-col gap-3 items-center">
+    return <div className="flex flex-col gap-3 items-center w-full">
         <Dialog>
             {tasksLoading && <Spinner/>}   
             {renderDialog()}
             {!tasksLoading && !habitsLoading && habits && habits.map((habit: HabitType) => {
                 const tasks = tasksByHabit[habit.id] || [];
                 return <div className="flex flex-row relative">
-                    <div key={habit.id} className="bg-gray-600/10 p-2 flex flex-row justify-between relative rounded items-center min-w-[350px]"
+                    <div key={habit.id} className="bg-gray-600/10 p-2 flex flex-row justify-between relative rounded items-center min-w-[350px] lg:min-w-[500px]"
                         style={{ borderLeft: `2px solid ${getCategoryColor(habit.category)}` }}
                     >
-                        <div className="text-xs">
-                            <div className="min-w-[200px]" >{habit.name}</div>
+                        <div className="text-xs lg:text-sm">
+                            <div className="min-w-[200px] font-sans" >{habit.name}</div>
                             {tasks && tasks.length > 0 && <Todos tasks={tasks} />}
                         </div>
                     </div>

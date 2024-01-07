@@ -41,7 +41,11 @@ const Todos = ({tasks}: Props) => {
         <div className="flex flex-row w-full absolute h-[20px] min-w-[335px] cursor-pointer hover:bg-slate-950/20 transition-colors duration-300 ease-in-out"
             onClick={() => setExpanded(!expanded)}>
                 {tasks && tasks.length > 0 && <ProgressBar percentage={percentage}/>}
-                {tasks && tasks.length > 0 && <div className="text-xs text-gray-500 absolute bg-gray-950 px-2 right-0 -bottom-1">{comp}/{tasks.length}</div>}
+                    <div className="absolute w-full flex flex-row items-center justify-center my-2 text-gray-300/50">
+                        {!expanded ? <ArrowDown strokeWidth={1.5} size={16}  />
+                        : <ArrowDown strokeWidth={1.5} size={16} style={{transform: 'rotate(180deg)'}}/>}
+                    </div>
+                {tasks && tasks.length > 0 && <div className="text-xs lg:text-md text-gray-500 absolute bg-gray-950 px-2 right-2 bottom-0">{comp}/{tasks.length}</div>}
         </div>
     </div>
 }

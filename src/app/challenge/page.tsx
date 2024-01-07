@@ -66,13 +66,15 @@ const Page = () => {
     return <div className="page">
         <div className='absolute z-10 w-full'><HeaderComponent page="Challenge"  /></div>
         <Dialog>
-            <div className="flex flex-col mt-[15%] p-2 w-full">
+            <div className="flex flex-col mt-[10%] p-2 w-full">
                 <div className="flex flex-row justify-start w-full">
                      <MenuItem setActiveChoice={setActiveChoice} choice={choices.our} label='Our'/>
                     <MenuItem setActiveChoice={setActiveChoice} choice={choices.own} label='Your'/>
                     <MenuItem setActiveChoice={setActiveChoice} choice={choices.friend} label='Recommended'/>
                 </div>
-                {renderSection(activeChoice)}
+                <div className="mt-[10%]">
+                    {renderSection(activeChoice)}
+                </div>
                 {showDetail && <div className="relative">
                     <Divider/>
                     <div className="absolute right-0" onClick={()=>{setShowDetail(false)}}><ArrowUp/></div>

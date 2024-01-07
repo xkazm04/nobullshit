@@ -1,7 +1,7 @@
 import { DialogTrigger } from "../ui/dialog"
 
 const DatePicker = ({nextDay, prevDay, fullDate}:any) => {
-    return <div className="flex flex-row justify-center font-bold mb-5" >
+    return <div className="flex flex-row justify-center font-sans font-bold mb-5" >
     <div className="">
         <button className="text-main lg:hover:cursor-pointer px-2 py-1" onClick={() => { prevDay() }}>{"<"}</button>
     </div>

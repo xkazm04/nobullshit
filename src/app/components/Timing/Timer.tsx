@@ -33,7 +33,7 @@ const TimerExamples = [
 ]
 
 const Timer = () => {
-    return <div className="flex flex-col justify-center items-center mt-[25%]">
+    return <div className="flex flex-col justify-start items-center h-full mt-[10%] max-w-[800px]">
         <div className="flex flex-row flex-wrap justify-start gap-2">
             {TimerExamples.map((t) => (
                <div key={t.habitId}> <TimerButton  category={t.category} time={t.time} habitId={t.habitId} task={t.task} /></div>

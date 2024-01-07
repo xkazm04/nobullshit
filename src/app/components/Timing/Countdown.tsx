@@ -159,7 +159,7 @@ const Countdown = () => {
     return <Modal title='Add some music' description='via YT music' content={<MusicSelector/>}/>
   }
 
-  return <div className='flex flex-col justify-between items-center h-full gap-2'>
+  return <div className='flex flex-col justify-start items-center h-full gap-2'>
     {/* <TimerWidget /> */}
     <Dialog>
       <CountdownClock countdown={countdown} totalMilliseconds={totalMilliseconds} cd={cd} data={data} setCountdown={setCountdown} setTotalMiliseconds={setTotalMiliseconds} setTotalSeconds={setTotalSeconds} />
