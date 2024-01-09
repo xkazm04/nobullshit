@@ -12,8 +12,6 @@ import { HabitType } from "@/app/types/TrackerTypes";
 import Todos from "./Todos";
 import Spinner from "../Spinner";
 import { useState } from "react";
-import TasksStats from "./TasksStats";
-import Divider from "../animations/Divider";
 import { getCategoryColor } from "@/app/lib/colorGetter";
 
 export type TaskType = {
@@ -39,20 +37,20 @@ const TaskOverview = () => {
     // Todo new task not working + fix styling
     const renderDialog = () => {
         if (selectedHabit) {
-            return <Modal content={<TodoNew user={userId} habit={selectedHabit} />} title={selectedHabit.name} description=""  />;
+            return <Modal content={<TodoNew user={userId || ''} habit={selectedHabit} />} title={'Add new task'} description={""}  />;
         }
         return null;
     }
 
     const tasksByHabit = data ? groupBy(data, 'habit_id') : {};
 
-    return <div className="flex flex-col gap-3 items-center w-full md:overflow-scroll md:max-h-[600px]">
+    return <div className="flex flex-col gap-3 items-center w-full">
         <Dialog>
             {tasksLoading && <Spinner/>}   
             {renderDialog()}
             {!tasksLoading && !habitsLoading && habits && habits.map((habit: HabitType) => {
                 const tasks = tasksByHabit[habit.id] || [];
-                return <div key={habit.id} className="flex flex-row relative">
+                return <div key={habit.id} className="flex flex-row relative" onClick={() => setSelectedHabit(habit)}>
                     <div className="bg-gray-600/10 p-2 flex flex-row justify-between relative rounded items-center min-w-[350px] md:min-w-[500px]"
                         style={{ borderLeft: `2px solid ${getCategoryColor(habit.category)}` }}
                     >
@@ -61,14 +59,13 @@ const TaskOverview = () => {
                             {tasks && tasks.length > 0 && <Todos tasks={tasks} />}
                         </div>
                     </div>
-                    <DialogTrigger onClick={() => setSelectedHabit(habit)}>
+                    <DialogTrigger>
                         <div className="px-3 rounded bg-gray-600/20 absolute right-0 top-0">+</div>
                     </DialogTrigger>
                 </div>
             })}
         </Dialog>
-        {!tasksLoading && <Divider/>}
-        {data && data.length > 0 && <TasksStats tasks={data}/>}
+
     </div>
 }
 
