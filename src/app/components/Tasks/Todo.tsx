@@ -62,7 +62,7 @@ const Todo: React.FC<Props> = ({ task, setPercentage, length, percentage }) => {
 
     }
     return <>
-    <div key={task.id} className="flex flex-row justify-between gap-2 pl-7 py-1 border-t  border-gray-700/80 bg-gray-950/20 relative w-full min-w-[320px]">
+    <div key={task.id} className="flex flex-row justify-between gap-2 pl-7 py-1 border-t  border-gray-700/80 bg-gray-950/20 relative w-full min-w-[320px] md:min-w-[450px]">
         {!showEdit ? (
             !checked ? <div className="text-gray-200">{task.name}</div> :
             <div className="text-gray-500 line-through">{task.name}</div>

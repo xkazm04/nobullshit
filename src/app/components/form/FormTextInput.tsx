@@ -7,7 +7,7 @@ type FormTextInputProps = {
 export const FormTextInput = ({setNew, label, type}: FormTextInputProps) => {
     return  <div className="relative">
 
-    <input id='in' className="block rounded-xl w-full min-w-[250px] text-lg bg-gray-600/20  appearance-none px-6 pt-6 pb-1 peer border border-slate-600/20
+    <input id='in' className="block rounded-xl w-full min-w-[250px] text-lg bg-gray-600/20  appearance-none px-6 pt-4 pb-1 peer border border-slate-600/20
        focus:outline-none
        focus:ring-0" 
         type={type} 
@@ -23,6 +23,7 @@ export const FormTextInput = ({setNew, label, type}: FormTextInputProps) => {
         peer-placeholder-shown:translate-y-0 
         peer-focus:scale-75 
         peer-focus:-translate-y-6
+        pointer-events-none
     ">{label}</label>
 </div>
 }

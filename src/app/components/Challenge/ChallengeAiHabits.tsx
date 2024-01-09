@@ -12,7 +12,8 @@ const ChallengeAiHabits = () => {
     // Get all habits -> List them, generate recommendation
     const { data: habits } = useQuery({
         queryKey: ['habits', user],
-        queryFn: () => getHabits(user || '')
+        queryFn: () => getHabits(user || ''),
+        staleTime: Infinity
     })
 
     const activate = (habit: HabitType) => {

@@ -27,7 +27,7 @@ const HabitCompletions = ({habit}: {habit:HabitType}) => {
 
     return  <div className="flex flex-row justify-end gap-4 w-full">
     {completions.map((c: boolean, index: number) => (
-        <HabitCompletion c={c} setCompletions={setCompletions} habit={habit} index={index} />
+        <HabitCompletion c={c} key={index} setCompletions={setCompletions} habit={habit} index={index} />
     ))}
 </div>
 }

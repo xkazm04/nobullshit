@@ -42,7 +42,7 @@ const HabitNoteNew = ({habit, setNoteColor, setNoteSent, setShowNote}: any) => {
     }
 
     return <>
-            <div className={`flex flex-row justify-between items-center bg-gray-950 p-2 mb-5`}>
+            <div className={`box-medium`}>
                 <label htmlFor="note" className="sr-only">Note</label>
                 <input
                     type="text"

@@ -27,6 +27,7 @@ const HabitOverview = () => {
     const {data, error} = useQuery({
         queryKey: ['habits-all', userId],
         queryFn: () => getHabits(userId ? userId : ""),
+        staleTime: Infinity
     })
 
     useEffect(() => {
@@ -47,12 +48,12 @@ const HabitOverview = () => {
 
 
     const renderDialog = () => {
-        return <Modal title={''} description={''} content={<HabitSelection/>} />
+        return <Modal title={'Title'} description={'Description'} content={<HabitSelection/>} h={'min-h-[500px]'} />
     }
 
 
     return <>
-        <div className="flex flex-col relative justify-between items-start w-full h-full bg-gray-950 py-1 rounded-2xl text-sm md:p-5 ">
+        <div className="flex flex-col relative justify-between items-start w-full h-full bg-gray-950 py-1 rounded-2xl text-sm md:p-5">
             <Dialog>
                 <div className=" text-white w-full text-[10px] md:text-[14px]">
                     <div className="container mx-auto px-4 py-6 relative">

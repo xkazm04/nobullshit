@@ -4,6 +4,7 @@ import {
     DialogHeader,
     DialogTitle,
 } from "./ui/dialog";
+import { useEffect } from 'react';
 
 type ModalProps = {
     title: string;
@@ -14,6 +15,9 @@ type ModalProps = {
 
 
 const Modal = ({title, description, content, h}: ModalProps) => {
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, []);
     return (
         <DialogContent className={`sm:max-w-md ${h}`}>
             <DialogHeader>

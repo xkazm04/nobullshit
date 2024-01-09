@@ -9,6 +9,7 @@ import { HabitType, RecurrenceObject } from "@/app/types/TrackerTypes";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createHabit } from "@/app/apiFns/habitApis";
 import useGetUser from "@/app/lib/hooks/useGetUser";
+import FormVolume, { VolumeObject } from "../../form/FormVolume";
 
 
 const HabitNew = () => {
@@ -21,6 +22,8 @@ const HabitNew = () => {
     const [error, setError] = useState(false)
     const [specificDays, setSpecificDays] = useState([false, false, false, false, false, false, false])
     const [success, setSuccess] = useState(false)
+    const [enableVolume, setEnableVolume] = useState(false)
+    const [volume, setVolume] = useState<VolumeObject>({});
 
     const user = useGetUser() || ''
     // Timestamp without time zone 
@@ -42,6 +45,9 @@ const HabitNew = () => {
             specificDays: specificDays,
             active: true,
             ai: enableAi,
+            volume_start: enableAi && volume && volume.start ? volume.start : undefined,
+            volume_units: enableAi && volume && volume.units ? volume.units : undefined,
+            volume_actual: enableAi && volume && volume.start ? volume.start : undefined,
         }
         mutation.mutate(newHabit)
     }
@@ -52,11 +58,13 @@ const HabitNew = () => {
         mutationFn: (habit: HabitType) => createHabit(habit),
         onSuccess: () => {
             setSuccess(true)
+            setError(false)
             //@ts-ignore
             queryClient.invalidateQueries('habits');
         },
-        onError: () => {
+        onError: (error) => {
             setError(true)
+            console.log(error)
         }
     })
 
@@ -70,6 +78,11 @@ const HabitNew = () => {
                     <FormCategory activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
                     <div className="divider" />
                     <FormDays habitDays={specificDays} setHabitDays={setSpecificDays} label={'Repeat on'} />
+                    <div className="divider" />
+                    <div className="md:flex md:justify-between max-xl:justify-center max-xl:gap-10">
+                        <FormCondition setChecked={setEnableVolume} checked={enableVolume} text={'Set regular volume'} />
+                        {enableVolume && <FormVolume volume={volume} setVolume={setVolume}></FormVolume>}
+                    </div>
                     <div className="divider" />
                     <FormCondition setChecked={setEnableAi} checked={enableAi} text={'Enable AI tasks recommendation'} />
                     {error && <>Error. You can finish the process</>}

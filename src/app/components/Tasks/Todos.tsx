@@ -13,7 +13,6 @@ const Todos = ({tasks}: Props) => {
     const [percentage, setPercentage] = useState(0)
     const [expanded, setExpanded] = useState(false)
     const [comp, setComp] = useState(0)
-    // Completed state does not persist
 
     useEffect(() => {
         if (tasks) {

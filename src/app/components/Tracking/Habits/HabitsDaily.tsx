@@ -14,7 +14,8 @@ const HabitsDaily = ({day}:any) => {
     const userId = useGetUser();
     const {data, error, isLoading, refetch} = useQuery({
         queryKey: ['habits-daily', userId, day],
-        queryFn: () => getUserHabits({userId: userId || '', day: day})
+        queryFn: () => getUserHabits({userId: userId || '', day: day}),
+        staleTime: Infinity
     })
 
     useEffect(() => {
@@ -41,7 +42,7 @@ const HabitsDaily = ({day}:any) => {
                 </div>
                 <div className='flex flex-col gap-1'>
                 {data && data.length > 0 ? data.map((h:HabitType) => (
-                    <div key={h.id}><Habit habit={h} /></div>
+                    <div key={h.id}><Habit habit={h} day={day} /></div>
                 ))
                 : <NoFound title={'No activities found'} description={'Add a new target to be better'} picture={<IlustratedFire/>}/>
                 }

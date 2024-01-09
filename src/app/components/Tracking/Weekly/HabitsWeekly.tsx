@@ -23,7 +23,7 @@ const HabitsWeekly = ({ habits}: Habits ) => {
         }
     }, []);
 
-    return <>  
+    return <div className="max-h-[400px] overflow-y-scroll">  
         <Dialog>
             <QuickPinchZoom onUpdate={onUpdate}>
                 <div ref={ref}>
@@ -44,7 +44,7 @@ const HabitsWeekly = ({ habits}: Habits ) => {
                 </div>
             </QuickPinchZoom>
         </Dialog>
-    </>
+    </div>
 }
 
 export default HabitsWeekly;

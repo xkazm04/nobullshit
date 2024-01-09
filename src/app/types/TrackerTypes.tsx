@@ -12,6 +12,10 @@ export type HabitType = {
     specificDays?: boolean[];
     active?: boolean;
     ai?: boolean;
+    volume_start?: number;
+    volume_target?: number;
+    volume_units?: string;
+    volume_actual?: number; 
 }
 
 export type Habits = {
@@ -66,4 +70,6 @@ export type CompType = {
     habit_id: string
     day: string
     completed: boolean
+    volume_actual?: number
+    volume_units?: string
 }

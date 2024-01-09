@@ -32,10 +32,11 @@ const TaskOverview = () => {
 
     const { data: habits, isLoading: habitsLoading } = useQuery({
         queryKey: ['habits', userId],
-        queryFn: () => getHabits(userId || '')
-    })
+        queryFn: () => getHabits(userId || ''),
+        staleTime: Infinity
+    });
 
-    // Todo new task not working + fix stylingS
+    // Todo new task not working + fix styling
     const renderDialog = () => {
         if (selectedHabit) {
             return <Modal content={<TodoNew user={userId} habit={selectedHabit} />} title={selectedHabit.name} description=""  />;
@@ -45,14 +46,14 @@ const TaskOverview = () => {
 
     const tasksByHabit = data ? groupBy(data, 'habit_id') : {};
 
-    return <div className="flex flex-col gap-3 items-center w-full">
+    return <div className="flex flex-col gap-3 items-center w-full md:overflow-scroll md:max-h-[600px]">
         <Dialog>
             {tasksLoading && <Spinner/>}   
             {renderDialog()}
             {!tasksLoading && !habitsLoading && habits && habits.map((habit: HabitType) => {
                 const tasks = tasksByHabit[habit.id] || [];
-                return <div className="flex flex-row relative">
-                    <div key={habit.id} className="bg-gray-600/10 p-2 flex flex-row justify-between relative rounded items-center min-w-[350px] md:min-w-[500px]"
+                return <div key={habit.id} className="flex flex-row relative">
+                    <div className="bg-gray-600/10 p-2 flex flex-row justify-between relative rounded items-center min-w-[350px] md:min-w-[500px]"
                         style={{ borderLeft: `2px solid ${getCategoryColor(habit.category)}` }}
                     >
                         <div className="text-xs md:text-sm">

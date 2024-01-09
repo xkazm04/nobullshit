@@ -18,7 +18,7 @@ export async function getWeeklyCompletions (habitId: string){
 }
 
 export async function createCompletion (completion: CompType) {
-    const response = await compApi.post('/', completion);
+    const response = await compApi.post('', completion);
     return response.data;
 }
 

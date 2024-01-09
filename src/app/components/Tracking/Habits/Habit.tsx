@@ -11,7 +11,7 @@ import { getCategoryColor } from "@/app/lib/colorGetter";
 import HabitCompletion from "./HabitCompletion";
 import ItemDivider from "../../animations/ItemDivider";
 
-const Habit = ({ habit }: { habit: HabitType }) => {
+const Habit = ({ habit, day }: { habit: HabitType, day: string }) => {
 
     const [expanded, setExpanded] = useState(false)
     const [showNote, setShowNote] = useState(false)
@@ -31,11 +31,12 @@ const Habit = ({ habit }: { habit: HabitType }) => {
     return (<div key={habit.id} className="flex flex-col justify-between">
         <div
             key={habit.id}
-            className={`box-dark`}
+            className={`box-dark relative`}
             style={error ? { border: '2px solid red' } : {borderLeft: `2px solid ${getCategoryColor(habit.category)}`}}
         >
             <div className="flex justify-between text-sm md:text-lg w-full md:px-[5%]" style={{ color: getCategoryColor(habit.category) }}>
-                <div>{habit.name}</div>
+                    <div>{habit.name}</div>
+                    {habit.volume_actual && <div className="text-xs absolute top-0">{habit.volume_actual} {habit.volume_units}</div>}
                 <div className='flex flex-row mt-1 gap-5'>
                     <div className={`${showNote ? 'animate-vibrate' : ''} transition-all duration-500 ease-in-out`}
                         onClick={() => { setShowNote(!showNote) }}>
@@ -44,7 +45,7 @@ const Habit = ({ habit }: { habit: HabitType }) => {
                     <ItemDivider/>
                     {tasksCompleted > 0 ? <div className='p-1 bg-gray-900 rounded-2xl' onClick={() => { setExpanded(!expanded) }}>
                         <Maximize2Icon strokeWidth={1.5} size={16} color={mainColor} />
-                    </div> : <HabitCompletion habit={habit} setError={setError}/>}
+                    </div> : <HabitCompletion habit={habit} setError={setError} day={day}/>}
                 </div>
             </div>
 
@@ -56,10 +57,10 @@ const Habit = ({ habit }: { habit: HabitType }) => {
                 animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }}
             >
-               <HabitTasks habitId={habit.id} />
+               <HabitTasks habitId={habit.id}  />
                 <div className="flex flex-row justify-between my-3 ">
                     <div className="flex flex-row justify-center gap-3">
-                        <FormTextInput placeholder="Quest subject" label={'New'} type={'text'} setNew={setNewTaskName} />
+                        <FormTextInput label={'New'} type={'text'} setNew={setNewTaskName} />
                     </div>
                     <ConfirmationMini trigger={<PlusCircle color={'#EEFF87'} strokeWidth={0.75} size={25} />} question={'Add quest?'} yesFn={addTask} />
                 </div>

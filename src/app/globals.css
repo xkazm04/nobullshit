@@ -19,17 +19,17 @@
 
 /* width */
 ::-webkit-scrollbar {
-  width: 3px;
+  width: 1px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #454545;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #4F46E5;
+  background: #747474;
 }
 
 body {
@@ -106,7 +106,7 @@ body {
   }
   .page{
     @apply relative flex flex-col justify-between items-center h-full w-full p-2 sm:px-2 md:px-4 lg:px-10 lg:w-[90%] xl:w-[80%] 2xl:w-[70%] mx-auto shadow-lg shadow-gray-950 border border-gray-700/30 my-5
-    md:min-w-[600px] md:min-h-[700px] 
+    md:min-w-[600px] md:min-h-[700px]
     ;
   }
   .input{
@@ -133,7 +133,7 @@ body {
     @apply leading-7 [&:not(:first-child)]:mt-6;
   }
   .typo-long{
-    @apply flex flex-row justify-center text-center text-sm tracking-wider px-7 text-gray-100 leading-6;
+    @apply flex flex-row justify-center text-center text-sm md:text-base tracking-wider px-7 text-gray-100 leading-6;
   }
   .typo-label{
     @apply flex flex-row w-full justify-start text-left text-xs tracking-wider text-gray-100 leading-6;
