@@ -44,17 +44,6 @@ body {
   background: linear-gradient(180deg, #0C0F17 1.42%, #13151C 44.62%, #0E1017 99.99%)
 }
 
-@keyframes typewriter {
-  from { width: 0; }
-  to { width: 100%; }
-}
-
-.typewriter {
-  animation: typewriter 1s steps(40) 1s 1 normal both;
-  overflow: hidden;
-  white-space: nowrap;
-}
-
 .skeleton {
   animation: shimmer 1.5s infinite;
 }

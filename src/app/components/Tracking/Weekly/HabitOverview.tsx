@@ -1,7 +1,7 @@
 
 'use client';
 import { useEffect, useState } from "react";
-import { FlagIcon, MoonIcon, PlusCircleIcon, SunIcon } from "lucide-react";
+import { FlagIcon, MoonIcon, PlusSquare, SunIcon } from "lucide-react";
 import { Dialog, DialogTrigger } from "../../ui/dialog";
 import Modal from "../../Modal";
 import { Powah } from "../../icons/illustrations";
@@ -53,9 +53,11 @@ const HabitOverview = () => {
 
 
     return <>
-        <div className="flex flex-col relative justify-between items-start w-full h-full bg-gray-950 py-1 rounded-2xl text-sm md:p-5">
+        <div className={`flex flex-col relative justify-between items-start w-full h-full bg-gray-950 py-1 rounded-2xl text-sm md:p-5 border border-gray-800/50
+            ${error && 'border-red-400'}
+        `}>
             <Dialog>
-                <div className=" text-white w-full text-[10px] md:text-[14px]">
+                <div className="text-white w-full text-[10px] md:text-[14px]">
                     <div className="container mx-auto px-4 py-6 relative">
                         <div className="flex items-center justify-end mb-4 relative gap-5">
                             {days.map(day => (
@@ -74,13 +76,14 @@ const HabitOverview = () => {
                     </div>
                     <DialogTrigger asChild>
                         <div className="flex flex-row justify-center">
-                            <button><PlusCircleIcon color={'#EEFF87'}/></button>
+                            <button className="md:hover:opacity-90 md:cursor-pointer">
+                                <PlusSquare size={35} color={'#EEFF87'} strokeWidth={1}/>
+                            </button>
                         </div>
                     </DialogTrigger>
                     {data && data.length < 5 && <div className="flex flex-row justify-center opacity-50 mt-[50%]">
                             <Powah/>
                         </div>}
-                    {error && <div className="alert-error">Technical issues.</div>}
                 </div>
                 {renderDialog()}
             </Dialog>

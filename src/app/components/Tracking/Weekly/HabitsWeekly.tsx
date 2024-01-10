@@ -30,7 +30,8 @@ const HabitsWeekly = ({ habits}: Habits ) => {
                 {habits && [...habits].sort((a, b) => a.category - b.category).map(h => (
                     <div key={h.id} className="flex items-center justify-between py-2 md:py-3 relative border-b border-transmain shadow-sm shadow-purple-950">
                         <DialogTrigger asChild>
-                            <div className="flex flex-col min-w-[120px] md:min-w-[200px] relative" style={{ color: getCategoryColor(h.category) }}>
+                            <div className="flex flex-col min-w-[120px] md:min-w-[200px] relative md:hover:opacity-90 md:cursor-pointer" 
+                                style={{ color: getCategoryColor(h.category) }}>
                                 <div className="text-xs md:text-[16px]">{h.name}</div>
                                 <div className="text-[10px] -bottom-4 opacity-60 absolute">
                                     {categories[h.category].name}

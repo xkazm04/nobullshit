@@ -1,11 +1,12 @@
 'use client';
-import { ArrowRightIcon, BanIcon, PlusIcon } from "lucide-react";
+import { BanIcon, PlusIcon } from "lucide-react";
 import { useState } from "react";
 import { createTask } from "@/app/apiFns/taskApis";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { HabitType, TaskInput } from "@/app/types/TrackerTypes";
 import { getHabitTaskRecommendation } from "@/app/apiFns/aiApis";
 import Spinner from "../Spinner";
+import AiResponse from "../Tracking/AiResponse";
 
 type Props = {
     habit: HabitType,
@@ -70,13 +71,8 @@ const TodoNew = ({habit,user}:Props) => {
             {recommendationLoading && <div>Recommendations loading <Spinner/></div>}
             {!recommendationLoading && recommendation && <div className="flex flex-col gap-1">
             <div className="flex flex-col gap-2 text-sm font-sans">
-                {JSON.parse(recommendation).map((item, index) => (
-                    <div key={index}>
-                        <div onClick={()=>{setTaskName(item.name)}} className="text-main bg-gray-800/70 px-4 py-1 rounded my-1 flex gap-3 md:cursor-pointer md:hover:text-main/90">{item.name} <ArrowRightIcon/></div>
-                        <div className="tracking-wider text-gray-100 text-xs">{item.description}</div>
-                        <br/>
-                        <div className="tracking-wider text-gray-100 text-xs">{item.rationale}</div>
-                    </div>
+                {JSON.parse(recommendation).map((item) => (
+                    <AiResponse  item={item} action={setTaskName} />
                 ))}
             </div>
             </div>}

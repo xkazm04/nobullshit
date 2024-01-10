@@ -125,10 +125,15 @@ module.exports = {
           '50%': { transform: 'translate(-2px, -2px)' },
           '75%': { transform: 'translate(-2px, 2px)' },
           '100%': { transform: 'translate(2px, -2px)' },
-        },
+        },'typewriter': {
+          to: {
+            left: "100%"
+          }
+        }
       },
       animation: {
         "circle": "circle 0.3s linear",
+        'typewriter': "typewriter 5s steps(440) forwards",
         "accordion-down": "accordion-down 0.3s ease-out",
         "accordion-up": "accordion-up 0.3s ease-out",
         "accordion-right": "accordion-right 0.3s ease-out",

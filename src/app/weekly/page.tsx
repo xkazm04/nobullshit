@@ -7,7 +7,7 @@ const Page = async() => {
             <div className='flex flex-row justify-between absolute z-10 w-full'>
                 <HeaderComponent page={'Weekly habits'}/>
             </div>
-            <div className="flex flex-col justify-center h-full w-full gap-5 mt-[10%] overflox-y-hidden">
+            <div className="flex flex-col justify-center h-full w-full gap-5 my-[10%] overflox-y-hidden">
                 <HabitOverview />
             </div>
     </div>

@@ -4,6 +4,7 @@ import { NoBullshitLogo } from "../../icons/illustrations";
 import { useState } from "react";
 import HabitNotesHistory from "./HabitNotesHistory";
 import HabitDelete from "../Habits/HabitDelete";
+import Stats from "./Stats";
 
 const settingsItems = [
     {
@@ -42,10 +43,10 @@ const HabitMenu = ({ habitId }: {habitId:string}) => {
                     </div>
                 ))}
             </div>
-            <div className="full-w min-w-[70%]">
+            <div className="full-w min-w-[70%] max-h-[450px] md:max-h-[600px] overflow-y-scroll">
                 {active === 'Notes' && <HabitNotesHistory habitId={habitId} />}
                 {active === 'Edit' && <>Edit</>}
-                {active === 'Stats' && <>Stats</>}
+                {active === 'Stats' && <Stats habitId={habitId}/>}
                 {active === 'Delete' && <HabitDelete habitId={habitId}/>}
             </div>
         </div>
