@@ -20,7 +20,7 @@ const HabitsDaily = ({day}:any) => {
 
     useEffect(() => {
         refetch()
-    }, [day])
+    }, [day, refetch])
 
     const renderDialog = () => {
         return <Modal title={'Create a habit'} description={''} content={<HabitNew/>} />

@@ -1,7 +1,7 @@
 import {useRive, useStateMachineInput } from '@rive-app/react-canvas-lite'
 
 const Bell = () => {
-    const {rive, RiveComponent, loaded} = useRive({
+    const {rive, RiveComponent} = useRive({
         src: '/assets/anim/bell.riv',
         stateMachines: 'State Machine 1',
         autoplay: false,
@@ -10,7 +10,7 @@ const Bell = () => {
     const input = useStateMachineInput(rive, 'State Machine 1', 'Timeline 1');
 
     const playAnimation = () => {
-        if (loaded && input) {
+        if (input) {
             input.value = 1;
         }
     }

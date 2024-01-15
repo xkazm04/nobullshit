@@ -71,8 +71,10 @@ const TodoNew = ({habit,user}:Props) => {
             {recommendationLoading && <div>Recommendations loading <Spinner/></div>}
             {!recommendationLoading && recommendation && <div className="flex flex-col gap-1">
             <div className="flex flex-col gap-2 text-sm font-sans">
-                {JSON.parse(recommendation).map((item) => (
-                    <AiResponse  item={item} action={setTaskName} />
+                {JSON.parse(recommendation).map((item: any, index: number) => (
+                    <div key={index}>
+                        <AiResponse  item={item} action={setTaskName} />
+                    </div>
                 ))}
             </div>
             </div>}

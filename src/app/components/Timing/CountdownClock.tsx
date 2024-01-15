@@ -28,6 +28,7 @@ const CountdownClock = ({countdown, totalMilliseconds, cd,data,setCountdown,setT
             setTotalSeconds(total);
             setStrokeDashoffset((activeTimerMiliseconds / totalMilliseconds) * circumference);
         }
+        //@ts-ignore
     }, [countdown]);
 
     return       <div className="relative w-64 h-64">

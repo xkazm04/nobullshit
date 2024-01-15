@@ -26,8 +26,7 @@ const ChallengeAiHabits = () => {
             setActive(habits[0].name)
             setActiveHabit(habits[0])
         }
-        //@ts-ignore
-    }, [])
+    }, [habits])
 
     return <>
         Boilerplate

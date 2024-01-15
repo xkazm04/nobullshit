@@ -17,7 +17,8 @@ const ChallengeAddTask = ({ habit, task, user }: Props) => {
     const [success, setSuccess] = useState(false)
     const [removed, setRemoved] = useState(false)
     const mutation = useMutation({
-        mutationFn: (taskInput) => createTask(taskInput, habit.id || ""),
+        //@ts-ignore
+        mutationFn: (i) => createTask(i),
         onSuccess: () => {
             console.log("success")
             setSuccess(true)
@@ -33,6 +34,7 @@ const ChallengeAddTask = ({ habit, task, user }: Props) => {
             habit_id: habit.id,
             user_id: user
         }
+         //@ts-ignore
         mutation.mutate(taskInput)
     }
 

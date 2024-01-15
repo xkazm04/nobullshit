@@ -33,7 +33,7 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
+  color: white;
   background: #1b203a;
   font-size: 16px;
 }

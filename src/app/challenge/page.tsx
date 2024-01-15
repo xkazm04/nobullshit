@@ -11,6 +11,12 @@ import {AnimatePresence, motion} from 'framer-motion'
 import ChallengesDefault from "../components/Challenge/ChallengesDefault";
 import Divider from "../components/animations/Divider";
 
+type Props = {
+    setActiveChoice: (choice: string) => void,
+    choice: string,
+    label: string
+}
+
 const challengeExamples = [
     { id: 1, title: 'Plank', description: '2 min daily', points: 100 },
     { id: 2, title: 'Pushups', description: 'From 30 to 50', points: 200 },
@@ -32,7 +38,7 @@ const Page = () => {
         return <Modal title='' description="" content={<Leaderboard/>} />
     }
 
-    const MenuItem = ({setActiveChoice, choice, label}) => {
+    const MenuItem = ({setActiveChoice, choice, label}:Props) => {
         return <div 
             onClick={() => { setActiveChoice(choice) }}
             className={`menu-item ${activeChoice === choice ? 'text-main' : 'text-gray-400'}`}>
