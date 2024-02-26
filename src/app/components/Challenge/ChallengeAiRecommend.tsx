@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query"
 import Spinner from "../Spinner"
 import { useEffect, useState } from 'react'
 import ChallengeAddTask from "./ChallengeAddTask"
+import { TextGenerateEffect } from "../ui/text-type"
 
 
 type Props = {
@@ -47,6 +48,7 @@ const ChallengeAiRecommend = ({habit, user}:Props) => {
              </div>
         ))}
     </div>
+    <TextGenerateEffect words="Here are some recommendations for you: Text type example"/>
     {isLoading && <div><Spinner/></div>}
     </>
 }

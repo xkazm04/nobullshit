@@ -3,6 +3,7 @@ import { getCategoryColor } from '@/app/lib/colorGetter';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCheckIcon } from 'lucide-react';
 import { useState } from 'react';
+import { BackgroundGradient } from '../ui/bg-gradient';
 
 
 type TimerButtonProps = {
@@ -78,6 +79,7 @@ const TimerButton: React.FC<TimerButtonProps> = ({ category, time, habitId, task
                             <div className='font-mono text-xs'>{task}</div>
                         </div>
                     </motion.button> :
+                    <BackgroundGradient animate={true}>
                     <motion.button
                         className={`text-xs px-3 py-2 bg-green-500/10 rounded-xl border w-[140px] h-[140px]
             animate-fadeIn transition-all duration-500 ease-in-out`}
@@ -87,7 +89,9 @@ const TimerButton: React.FC<TimerButtonProps> = ({ category, time, habitId, task
                             <div className='flex justify-center'><div className='text-2xl'>{timer}</div><div>s</div></div>
                             <div className='font-mono text-xs'>{task}</div>
                         </div>
-                    </motion.button>}
+                    </motion.button>
+                    </BackgroundGradient>
+                    }
             </AnimatePresence>
         </div>
     )

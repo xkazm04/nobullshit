@@ -1,6 +1,6 @@
 'use client';
 import { useState } from "react";
-import LoadingAnim from "../../LoadingAnim";
+
 import { Checkbox } from "../../ui/checkbox";
 
 const exampleMilestones = [
@@ -19,7 +19,7 @@ const GuideMilestones = () => {
             setLoading(false);
         }, 10000);
     }
-    const handleCheck = (id) => {
+    const handleCheck = (id: any) => {
         setMilestones(milestones.map(milestone => 
             milestone.id === id ? {...milestone, checked: !milestone.checked} : milestone
         ));
@@ -30,7 +30,7 @@ const GuideMilestones = () => {
             {loading && <div className="flex flex-col">Loading</div>}
             {milestones.map((milestone) => (
                 <div key={milestone.id} className="flex flex-row gap-3">
-                    <Checkbox checked={milestone.checked} setChecked={() => handleCheck(milestone.id)} />
+                    <Checkbox checked={milestone.checked} onChange={() => handleCheck(milestone.id)} />
                     <div>{milestone.title}</div>
                 </div>
             ))}

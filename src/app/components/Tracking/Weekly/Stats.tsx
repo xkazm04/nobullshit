@@ -57,7 +57,7 @@ const Stats = ({ habitId }: { habitId: string }) => {
         <Divider />
         <div className="typo-long" onClick={()=>setShowRec(true)}>Show advice</div>
         {showRec && !recLoading && rec && <div className="flex flex-col gap-3 items-center p-2">
-            {JSON.parse(rec).map((r, index) => <AiResponse key={index} item={r} action={action} />)}
+            {JSON.parse(rec).map((r: { name: string; description: string; rationale: string; }, index: number) => <AiResponse key={index} item={r} action={action} />)}
         </div>}
 
     </AnimatePresence>

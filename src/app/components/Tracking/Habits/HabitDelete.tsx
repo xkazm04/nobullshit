@@ -1,6 +1,6 @@
 import { Trash2Icon } from "lucide-react"
 
-const HabitDelete = ({habitId}) => {
+const HabitDelete = ({habitId}: {habitId: any}) => {
     const removeHabit = () => {
         console.log('Habit removed')
     }

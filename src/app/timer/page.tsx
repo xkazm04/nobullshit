@@ -8,7 +8,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 const Page = () => {
   const [type, setType] = useState('countdown' as string);
-  const MenuItem = ({setActiveChoice, choice, label, icon}) => {
+  const MenuItem = ({ setActiveChoice, choice, label, icon }: { setActiveChoice: Function, choice: string, label: string, icon: JSX.Element }) => {
     return <div 
         onClick={() => { setActiveChoice(choice) }}
         className={`menu-item flex ${type === choice ? 'text-main' : 'text-gray-400'}`}>

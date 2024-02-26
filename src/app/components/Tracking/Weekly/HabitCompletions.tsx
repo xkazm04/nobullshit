@@ -8,8 +8,8 @@ import HabitCompletion from "./HabitCompletion";
 const HabitCompletions = ({habit}: {habit:HabitType}) => {
     const [completions, setCompletions] = useState([false, false, false, false, false]);
     const {data} = useQuery({
-        queryKey: ['completions-week', habit.id],
-        queryFn: () => getWeeklyCompletions(habit.id),
+        queryKey: ['completions-week', habit.id ?? ''],
+        queryFn: () => getWeeklyCompletions(habit.id ?? ''),
     })
 
 
@@ -19,6 +19,7 @@ const HabitCompletions = ({habit}: {habit:HabitType}) => {
                 const day = new Date();
                 day.setDate(day.getDate() - index);
                 const formattedDay = day.toISOString().split('T')[0]; // Format the date as YYYY-MM-DD
+                //@ts-ignore
                 return data.some(completion => completion.day === formattedDay && completion.completed);
             });
             setCompletions(newCompletions);

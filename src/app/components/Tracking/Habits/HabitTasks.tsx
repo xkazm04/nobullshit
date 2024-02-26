@@ -4,7 +4,7 @@ import { getHabitTasks } from "@/app/apiFns/taskApis";
 import { useState } from "react";
 
 
-const HabitTasks = ({ habitId }: string) => {
+const HabitTasks = ({ habitId }: any) => {
     const [tasksCompleted, setTasksCompleted] = useState(0);
     const [percentage, setPercentage] = useState(0);
     const [comp, setComp] = useState(false);
@@ -28,7 +28,7 @@ const HabitTasks = ({ habitId }: string) => {
                     className={`h-[0.5px] ${comp ? 'bg-green-500' : 'bg-gray-100'} z-0 transition-all duration-500 ease-in-out`}
                 />
             </div>}
-        {!isLoading && data && data.map((task) => (
+        {!isLoading && data && data.map((task: any) => (
             <div key={task.id}>
                 <Task
                     id={task.id}
@@ -36,6 +36,7 @@ const HabitTasks = ({ habitId }: string) => {
                     length={data.length}
                     setPercentage={setPercentage}
                     percentage={percentage}
+                    complete={task.completed} // Add the missing 'complete' property
                 />
             </div>
         ))}

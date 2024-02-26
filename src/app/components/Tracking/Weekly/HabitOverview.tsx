@@ -11,6 +11,7 @@ import { getHabits } from "@/app/apiFns/habitApis";
 import { useQuery } from "@tanstack/react-query";
 import HabitSelection from "../Habits/HabitSelection";
 import useGetUser from "@/app/lib/hooks/useGetUser";
+import { BackgroundGradient } from "../../ui/bg-gradient";
 
 const daysExamples = [
     {id:1, name: 'THU', date: '29'},
@@ -84,6 +85,7 @@ const HabitOverview = () => {
                     {data && data.length < 5 && <div className="flex flex-row justify-center opacity-50 mt-[50%]">
                             <Powah/>
                         </div>}
+                        
                 </div>
                 {renderDialog()}
             </Dialog>

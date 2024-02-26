@@ -15,6 +15,7 @@ const HabitWeeklySection = ({habits,title}:Props) => {
     }
     return <>
         <div>{title}</div>
+        {/* @ts-ignore */}
         {habits && habits.map(h => (
             <div key={h.id} className="flex items-center justify-between py-2 relative border-b border-transmain shadow-sm shadow-purple-950">
                 <DialogTrigger asChild>

@@ -38,7 +38,8 @@ export type RecurrenceRepetition = 'Week' | 'Month'
 export type NoteType = {
     id: string,
     date: string,
-    text: string
+    text: string,
+    type: string,
 }
 
 export type TaskInput = {

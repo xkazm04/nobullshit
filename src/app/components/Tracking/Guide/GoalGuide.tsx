@@ -5,10 +5,14 @@ import GuideArea from "./GuideArea";
 import GuideHabit from "./GuideHabit";
 import GuideMilestones from "./GuideMilestones";
 
+type Step = {
+    nextComponent: JSX.Element;
+  };
+
 const GoalGuide = () => {
    
     const [currentStep, setCurrentStep] = useState(0)
-    const steps = [
+    const steps: Step[] = [
         {nextComponent: <GuideArea/>},
         {nextComponent: <GuideHabit/>},
         {nextComponent: <GuideMilestones/>},
@@ -24,6 +28,7 @@ const GoalGuide = () => {
                 {steps[currentStep].nextComponent}
             </div>
             <div className="absolute bottom-[100px] w-full">
+                {/* @ts-ignore */}
                 <Stepper steps={steps} currentStep={currentStep} setCurrentStep={setCurrentStep} finalFunction={finish}  />
             </div>
         </div>

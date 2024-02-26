@@ -2,7 +2,7 @@ import { categories } from "@/data/enums";
 import { getCategoryColor } from "@/app/lib/colorGetter";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { SkillIcon, StudyIcon, HealthIcon, FitIcon, CodingIcon, SideIcon } from "../icons/IconsCats";
+import { SkillIcon, StudyIcon, HealthIcon, FitIcon, CodingIcon, SideIcon } from "../icons/iconsCats";
 
 
 const FormCategory = ({ activeCategory, setActiveCategory }: any) => {
@@ -56,13 +56,13 @@ const FormCategory = ({ activeCategory, setActiveCategory }: any) => {
                             exit={{ opacity: 0 }}
                             transition={{ duration: 0.5 }}
                         >
-                          {display.examples.length > 0 && <div className="flex flex-col gap-1 pt-1 pb-2 w-full">{display.examples.map((e, i) => (
-                                <div key={i} className="flex flex-row items-center">
-                                    <div className="w-1 h-1 rounded-full inline-block mr-2" style={{ backgroundColor: display.color }} />
-                                    <div>{e}</div>
-                                </div>
-                            ))
-                          }</div>}
+                        {display.examples.length > 0 && <div className="flex flex-col gap-1 pt-1 pb-2 w-full">{display.examples.map((e: string, i: number) => (
+                            <div key={i} className="flex flex-row items-center">
+                                <div className="w-1 h-1 rounded-full inline-block mr-2" style={{ backgroundColor: display.color }} />
+                                <div>{e}</div>
+                            </div>
+                        ))}
+                        </div>}
                         </motion.div>
                     </AnimatePresence>
                 </div>

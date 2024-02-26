@@ -12,7 +12,7 @@ const Page = () => {
     const steps = [
         { nextComponent: <IntroLogin condition={condition} setCondition={setCondition} /> },
         { nextComponent: <IntroPromo setCondition={setCondition}/> },
-        { nextComponent: <IntroFirst setCondition={setCondition}/> },
+        { nextComponent: <IntroFirst /> },
       ];
     const [currentStep, setCurrentStep] = useState(0);
     
@@ -24,6 +24,7 @@ const Page = () => {
         {steps[currentStep].nextComponent}
         <div className="absolute bottom-5 w-full">
           <Stepper 
+            //@ts-ignore
             steps={steps} 
             currentStep={currentStep} 
             setCurrentStep={setCurrentStep} 

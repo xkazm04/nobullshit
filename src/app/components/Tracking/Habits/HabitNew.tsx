@@ -23,7 +23,7 @@ const HabitNew = () => {
     const [specificDays, setSpecificDays] = useState([false, false, false, false, false, false, false])
     const [success, setSuccess] = useState(false)
     const [enableVolume, setEnableVolume] = useState(false)
-    const [volume, setVolume] = useState<VolumeObject>({});
+    const [volume, setVolume] = useState<VolumeObject | null>(null);
 
     const user = useGetUser() || ''
     // Timestamp without time zone 
@@ -81,6 +81,7 @@ const HabitNew = () => {
                     <div className="divider" />
                     <div className="md:flex md:justify-between max-xl:justify-center max-xl:gap-10">
                         <FormCondition setChecked={setEnableVolume} checked={enableVolume} text={'Set regular volume'} />
+                        {/* @ts-ignore */}
                         {enableVolume && <FormVolume volume={volume} setVolume={setVolume}></FormVolume>}
                     </div>
                     <div className="divider" />

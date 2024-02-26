@@ -51,6 +51,7 @@ const Countdown = () => {
 
   // Online timer + CRUD operations + Notification + Tracker connection + Music randomizzer
   const mutCreate = useMutation({
+    // @ts-ignore
     mutationFn: (body) => createCountdown(body),
     onSuccess: () => {
       setIsRunning(true);
@@ -63,20 +64,21 @@ const Countdown = () => {
     }
 })
 
-  const mutFinish = useMutation({
-    mutationFn: (id) => finishCountdown(id),
-    onSuccess: () => {
-      setIsRunning(false);
-      setActive(false);
-      setCountdown(120*1000);
-      setCd({ hours: Math.floor(120 / 60 / 60), minutes: Math.floor(120  / 60), seconds: Math.floor((120 ) % 60) })
-    },
-    onError: () => {
-      setErr('Something went wrong')
-    }
-})
+    const mutFinish = useMutation({
+      mutationFn: (id: string) => finishCountdown(id),
+      onSuccess: () => {
+        setIsRunning(false);
+        setActive(false);
+        setCountdown(120*1000);
+        setCd({ hours: Math.floor(120 / 60 / 60), minutes: Math.floor(120  / 60), seconds: Math.floor((120 ) % 60) })
+      },
+      onError: () => {
+        setErr('Something went wrong')
+      }
+  })
 
   const mutPause = useMutation({
+    // @ts-ignore
     mutationFn: (body) => pauseCountdown(cdId, body),
     onSuccess: () => {
       setIsRunning(false);
@@ -95,6 +97,7 @@ const Countdown = () => {
       countdown: totalMilliseconds
     }
     if (user && !active){
+      // @ts-ignore
       mutCreate.mutate(body)
     }
   }
@@ -106,6 +109,7 @@ const Countdown = () => {
       elapsed: t,
     }
     if (cdId){
+      // @ts-ignore
       mutPause.mutate(body)
     } 
   }

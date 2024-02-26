@@ -1,6 +1,6 @@
 import Header from "../Header";
 
-const HeaderComponent = ({ page }) => {
+const HeaderComponent = ({ page }:any) => {
     return <>
         <div className='absolute z-10 w-full'>
             <div className="flex flex-row">

@@ -41,7 +41,7 @@ const ChallengeAiHabits = () => {
                 </div>
             ))}
         </div>
-        {active != '' && activeHabit && <ChallengeAiRecommend habit={activeHabit} user={user} />}
+        {active !== '' && activeHabit && <ChallengeAiRecommend habit={activeHabit} user={user || ''} />}
     </>
 }
 

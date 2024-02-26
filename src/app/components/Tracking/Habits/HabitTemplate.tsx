@@ -49,9 +49,11 @@ const HabitTemplate = () => {
     const handleHabit = (habit: string) => {
         // If habit exists, remove it
         // If habit doesn't exist, add it
+        //@ts-ignore
         if (habits.includes(habit)) {
             setHabits(habits.filter(h => h !== habit))
         } else {
+            //@ts-ignore
             setHabits([...habits, habit])
         }
     }

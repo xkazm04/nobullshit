@@ -6,6 +6,8 @@ import Modal from "../../Modal";
 import CalendarPicker from "../../form/CalendarPicker";
 import DatePicker from "../../form/DatePicker";
 import Divider from "../../animations/Divider";
+import { SparklesCore } from "../../ui/sparkles";
+import { MovingBorder } from "../../ui/moving-border";
 
 const HabitsLayout = () => {
     const daysInMonth = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate();
@@ -58,9 +60,20 @@ const HabitsLayout = () => {
         <div className="flex flex-col  overflow-x-scroll hide-scrollbar relative max-w-[370px] md:max-w-[620px]">
             <Dialog>
                 <DatePicker nextDay={nextDay} prevDay={prevDay} fullDate={fullDate} />
+                <div className="w-full absolute inset-0 h-screen opacity-20">
+                        <SparklesCore
+                        id="tsparticlesfullpage"
+                        background="transparent"
+                        minSize={0.6}
+                        maxSize={1.4}
+                        particleDensity={100}
+                        className="w-full h-full"
+                        particleColor="#FFFFFF"
+                        />
+                    </div>
                 <div className="flex flex-row justify-between relative">
                     <div className="w-full flex-nowrap">
-                        <ul className="flex gap-1 items-center justify-center md:justify-start animate-infinite-scroll" ref={scrollContainerRef}>
+                        <ul className="flex gap-1 items-center justify-center md:justify-start animate-scroll" ref={scrollContainerRef}>
                             {days.map(day => (
                                 <div
                                     key={day}

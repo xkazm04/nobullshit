@@ -49,7 +49,8 @@ const TaskOverview = () => {
             {tasksLoading && <Spinner/>}   
             {renderDialog()}
             {!tasksLoading && !habitsLoading && habits && habits.map((habit: HabitType) => {
-                const tasks = tasksByHabit[habit.id] || [];
+                // @ts-ignore
+                const tasks = tasksByHabit[habit.id] || '';
                 return <div key={habit.id} className="flex flex-row relative" onClick={() => setSelectedHabit(habit)}>
                     <div className="bg-gray-600/10 p-2 flex flex-row justify-between relative rounded items-center min-w-[350px] md:min-w-[500px]"
                         style={{ borderLeft: `2px solid ${getCategoryColor(habit.category)}` }}

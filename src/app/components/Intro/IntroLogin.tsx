@@ -64,17 +64,18 @@ const IntroLogin = ({condition,setCondition}: Props) => {
           console.error('An error occurred:', error);
         }
       };
-      const providerLogin = async (provider: string) => {
-        await signIn(provider, {callbackUrl: 'http://localhost:3000'})
-        if (session) {
+    const providerLogin = async (provider: string) => {
+        await signIn(provider, { callbackUrl: 'http://localhost:3000' });
+        if (session && session.user) {
             console.log(session.user);
             let user = {
                 email: session.user.email,
-                username: session.user.name
-            }
-            await handleSubmit(user)
-          }
-      }
+                username: session.user.name,
+            };
+            //@ts-ignore
+            await handleSubmit(user);
+        }
+    };
 
 
     return (
